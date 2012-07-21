@@ -1,7 +1,7 @@
 Package: rsem
 Type: Package
 Title: Robust Structural Equation Modeling with Missing Data and Auxiliary Variables
-Version: 0.3
+Version: 0.3.1
 Date: 2010-12-27
 Author: Ke-Hai Yuan and Zhiyong Zhang
 Maintainer: Zhiyong Zhang <zhiyongzhang@nd.edu>
