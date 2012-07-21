@@ -8,26 +8,24 @@ Obtaining missing data patterns
 This function obtains the missing data patterns and the number of cases in each patterns. It also tells the number of observed variables and their indices for each pattern.
 }
 \usage{
-rsem.pattern(x, n, p)
+rsem.pattern(x, print=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
 A matrix as data
 }
-  \item{n}{
-Sample size (not required)
-}
-  \item{p}{
-Number of variables (not required)
+  \item{print}{
+Whether to print the missing data pattern. The default is TRUE.
 }
 }
 \details{
-The missing data pattern matrix has 2+p columns. The first column is the number cases in that pattern. The second column is the number of observed variables. The last p columns are a permutation of 1:p where the first part includes the indices for the observed variables and the second part includes the indices for the unobserved variables. 
+The missing data pattern matrix has 2+p columns. The first column is the number cases in that pattern. The second column is the number of observed variables. The last p columns are a matrix with 1 denoting observed data and 0 denoting missing data. 
 }
 \value{
   \item{x}{Data ordered according to missing data pattern}
-  \item{comp2 }{Missing data pattern matrix}
+  \item{misinfo}{Missing data pattern matrix}
+  \item{mispat}{Missing data pattern in better readable form.}
 }
 \references{
 Ke-Hai Yuan and Zhiyong Zhang (2011) Robust Structural Equation Modeling with Missing Data and Auxiliary Variables
@@ -37,10 +35,7 @@ Ke-Hai Yuan and Zhiyong Zhang
 }
 
 \examples{
-#dset<-read.table('MardiaMV25.dat.txt', na.string='-99')  
-#dset<-data.matrix(dset)                                  
-#n<-dim(dset)[1]
-#p<-dim(dset)[2]
-#miss_pattern<-rsem.pattern(n,p,dset)
-#miss_pattern
+data(mardiamv25)
+miss_pattern<-rsem.pattern(mardiamv25)
+miss_pattern
 }

@@ -5,12 +5,12 @@
 rsem.indexv function
 }
 \description{
-To be added
+Internal function.
 }
 \usage{
-rsem.indexv(p, V_forana)
+rsem.indexv(p, select)
 }
 \arguments{
 \item{p}{number of variables}
-\item{V_forana}{variables to be used}
+\item{select}{variables to be used}
 }

@@ -8,14 +8,14 @@ The main function for robust SEM analysis
 This is the function to carry out all analysis.
 }
 \usage{
-rsem(dset, V_forana, EQSmodel, moment=TRUE, varphi=.1, st='i', max_it=1000, eqsdata='data.txt', eqsweight='weight.txt', EQSpgm="C:/Progra~1/EQS61/WINEQS.EXE", serial="1234")
+rsem(dset, select, EQSmodel, moment=TRUE, varphi=.1, st='i', max.it=1000, eqsdata='data.txt', eqsweight='weight.txt', EQSpgm="C:/Progra~1/EQS61/WINEQS.EXE", serial="1234")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{dset}{
 A data matrix or a data frame
 }
-  \item{V_forana}{
+  \item{select}{
 Variables to be seleted for SEM analysis. If omitted, all variables in the data set will be used.
 }
   \item{moment}{With mean structure. For covariance only, set moment=FALSE.}
@@ -25,7 +25,7 @@ The input file  for EQS. If omitted, only the first-stage analysis will be condu
   \item{varphi}{
   Proportion of data to be down-weighted. Default is 0.1.
 }
-  \item{max_it}{Maximum number of iterations for EM. Default is 1000}
+  \item{max.it}{Maximum number of iterations for EM. Default is 1000}
   \item{st}{Starting values for EM algorithm. The default is 0 for mean and I for covariance. Alternative, the starting values can be estimated according to MCD.}
   \item{eqsdata}{Data file name used in EQS}
   \item{eqsweight}{File name for weight matrix}
