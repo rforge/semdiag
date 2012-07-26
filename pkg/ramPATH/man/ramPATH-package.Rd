@@ -1,23 +1,24 @@
-\name{ramPATH-package}
-\alias{ramPATH-package}
-\alias{ramPATH}
+\name{RAMpath-package}
+\alias{RAMpath-package}
+\alias{RAMpath}
 \docType{package}
 \title{
-To be added
+RAMpath for SEM analysis
 }
 \description{
-To be added
+RAMpath is a rewrite of RAMpath software developed by John McArdle and Steven Boker.
 }
 \details{
 \tabular{ll}{
-Package: \tab ramPATH\cr
+Package: \tab RAMpath\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
+Version: \tab 0.1\cr
 Date: \tab 2012-05-29\cr
 License: \tab What license is it under?\cr
 }
 
 }
 \author{
-Johnny Zhang and Jack McArdle
+Zhiyong Zhang and Jack McArdle
+Maintainer: Zhiyong Zhang <zhiyongzhang@nd.edu>
 }
