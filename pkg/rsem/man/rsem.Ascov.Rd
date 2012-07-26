@@ -45,9 +45,16 @@ Ke-Hai Yuan and Zhiyong Zhang
 \code{\link{rsem.emmusig}}
 }
 \examples{
-data(mardiamv25)
-miss_pattern<-rsem.pattern(mardiamv25)
-em_results<-rsem.emmusig(miss_pattern)
-rsem.Ascov(miss_pattern,em_results)
+#dset<-read.table('MardiaMV25.dat.txt', na.string='-99')  
+#dset<-data.matrix(dset)                                  
+#n<-dim(dset)[1]
+#p<-dim(dset)[2]
+#miss_pattern<-rsem.pattern(n,p,dset)
+#misinfo<-miss_pattern$misinfo
+#V_forana<-c(1,2,4,5)
+#em_results<-rsem.emmusig(dset,misinfo)
+#hmu1<-em_results$mu                           
+#hsigma1<-em_results$sigma
+#rsem.Ascov(x, hmu1, hsigma1)
 }
 
