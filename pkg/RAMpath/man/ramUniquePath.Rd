@@ -2,16 +2,16 @@
 \alias{ramUniquePath}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-To be added
+Get the uniques paths
 }
 \description{
-To be added}
+Get the uniques paths}
 \usage{
 ramUniquePath(tPathlist)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{tPathlist}{
-To be added
+The path list.
 }
 }

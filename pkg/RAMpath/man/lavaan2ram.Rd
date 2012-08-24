@@ -25,3 +25,9 @@ Whether print ram matrices
 Whether print fit statistics
 }
 }
+\value{
+\item{A and Ase}{A matrix and its standard errors}
+\item{S and Sse}{S matrix and its standard errors}
+\item{fit}{model fit}
+\item{lavaan}{Lavaan results}
+}

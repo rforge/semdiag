@@ -56,19 +56,26 @@ lavaan2ram<-function(fitModel, digits=2, zero.print="0", ram.out=TRUE, fit=FALSE
 	Sse.na[Sse==0]<-NA
 	
 	if (ram.out){
-		cat("\nParameter estimates:\n")
-		cat("Matrix A\n")
-		print(A.na, digits=digits,na.print = zero.print)
-		cat("Matrix S\n")
-		print(S.na,digits=digits,na.print = zero.print)
-		cat("\nStandard errors for parameter estimates:\n")
-		cat("Matrix A\n")
-		print(Ase.na,digits=digits,na.print = zero.print)
-		cat("Matrix S\n")
-		print(Sse.na,digits=digits,na.print = zero.print)
+	  cat("\n--------------------\n")
+	  cat("Parameter estimates:\n")
+	  cat("--------------------\n")
+	  cat("\nMatrix A\n\n")
+	  print(A.na, digits=digits,na.print = zero.print)
+	  cat("\nMatrix S\n\n")
+	  print(S.na,digits=digits,na.print = zero.print)
+	  
+	  cat("\n----------------------------------------\n")
+	  cat("Standard errors for parameter estimates:\n")
+	  cat("----------------------------------------\n")
+	  cat("\nMatrix A\n\n")
+	  print(Ase.na,digits=digits,na.print = zero.print)
+	  cat("\nMatrix S\n\n")
+	  print(Sse.na,digits=digits,na.print = zero.print)
 		cat("\n\n")
 	}
-	invisible(return(list(A=A, S=S, Ase=Ase, Sse=Sse, fit=fitInd, lavaan=fitModel, nvar=nrow, manifest=manifest,latent=latent,lname=varName[(manifest+1):nrow],varname=varName)))
+  lname<-NULL
+  if (latent>0) lname = varName[(manifest+1):nrow]
+	invisible(return(list(A=A, S=S, Ase=Ase, Sse=Sse, fit=fitInd, lavaan=fitModel, nvar=nrow, manifest=manifest,latent=latent,lname=lname,varname=varName)))
 }
 
 ramVF<-function(ramout, ylim, xlim, ninterval=10, scale=.1, length=.25, ...){

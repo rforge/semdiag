@@ -89,6 +89,6 @@ Starting value
 Starting value
 }
   \item{\dots}{
-Starting value
+Options can be used for lavaan
 }
 }

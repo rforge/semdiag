@@ -127,7 +127,8 @@ ramLCS<-function(data, ## data to be used
 		ram=lavaan2ram(fitModel)
 		invisible(return(list(model=model, lavaan=fitModel, ram=ram)))
 	}else{
-		invisible(return(list(model=model, lavaan=fitModel)))
+	  ram=lavaan2ram(fitModel,ram.out=FALSE)
+		invisible(return(list(model=model, lavaan=fitModel, ram=ram)))
 	}
 }
 
@@ -421,6 +422,7 @@ ramBLCS<-function(
 		ram=lavaan2ram(fitModel)
 		invisible(return(list(model=model, lavaan=fitModel, ram=ram)))
 	}else{
-		invisible(return(list(model=model, lavaan=fitModel)))
+	  ram=lavaan2ram(fitModel,ram.out=FALSE)
+		invisible(return(list(model=model, lavaan=fitModel, ram=ram)))
 	}
 }

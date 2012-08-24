@@ -21,30 +21,30 @@ y data
 time of y
 }
   \item{ram.out}{
-To be added
+Whether print ram matrices
 }
   \item{betay}{
-To be added
+Starting value
 }
   \item{my0}{
-To be added
+Starting value
 }
   \item{mys}{
-To be added
+Starting value
 }
   \item{varey}{
-To be added
+Starting value
 }
   \item{vary0}{
-To be added
+Starting value
 }
   \item{varys}{
-To be added
+Starting value
 }
   \item{vary0ys}{
-To be added
+Starting value
 }
   \item{\dots}{
-To be added
+Options can be used for lavaan
 }
 }

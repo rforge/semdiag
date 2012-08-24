@@ -36,6 +36,6 @@ Print digits
 Print ram matrices
 }
   \item{\dots}{
-lavaan options
+Options can be used for lavaan
 }
 }

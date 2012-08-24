@@ -108,8 +108,9 @@ ramMatrix<-function(model){
 	print(S)
 	cat("Matrix F\n")
 	print(F)
-	
-	invisible(return(list(F=F, A=A, S=S, nvar=nrow, manifest=manifest,latent=latent,lname=varname[(manifest+1):nrow],varname=varname)))
+  lname<-NULL
+  if (nrow>manifest)  lname=varname[(manifest+1):nrow]
+	invisible(return(list(F=F, A=A, S=S, nvar=nrow, manifest=manifest,latent=latent,lname=lname,varname=varname)))
 }
 
 ramFlip<-function(input){
@@ -292,11 +293,14 @@ ramPathBridge<-function(rammatrix, allbridge=TRUE, indirect=TRUE){
     tSpanlist <- makeSpanList(Smatrix)
     tBridgelist<-NULL
     if (allbridge) tBridgelist <- makeBridgeList(tPathlist, tSpanlist)
-    list(path=tPathlist, bridge=tBridgelist, span=tSpanlist, ram=rammatrix)
+    ramobject<-list(path=tPathlist, bridge=tBridgelist, span=tSpanlist, ram=rammatrix)
+	class(ramobject)<-'RAMpath'
+	ramobject 
 }
 
-ramPlot <- function (pathbridge, file, from, to, type=c("path","bridge"), size = c(8, 8), node.font = c("Helvetica", 14), edge.font = c("Helvetica", 10), rank.direction = c("LR","TB"), digits = 2, output.type=c("graphics", "dot"), graphics.fmt="pdf", dot.options=NULL, ...)
+plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8, 8), node.font = c("Helvetica", 14), edge.font = c("Helvetica", 10), rank.direction = c("LR","TB"), digits = 2, output.type=c("graphics", "dot"), graphics.fmt="pdf", dot.options=NULL, ...)
 {
+  pathbridge<-x
 	if (length(type)>1) type<-type[1]
 	tPathlist<-pathbridge$path
 	tBridgelist<-pathbridge$bridge
@@ -333,9 +337,11 @@ ramPlot <- function (pathbridge, file, from, to, type=c("path","bridge"), size =
 		cat(file = handle, paste("  edge [fontname=\"", edge.font[1],"\" fontsize=", edge.font[2], "];\n", sep = ""))
 		cat(file = handle, "  center=1;\n")
 		
+    if (!is.null(latent)){
 		for (lat in latent) {
 			cat(file = handle, paste("  \"", lat, "\" [shape=ellipse]\n",sep = ""))
 		}
+    }
 	
 		## single headed arrows	
 		for (i in 1:npath){
@@ -399,8 +405,10 @@ ramPlot <- function (pathbridge, file, from, to, type=c("path","bridge"), size =
 			}
 			
 			## the rest of the path diagram
+			if (!is.null(latent)){
 			for (lat in latent) {
 				cat(file = handle, paste("  \"", lat, "\" [shape=ellipse];\n",sep = ""))
+			}
 			}
 	
 			## single headed arrows
@@ -487,8 +495,10 @@ ramPlot <- function (pathbridge, file, from, to, type=c("path","bridge"), size =
 			
 			
 			## the full path diagram
+			if (!is.null(latent)){
 			for (lat in latent) {
 				cat(file = handle, paste("  \"", lat, "\" [shape=ellipse];\n",sep = ""))
+			}
 			}
 	
 			## single headed arrows
@@ -532,7 +542,8 @@ ramUniquePath<-function(tPathlist){
 	return(list(tUniquePath=tUniquePath[1:k, ], tUniqueName=name))
 }
 
-ramSummary<-function(pathbridge, from, to, type=c("path","bridge")){
+summary.RAMpath<-function(object, from, to, type=c("path","bridge"),...){
+  pathbridge<-object
 	if (length(type)>1) type<-type[1]
 	tPathlist<-pathbridge$path
 	tBridgelist<-pathbridge$bridge
@@ -822,6 +833,7 @@ ram2lavaan<-function(model){
     
     ## Construct the matrix for the slings
     slingInd<-grep('sling', model)
+    
     slingLine<-model[slingInd]
     for (i in 1:length(slingLine)){
     		temp<-ramParseLavaan(slingLine[i], manifest, 1)
@@ -875,8 +887,13 @@ ram2lavaan<-function(model){
 
 
 ## Fit a RAM model using Lavaan and return to the RAM matrix
-ramFit<-function(ramModel, data, digits=3, zero.print="0", ...){
-	lavaanModel<-ram2lavaan(ramModel)
+ramFit<-function(ramModel, data, type=c('ram','lavaan'), digits=3, zero.print="0", ...){
+  if (missing(type)) type = 'ram'
+  if (type=='ram') {
+    lavaanModel<-ram2lavaan(ramModel)
+  }else{    
+    lavaanModel<-ramModel
+  }
 	fitModel<-lavaan(model= lavaanModel, data=data, ...)
 	parTable<-fitModel@ParTable
 	parEst<-fitModel@Fit@est
@@ -920,8 +937,10 @@ ramFit<-function(ramModel, data, digits=3, zero.print="0", ...){
 	
 	## Print some results
 	## Print the Model fit
-	cat("Model fit statistics and indices\n")
-	print(fitInd)
+	#cat("--------------------------------\n")
+	#cat("Model fit statistics and indices\n")
+	#cat("--------------------------------\n")
+	#print(fitInd)
 	## Print the parameter estimates
 	A.na<-A
 	A.na[A==0]<-NA
@@ -932,18 +951,24 @@ ramFit<-function(ramModel, data, digits=3, zero.print="0", ...){
 	Sse.na<-Sse
 	Sse.na[Sse==0]<-NA
 	
-	cat("\nParameter estimates:\n")
-	cat("Matrix A\n")
+	cat("\n--------------------\n")
+	cat("Parameter estimates:\n")
+	cat("--------------------\n")
+	cat("\nMatrix A\n\n")
 	print(A.na, digits=digits,na.print = zero.print)
-	cat("Matrix S\n")
+	cat("\nMatrix S\n\n")
 	print(S.na,digits=digits,na.print = zero.print)
-	cat("\nStandard errors for parameter estimates:\n")
-	cat("Matrix A\n")
+  
+	cat("\n----------------------------------------\n")
+	cat("Standard errors for parameter estimates:\n")
+	cat("----------------------------------------\n")
+	cat("\nMatrix A\n\n")
 	print(Ase.na,digits=digits,na.print = zero.print)
-	cat("Matrix S\n")
+	cat("\nMatrix S\n\n")
 	print(Sse.na,digits=digits,na.print = zero.print)
-	
-	invisible(return(list(A=A, S=S, Ase=Ase, Sse=Sse, fit=fitInd, lavaan=fitModel, nvar=nrow, manifest=manifest,latent=latent,lname=varName[(manifest+1):nrow],varname=varName)))
+  lname<-NULL
+	if (nrow>manifest) lname=varName[(manifest+1):nrow]
+	invisible(return(list(A=A, S=S, Ase=Ase, Sse=Sse, fit=fitInd, lavaan=fitModel, nvar=nrow, manifest=manifest,latent=latent,lname=lname,varname=varName)))
 }
 
 
