@@ -696,7 +696,7 @@ rsem<-function(dset, select, EQSmodel, moment=TRUE, varphi=.1, st='i', max.it=10
   hmu1<-em_results$mu                           ## means for all variables including auxiliary variables
   hsigma1<-em_results$sigma                     ## covariance matrix for all variables
   ## Calculate the sandwitch covariance matrix
-  ascov_results<-rsem.Ascov(miss_pattern, musig, varphi=varphi)
+  ascov_results<-rsem.Ascov(miss_pattern, em_results, varphi=varphi)
   Abeta<-ascov_results$Abeta
   Bbeta<-ascov_results$Bbeta
   hupsilon<-ascov_results$Gamma
