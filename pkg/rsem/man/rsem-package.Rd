@@ -4,13 +4,13 @@
 \title{Robust Structural Equation Modeling with Missing Data and Auxiliary
 }
 \description{
-This package estimates means and covariance matrix of multiple variables with missing data using Huber weight and then estimates a SEM model using EQS.
+This package estimates means and covariance matrix of multiple variables with missing data using Huber weight and then estimates a SEM model using either lavaan or EQS.
 }
 \details{
 \tabular{ll}{
 Package: \tab rsem\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
+Version: \tab 0.4.3\cr
 Date: \tab 2010-12-27\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr

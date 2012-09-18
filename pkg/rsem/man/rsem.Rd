@@ -62,6 +62,8 @@ Ke-Hai Yuan and Zhiyong Zhang
 \examples{
 \dontrun{
 ## an example
+ ## to use eqs, first load the package semdiag
+ library(semdiag)
  data(mardiamv25)
  analysis<-rsem(mardiamv25, c(1,2,4,5), 'eqsinput.eqs')
  }
