@@ -1262,7 +1262,7 @@ rsem.fit<-function(object, gamma, musig){
     m2<-(trUT)^2/trUT2
     taml<-m1*object@Fit@test[[g]]$stat
     p.aml<-1-pchisq(taml, m2)
-    temp<-c(taml, m1, p.aml)
+    temp<-c(taml, m2, p.aml)
     names(temp)<-c('Statistic','df','p-value')
     TAML[[g]]<-temp
   }
