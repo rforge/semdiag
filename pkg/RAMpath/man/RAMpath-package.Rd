@@ -12,7 +12,7 @@ RAMpath is a rewrite of RAMpath software developed by John McArdle and Steven Bo
 \tabular{ll}{
 Package: \tab RAMpath\cr
 Type: \tab Package\cr
-Version: \tab 0.1.1\cr
+Version: \tab 0.1.2\cr
 Date: \tab 2012-05-29\cr
 License: \tab GPL\cr
 }
