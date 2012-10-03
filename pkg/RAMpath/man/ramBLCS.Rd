@@ -107,7 +107,7 @@ test.blcs<-ramBLCS(ex3, 7:12, 1:6, ram.out=TRUE)
 summary(test.blcs$lavaan, fit=TRUE)
 
 bridge<-ramPathBridge(test.blcs$ram, allbridge=FALSE,indirect=FALSE)
-ramPlot(bridge, 'blcs')
+plot(bridge, 'blcs')
 
 
 ## Test the vector field plot

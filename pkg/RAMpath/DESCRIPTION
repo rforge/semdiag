@@ -5,7 +5,7 @@ Version: 0.1.1
 Date: 2012-05-29
 Author: Johnny Zhang & Jack McArdle
 Maintainer: Johnny Zhang <zzhang4@nd.edu>
-Description: More about what it does (maybe more than one line)
+Description: RAMpath is a rewrite of RAMpath software developed by John McArdle and Steven Boker. However, it does more than the original software by providing flexible fit of growth curve models, univariate and bivariate latent change score models. It can also generate the vector field plot for the bivariate latent change score models.
 Depends: R (>= 2.7), lavaan
 License: GPL-2
 URL: http://rpackages.psychstat.org
