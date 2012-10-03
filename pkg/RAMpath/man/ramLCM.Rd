@@ -39,3 +39,26 @@ Print ram matrices
 Options can be used for lavaan
 }
 }
+\value{
+\item{model}{The lavaan model specification of the bivariate latent change score model}
+\item{lavaan}{The lavaan output}
+\item{ram}{Output in terms of RAM matrices}
+\item{fit}{Model fit}
+}
+
+\examples{
+data(ex3)
+## Example 3. Growth curve models
+gcm.all<-ramLCM(ex3, 1:6, ram.out=TRUE)
+## plot the path diagram
+bridge<-ramPathBridge(gcm.all$ram$latent, F, F)
+plot(bridge, 'latent')
+
+##unequal variance
+gcm.all<-ramLCM(ex3, 1:6, ram.out=TRUE, equal.var=F)
+
+## missing data
+gcm.all<-ramLCM(ex3, c(1,2,4,6), basis=c(1,2,4,6), ram.out=TRUE)
+
+gcm.l<-ramLCM(ex3, 1:6, model='linear', ram.out=TRUE)
+}

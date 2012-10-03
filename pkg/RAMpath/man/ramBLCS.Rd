@@ -89,6 +89,29 @@ Starting value
 Starting value
 }
   \item{\dots}{
-Options can be used for lavaan
+Options can be used for \code{\link[lavaan]{lavaan}}
 }
+}
+
+\value{
+\item{model}{The lavaan model specification of the bivariate latent change score model}
+\item{lavaan}{The lavaan output}
+\item{ram}{Output in terms of RAM matrices}
+}
+
+\examples{
+data(ex3)
+## Test the bivariate latent change score model ramBLCS
+
+test.blcs<-ramBLCS(ex3, 7:12, 1:6, ram.out=T)
+summary(test.blcs$lavaan, fit=T)
+
+bridge<-ramPathBridge(test.blcs$ram, allbridge=F,indirect=F)
+ramPlot(bridge, 'blcs')
+
+
+## Test the vector field plot
+## test.blcs is the output of the ramBLCS function.
+ramVF(test.blcs, c(0,80),c(0,80), length=.05, xlab='X', ylab='Y',scale=.5, ninterval=9)
+
 }

@@ -2,10 +2,10 @@
 \alias{ram2lavaan}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-RAM model to lavaan input
+RAM model to lavaan model
 }
 \description{
-RAM matrices to lavaan input}
+Convert RAM matrix specification to a lavaan model}
 \usage{
 ram2lavaan(model)
 }

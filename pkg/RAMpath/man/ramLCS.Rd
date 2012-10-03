@@ -48,3 +48,17 @@ Starting value
 Options can be used for lavaan
 }
 }
+\value{
+\item{model}{The lavaan model specification of the bivariate latent change score model}
+\item{lavaan}{The lavaan output}
+\item{ram}{Output in terms of RAM matrices}
+}
+
+\examples{
+data(ex3)
+test.lcs<-ramLCS(ex3, 7:12)
+summary(test.lcs$lavaan, fit=T)
+
+bridge<-ramPathBridge(test.lcs$ram, allbridge=F,indirect=F)
+plot(bridge, 'lcs')
+}

@@ -5,16 +5,13 @@
 Is the input a numeric variable
 }
 \description{
-Is the input a numeric variable}
+Check whether the input is a numeric variable}
 \usage{
 isNumeric(constant)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{constant}{
-Input
-}
+  \item{constant}{A variable to check}
 }
 
-\value{
-TRUE or FALSE}
+\value{TRUE or FALSE}
