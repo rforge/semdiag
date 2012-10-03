@@ -51,11 +51,11 @@ data(ex3)
 ## Example 3. Growth curve models
 gcm.all<-ramLCM(ex3, 1:6, ram.out=TRUE)
 ## plot the path diagram
-bridge<-ramPathBridge(gcm.all$ram$latent, F, F)
+bridge<-ramPathBridge(gcm.all$ram$latent, FALSE, FALSE)
 plot(bridge, 'latent')
 
 ##unequal variance
-gcm.all<-ramLCM(ex3, 1:6, ram.out=TRUE, equal.var=F)
+gcm.all<-ramLCM(ex3, 1:6, ram.out=TRUE, equal.var=FALSE)
 
 ## missing data
 gcm.all<-ramLCM(ex3, c(1,2,4,6), basis=c(1,2,4,6), ram.out=TRUE)

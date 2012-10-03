@@ -103,10 +103,10 @@ Options can be used for \code{\link[lavaan]{lavaan}}
 data(ex3)
 ## Test the bivariate latent change score model ramBLCS
 
-test.blcs<-ramBLCS(ex3, 7:12, 1:6, ram.out=T)
-summary(test.blcs$lavaan, fit=T)
+test.blcs<-ramBLCS(ex3, 7:12, 1:6, ram.out=TRUE)
+summary(test.blcs$lavaan, fit==TRUE)
 
-bridge<-ramPathBridge(test.blcs$ram, allbridge=F,indirect=F)
+bridge<-ramPathBridge(test.blcs$ram, allbridge=FALSE,indirect=FALSE)
 ramPlot(bridge, 'blcs')
 
 

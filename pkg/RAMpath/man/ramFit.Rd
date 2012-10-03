@@ -56,7 +56,7 @@ sling(3,3)=?
 res1<-ramFit(m1, ex1)
 
 ## More output from Lavaan
-summary(res1$lavaan, fit=T)
+summary(res1$lavaan, fit=TRUE)
 
 ## Effects and variance decomposition
 bridge<-ramPathBridge(res1)
@@ -90,7 +90,7 @@ mimic.res<-sem(mimic, data=ex2)
 mimic.ram<-lavaan2ram(mimic.res)
 
 ## plot the path diagram
-bridge<-ramPathBridge(mimic.ram, allbridge=F, indirect=F)
+bridge<-ramPathBridge(mimic.ram, allbridge=FALSE, indirect=FALSE)
 plot(bridge, 'mimic')
 
 }

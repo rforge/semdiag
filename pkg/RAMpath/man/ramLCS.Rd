@@ -57,8 +57,8 @@ Options can be used for lavaan
 \examples{
 data(ex3)
 test.lcs<-ramLCS(ex3, 7:12)
-summary(test.lcs$lavaan, fit=T)
+summary(test.lcs$lavaan, fit=TRUE)
 
-bridge<-ramPathBridge(test.lcs$ram, allbridge=F,indirect=F)
+bridge<-ramPathBridge(test.lcs$ram, allbridge=FALSE,indirect=FALSE)
 plot(bridge, 'lcs')
 }
