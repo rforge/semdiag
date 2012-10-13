@@ -82,8 +82,8 @@ lavaan2ram<-function(fitModel, digits=2, zero.print="0", ram.out=TRUE, fit=FALSE
 	
         	
 	}else{
-	obsVar <- lavaan:::vnames(parTable, "ov", group=g)
-        	latVar <- lavaan:::vnames(parTable, "lv", group=g)
+	obsVar <- lavaan:::vnames(parTable, "ov")
+        	latVar <- lavaan:::vnames(parTable, "lv")
 
 	varName<-c(obsVar, latVar)
 	manifest<-length(obsVar)
