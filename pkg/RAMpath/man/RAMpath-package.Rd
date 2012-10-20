@@ -19,6 +19,6 @@ License: \tab GPL\cr
 
 }
 \author{
-Zhiyong Zhang and Jack McArdle
+Zhiyong Zhang, Jack McArdle, Aki Hamagami, and Kevin Grimm
 Maintainer: Zhiyong Zhang <zhiyongzhang@nd.edu>
 }
