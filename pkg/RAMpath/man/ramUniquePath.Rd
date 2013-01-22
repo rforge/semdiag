@@ -1,5 +1,5 @@
-\name{ramUniquePath}
-\alias{ramUniquePath}
+\name{RAMUniquePath}
+\alias{RAMUniquePath}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Get the uniques paths
@@ -7,7 +7,7 @@ Get the uniques paths
 \description{
 Get the uniques paths}
 \usage{
-ramUniquePath(tPathlist)
+RAMUniquePath(tPathlist)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

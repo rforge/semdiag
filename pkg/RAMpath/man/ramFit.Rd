@@ -1,24 +1,24 @@
-\name{ramFit}
-\alias{ramFit}
+\name{RAMFit}
+\alias{RAMFit}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Fit a model using lavaan based on ram input
+Fit a model using lavaan based on RAM input
 }
 \description{
-Fit a model using lavaan based on ram input}
+Fit a model using lavaan based on RAM input}
 \usage{
-ramFit(ramModel, data, type=c('ram','lavaan'), digits = 3, zero.print = "0", ...)
+RAMFit(RAMModel, data, type=c('RAM','lavaan'), digits = 3, zero.print = "0", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{ramModel}{
-An ram model
+  \item{RAMModel}{
+An RAM model
 }
   \item{data}{
 data
 }
 \item{type}{
-  ram: specify a ram model; lavaan: specify a lavaan model
+  RAM: specify a RAM model; lavaan: specify a lavaan model
 }
   \item{digits}{
 Digits for print
@@ -53,17 +53,17 @@ sling(3,3)=?
 '
 
 ## Fit the model
-res1<-ramFit(m1, ex1)
+res1<-RAMFit(m1, ex1)
 
 ## More output from Lavaan
 summary(res1$lavaan, fit=TRUE)
 
 ## Effects and variance decomposition
-bridge<-ramPathBridge(res1)
+bridge<-RAMPathBridge(res1)
 summary(bridge)
 summary(bridge, type='bridge')
 
-## plot the path diagram
+## plot the path diagRAM
 plot(bridge, 'ex1')
 
 ## plot the effects from age to ept
@@ -87,10 +87,10 @@ R ~ edu + gender
 
 mimic.res<-sem(mimic, data=ex2)
 
-mimic.ram<-lavaan2ram(mimic.res)
+mimic.RAM<-lavaan2RAM(mimic.res)
 
-## plot the path diagram
-bridge<-ramPathBridge(mimic.ram, allbridge=FALSE, indirect=FALSE)
+## plot the path diagRAM
+bridge<-RAMPathBridge(mimic.RAM, allbridge=FALSE, indirect=FALSE)
 plot(bridge, 'mimic')
 
 }

@@ -1,5 +1,5 @@
-\name{ramBLCS}
-\alias{ramBLCS}
+\name{RAMBLCS}
+\alias{RAMBLCS}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Conduct bivariate latent change score analysis
@@ -7,7 +7,7 @@ Conduct bivariate latent change score analysis
 \description{
 Conduct bivariate latent change score analysis}
 \usage{
-ramBLCS(data, y, x, timey, timex, ram.out = FALSE, betax, betay, gammax, gammay, mx0, mxs, my0, mys, varex, varey, varx0, vary0, varxs, varys, varx0y0, varx0xs, vary0ys, varx0ys, vary0xs, varxsys, ...)
+RAMBLCS(data, y, x, timey, timex, RAM.out = FALSE, betax, betay, gammax, gammay, mx0, mxs, my0, mys, varex, varey, varx0, vary0, varxs, varys, varx0y0, varx0xs, vary0ys, varx0ys, vary0xs, varxsys, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -25,8 +25,8 @@ Time for y variables
 }
   \item{timex}{
 Time for x variables}
-  \item{ram.out}{
-whether print ram matrices
+  \item{RAM.out}{
+whether print RAM matrices
 }
   \item{betax}{
 Starting value
@@ -96,22 +96,22 @@ Options can be used for \code{\link[lavaan]{lavaan}}
 \value{
 \item{model}{The lavaan model specification of the bivariate latent change score model}
 \item{lavaan}{The lavaan output}
-\item{ram}{Output in terms of RAM matrices}
+\item{RAM}{Output in terms of RAM matrices}
 }
 
 \examples{
 data(ex3)
-## Test the bivariate latent change score model ramBLCS
+## Test the bivariate latent change score model RAMBLCS
 
-test.blcs<-ramBLCS(ex3, 7:12, 1:6, ram.out=TRUE)
+test.blcs<-RAMBLCS(ex3, 7:12, 1:6, RAM.out=TRUE)
 summary(test.blcs$lavaan, fit=TRUE)
 
-bridge<-ramPathBridge(test.blcs$ram, allbridge=FALSE,indirect=FALSE)
+bridge<-RAMPathBridge(test.blcs$RAM, allbridge=FALSE,indirect=FALSE)
 plot(bridge, 'blcs')
 
 
 ## Test the vector field plot
-## test.blcs is the output of the ramBLCS function.
-ramVF(test.blcs, c(0,80),c(0,80), length=.05, xlab='X', ylab='Y',scale=.5, ninterval=9)
+## test.blcs is the output of the RAMBLCS function.
+RAMVF(test.blcs, c(0,80),c(0,80), length=.05, xlab='X', ylab='Y',scale=.5, ninterval=9)
 
 }

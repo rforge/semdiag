@@ -12,6 +12,6 @@ makeSpanList(SMatrix)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{SMatrix}{
-S matrix from the ram matrices
+S matrix from the RAM matrices
 }
 }

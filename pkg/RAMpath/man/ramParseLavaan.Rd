@@ -1,13 +1,13 @@
-\name{ramParseLavaan}
-\alias{ramParseLavaan}
+\name{RAMParseLavaan}
+\alias{RAMParseLavaan}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-lavaan to ram 
+lavaan to RAM 
 }
 \description{
-lavaan to ram matrices}
+lavaan to RAM matrices}
 \usage{
-ramParseLavaan(input, manifest, type = 0)
+RAMParseLavaan(input, manifest, type = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

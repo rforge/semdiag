@@ -1,5 +1,5 @@
-\name{ramLCS}
-\alias{ramLCS}
+\name{RAMLCS}
+\alias{RAMLCS}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Univariate latent change score model
@@ -7,7 +7,7 @@ Univariate latent change score model
 \description{
 Univariate latent change score model}
 \usage{
-ramLCS(data, y, timey, ram.out = FALSE, betay, my0, mys, varey, vary0, varys, vary0ys, ...)
+RAMLCS(data, y, timey, RAM.out = FALSE, betay, my0, mys, varey, vary0, varys, vary0ys, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -20,8 +20,8 @@ y data
   \item{timey}{
 time of y
 }
-  \item{ram.out}{
-Whether print ram matrices
+  \item{RAM.out}{
+Whether print RAM matrices
 }
   \item{betay}{
 Starting value
@@ -51,14 +51,14 @@ Options can be used for lavaan
 \value{
 \item{model}{The lavaan model specification of the bivariate latent change score model}
 \item{lavaan}{The lavaan output}
-\item{ram}{Output in terms of RAM matrices}
+\item{RAM}{Output in terms of RAM matrices}
 }
 
 \examples{
 data(ex3)
-test.lcs<-ramLCS(ex3, 7:12)
+test.lcs<-RAMLCS(ex3, 7:12)
 summary(test.lcs$lavaan, fit=TRUE)
 
-bridge<-ramPathBridge(test.lcs$ram, allbridge=FALSE,indirect=FALSE)
+bridge<-RAMPathBridge(test.lcs$RAM, allbridge=FALSE,indirect=FALSE)
 plot(bridge, 'lcs')
 }

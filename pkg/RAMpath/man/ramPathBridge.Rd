@@ -1,5 +1,5 @@
-\name{ramPathBridge}
-\alias{ramPathBridge}
+\name{RAMPathBridge}
+\alias{RAMPathBridge}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Generate path and bridges
@@ -7,11 +7,11 @@ Generate path and bridges
 \description{
 Generate path and bridges}
 \usage{
-ramPathBridge(rammatrix, allbridge = TRUE, indirect = TRUE)
+RAMPathBridge(RAMmatrix, allbridge = TRUE, indirect = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{rammatrix}{
+  \item{RAMmatrix}{
 RAM matrices
 }
   \item{allbridge}{

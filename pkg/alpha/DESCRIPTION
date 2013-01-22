@@ -1,0 +1,10 @@
+Package: alpha
+Type: Package
+Title: Robust Cronbach's alpha with missing and non-normal data
+Version: 0.1
+Date: 2013-01-22
+Author: Zhiyong Zhang and Ke-Hai Yuan
+Maintainer: Zhiyong Zhang <zzhang4@nd.edu>
+Description: An R package to calculate coefficient with missing data and non-normal data. Robust standard error and confidence interval are also provided.
+License: GPL
+LazyLoad: yes

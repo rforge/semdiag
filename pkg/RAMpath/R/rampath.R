@@ -1,7 +1,7 @@
 ## Original RAMpath input
 ## By Johnny Zhang, Jack McArdle, & Aki Hamagami
 ## version 0.1, May 20, 2012
-ramIndex<-function(input){
+RAMIndex<-function(input){
 	sptInput<-unlist(strsplit(input, "="))
 	value<-as.numeric(sptInput[2])
 	left<-sptInput[1]
@@ -14,7 +14,7 @@ ramIndex<-function(input){
 	c(ind1,ind2,value)
 }
 
-ramMatrix<-function(model){
+RAMMatrix<-function(model){
 	# check for empty syntax
     if(length(model) == 0) {
         stop("ERROR: empty model syntax")
@@ -65,7 +65,7 @@ ramMatrix<-function(model){
     arrowInd<-grep('arrow', model)
     arrowLine<-model[arrowInd]
     for (i in 1:length(arrowLine)){
-    	temp<-ramIndex(arrowLine[i])
+    	temp<-RAMIndex(arrowLine[i])
     	A[temp[1],temp[2]]<-temp[3]
     }
     
@@ -73,7 +73,7 @@ ramMatrix<-function(model){
     slingInd<-grep('sling', model)
     slingLine<-model[slingInd]
     for (i in 1:length(slingLine)){
-    	temp<-ramIndex(slingLine[i])
+    	temp<-RAMIndex(slingLine[i])
     	S[temp[1],temp[2]]<-temp[3]
     	S[temp[2],temp[1]]<-temp[3]
     }
@@ -113,18 +113,18 @@ ramMatrix<-function(model){
 	invisible(return(list(F=F, A=A, S=S, nvar=nrow, manifest=manifest,latent=latent,lname=lname,varname=varname)))
 }
 
-ramFlip<-function(input){
+RAMFlip<-function(input){
 	input<-unlist(strsplit(input,">"))
 	n<-length(input)
 	input<-input[n:1]
 	paste(input[1:(n-1)], collapse="<")
 }
-ramRmOne<-function(input){
+RAMRmOne<-function(input){
 	input<-unlist(strsplit(input,">"))
 	n<-length(input)
 	paste(input[2:n], collapse=">")
 }
-## Modified from Boker's Rampath2000 article and S scripts
+## Modified from Boker's RAMpath2000 article and S scripts
 ## makePathList, makeSpanList, makeBridgeList
 
 makePathList <- function(AMatrix, indirect=TRUE) {
@@ -241,8 +241,8 @@ makeBridgeList <- function(pathList, spanList) {
 				tPath1ID[k] <- pathList$index[j]
 				tPath2ID[k] <- 0
 				tValue[k] <- spanList$value[i] * pathList$value[j]
-				tPath[k]<-paste(ramFlip(pathList$tPath[j]), '<', tPath[i], sep='')
-				tPathName[k]<-paste(ramFlip(pathList$tPathName[j]), '<', tPathName[i], sep='')
+				tPath[k]<-paste(RAMFlip(pathList$tPath[j]), '<', tPath[i], sep='')
+				tPathName[k]<-paste(RAMFlip(pathList$tPathName[j]), '<', tPathName[i], sep='')
 			}
 			
 			if (spanList$varB[i] == pathList$fromVar[j]) {
@@ -253,8 +253,8 @@ makeBridgeList <- function(pathList, spanList) {
 				tPath1ID[k] <- 0
 				tPath2ID[k] <- pathList$index[j]
 				tValue[k] <- spanList$value[i] * pathList$value[j]
-				tPath[k]<-paste(ramFlip(pathList$tPath[j]), '<', tPath[i], sep='')
-				tPathName[k]<-paste(ramFlip(pathList$tPathName[j]), '<', tPathName[i], sep='')
+				tPath[k]<-paste(RAMFlip(pathList$tPath[j]), '<', tPath[i], sep='')
+				tPathName[k]<-paste(RAMFlip(pathList$tPathName[j]), '<', tPathName[i], sep='')
 			}
 			
 		}
@@ -272,8 +272,8 @@ makeBridgeList <- function(pathList, spanList) {
 						tPath1ID[k] <- pathList$index[j]
 						tPath2ID[k] <- pathList$index[h]
 						tValue[k] <- spanList$value[i] * pathList$value[j] * pathList$value[h]
-						tPath[k]<-paste(ramFlip(pathList$tPath[h]), "<", tPath[i],  substring(pathList$tPath[j],2), sep='')
-						tPathName[k]<-paste(ramFlip(pathList$tPathName[h]), "<", tPathName[i], ">", ramRmOne(pathList$tPathName[j]), sep='')
+						tPath[k]<-paste(RAMFlip(pathList$tPath[h]), "<", tPath[i],  substring(pathList$tPath[j],2), sep='')
+						tPathName[k]<-paste(RAMFlip(pathList$tPathName[h]), "<", tPathName[i], ">", RAMRmOne(pathList$tPathName[j]), sep='')
 					}
 				}
 			}
@@ -286,16 +286,16 @@ makeBridgeList <- function(pathList, spanList) {
 				value=tValue[1:k], path=tPath[1:k],pathName=tPathName[1:k]))
 }
 
-ramPathBridge<-function(rammatrix, allbridge=TRUE, indirect=TRUE){
-	Amatrix<-rammatrix$A
-	Smatrix<-rammatrix$S
+RAMPathBridge<-function(RAMmatrix, allbridge=TRUE, indirect=TRUE){
+	Amatrix<-RAMmatrix$A
+	Smatrix<-RAMmatrix$S
 	tPathlist <- makePathList(Amatrix,indirect=indirect)
     tSpanlist <- makeSpanList(Smatrix)
     tBridgelist<-NULL
     if (allbridge) tBridgelist <- makeBridgeList(tPathlist, tSpanlist)
-    ramobject<-list(path=tPathlist, bridge=tBridgelist, span=tSpanlist, ram=rammatrix)
-	class(ramobject)<-'RAMpath'
-	ramobject 
+    RAMobject<-list(path=tPathlist, bridge=tBridgelist, span=tSpanlist, RAM=RAMmatrix)
+	class(RAMobject)<-'RAMpath'
+	RAMobject 
 }
 
 plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8, 8), node.font = c("Helvetica", 14), edge.font = c("Helvetica", 10), rank.direction = c("LR","TB"), digits = 2, output.type=c("graphics", "dot"), graphics.fmt="pdf", dot.options=NULL, ...)
@@ -305,10 +305,10 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
 	tPathlist<-pathbridge$path
 	tBridgelist<-pathbridge$bridge
 	tSpanlist<-pathbridge$span
-	rammatrix<-pathbridge$ram
-	varname<-rammatrix$varname
+	RAMmatrix<-pathbridge$RAM
+	varname<-RAMmatrix$varname
 	nvar<-length(varname)
-	latent <- rammatrix$lname
+	latent <- RAMmatrix$lname
 	npath<-tPathlist$nPath
 	nspan<-length(tSpanlist$index)
 	pathValue<-round(tPathlist$value[1:npath],digits=digits)
@@ -321,7 +321,7 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
 	output.type <- match.arg(output.type)
 	
 	if (missing(from)|missing(to)){
-		## plot the solid path diagram if missing from or to
+		## plot the solid path diagRAM if missing from or to
 		if (!missing(file)) {
 			dot.file <- paste(file, ".dot", sep="")
 			handle <- file(dot.file, "w")
@@ -330,7 +330,7 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
 		}else handle <- stdout()
 	
 		rank.direction <- match.arg(rank.direction)
-		cat(file = handle, paste("digraph \"pathdiagram\" {\n", sep = ""))
+		cat(file = handle, paste("digraph \"pathdiagRAM\" {\n", sep = ""))
 		cat(file = handle, paste("  rankdir=", rank.direction, ";\n",sep = ""))
 		cat(file = handle, paste("  size=\"", size[1], ",", size[2],"\";\n", sep = ""))
 		cat(file = handle, paste("  node [fontname=\"", node.font[1], "\" fontsize=", node.font[2], " shape=box];\n", sep = ""))
@@ -371,7 +371,7 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
 		index<-which(tPathlist$fromVar==varA & tPathlist$toVar==varB)
 		if (length(index)==0) stop('No such path exists')
 		for (j in 1:length(index)){
-			## plot the solid path diagram if missing from or to
+			## plot the solid path diagRAM if missing from or to
 			if (!missing(file)) {
 				dot.file <- paste(file, j, ".dot", sep="")
 				handle <- file(dot.file, "w")
@@ -380,7 +380,7 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
 			}else handle <- stdout()
 	
 			rank.direction <- match.arg(rank.direction)
-			cat(file = handle, paste("strict digraph \"pathdiagram\" {\n", sep = ""))
+			cat(file = handle, paste("strict digraph \"pathdiagRAM\" {\n", sep = ""))
 			cat(file = handle, paste("  rankdir=", rank.direction, ";\n",sep = ""))
 			cat(file = handle, paste("  size=\"", size[1], ",", size[2],"\";\n", sep = ""))
 			cat(file = handle, paste("  node [fontname=\"", node.font[1], "\" fontsize=", node.font[2], " shape=box  style=dashed];\n", sep = ""))
@@ -404,7 +404,7 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
 				cat(file = handle, paste("  \"", sPathInd[k], "\" -> \"", sPathInd[k+1], "\" [label=\"", value, "\" style=solid];\n", sep = ""))
 			}
 			
-			## the rest of the path diagram
+			## the rest of the path diagRAM
 			if (!is.null(latent)){
 			for (lat in latent) {
 				cat(file = handle, paste("  \"", lat, "\" [shape=ellipse];\n",sep = ""))
@@ -435,7 +435,7 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
 		## plot the bridge
 		index<-which(tBridgelist$varA==varA & tBridgelist$varB==varB)
 		for (j in 1:length(index)){
-			## plot the solid path diagram if missing from or to
+			## plot the solid path diagRAM if missing from or to
 			if (!missing(file)) {
 				dot.file <- paste(file, j, ".dot", sep="")
 				handle <- file(dot.file, "w")
@@ -444,7 +444,7 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
 			}else handle <- stdout()
 	
 			rank.direction <- match.arg(rank.direction)
-			cat(file = handle, paste("strict digraph \"pathdiagram\" {\n", sep = ""))
+			cat(file = handle, paste("strict digraph \"pathdiagRAM\" {\n", sep = ""))
 			cat(file = handle, paste("  rankdir=", rank.direction, ";\n",sep = ""))
 			cat(file = handle, paste("  size=\"", size[1], ",", size[2],"\";\n", sep = ""))
 			cat(file = handle, paste("  node [fontname=\"", node.font[1], "\" fontsize=", node.font[2], " shape=box  style=dashed];\n", sep = ""))
@@ -494,7 +494,7 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
 			cat(file = handle, paste("  \"", sLeft[nLeft], "\" -> \"", sRight[1], "\" [label=\"", value, "\" style=solid   dir=both];\n", sep = ""))
 			
 			
-			## the full path diagram
+			## the full path diagRAM
 			if (!is.null(latent)){
 			for (lat in latent) {
 				cat(file = handle, paste("  \"", lat, "\" [shape=ellipse];\n",sep = ""))
@@ -526,7 +526,7 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
 	invisible(NULL)
 }
 
-ramUniquePath<-function(tPathlist){
+RAMUniquePath<-function(tPathlist){
 	tUniquePath<-cbind(tPathlist$fromVar, tPathlist$toVar)
 	name<-tPathlist$tPathName[1]
 	k<-1
@@ -548,14 +548,14 @@ summary.RAMpath<-function(object, from, to, type=c("path","bridge"),...){
 	tPathlist<-pathbridge$path
 	tBridgelist<-pathbridge$bridge
 	tSpanlist<-pathbridge$span
-	rammatrix<-pathbridge$ram
-	varname<-rammatrix$varname	
+	RAMmatrix<-pathbridge$RAM
+	varname<-RAMmatrix$varname	
 	
 	if (missing(from)|missing(to)){	
 	## print the paths
 	if (type=="path"){
 	## col1: path col2: value col3: percent
-	tUniquePath<-ramUniquePath(tPathlist)
+	tUniquePath<-RAMUniquePath(tPathlist)
 	npath<-length(tUniquePath$tUniqueName)
 	cat('Path and its decomposions:\n\n')
 	nString<-max(nchar(tPathlist$tPathName))
@@ -687,7 +687,7 @@ isNumeric <- function(constant){
 	!(is.na(as.numeric(constant)))
 }
 
-ramParseLavaan<-function(input, manifest, type=0){
+RAMParseLavaan<-function(input, manifest, type=0){
 	sptInput<-unlist(strsplit(input, "="))
 	sLeft<-sptInput[1]
 	sRight<-sptInput[2]
@@ -726,7 +726,7 @@ ramParseLavaan<-function(input, manifest, type=0){
 	}else{
 		findQM<-grep("?", sRight, fixed=TRUE)
 		if (length(findQM>0)){
-			## freely estimated parameter
+			## freely estimated paRAMeter
 			fixed<-1
 			if (nchar(sRight)==1){
 				fixedAt<-NA
@@ -766,10 +766,10 @@ ramParseLavaan<-function(input, manifest, type=0){
 		arrowType<-3
 	}
 	
-	list(ramValue=c(fromVar, toVar, arrowType, fixed, fixedAt), ramLabel=label)
+	list(RAMValue=c(fromVar, toVar, arrowType, fixed, fixedAt), RAMLabel=label)
 }
 
-ram2lavaan<-function(model){
+RAM2lavaan<-function(model){
 	# check for empty syntax
     if(length(model) == 0) {
         stop("ERROR: empty model syntax")
@@ -815,20 +815,20 @@ ram2lavaan<-function(model){
     latent<-as.numeric(latent)
     nrow<-manifest+latent
     
-    ## construct a matrix with from variable, to variable, arrows, fixed/free parameters, starting values, labels
+    ## construct a matrix with from variable, to variable, arrows, fixed/free paRAMeters, starting values, labels
     ## fixed: 0 Free: 1
     ## obs to obs/obs 1; latent to obs 2; double 3
     
-    ramMatrix<-NULL
-    ramLabel<-NULL
+    RAMMatrix<-NULL
+    RAMLabel<-NULL
     
     ## Construct the matrix for the arrows
     arrowInd<-grep('arrow', model)
     arrowLine<-model[arrowInd]
     for (i in 1:length(arrowLine)){
-    		temp<-ramParseLavaan(arrowLine[i], manifest, 0)
-    		ramMatrix<-rbind(ramMatrix, temp$ramValue)
-    		ramLabel<-c(ramLabel, temp$ramLabel)
+    		temp<-RAMParseLavaan(arrowLine[i], manifest, 0)
+    		RAMMatrix<-rbind(RAMMatrix, temp$RAMValue)
+    		RAMLabel<-c(RAMLabel, temp$RAMLabel)
     }
     
     ## Construct the matrix for the slings
@@ -836,9 +836,9 @@ ram2lavaan<-function(model){
     
     slingLine<-model[slingInd]
     for (i in 1:length(slingLine)){
-    		temp<-ramParseLavaan(slingLine[i], manifest, 1)
-    		ramMatrix<-rbind(ramMatrix, temp$ramValue)
-    		ramLabel<-c(ramLabel, temp$ramLabel)
+    		temp<-RAMParseLavaan(slingLine[i], manifest, 1)
+    		RAMMatrix<-rbind(RAMMatrix, temp$RAMValue)
+    		RAMLabel<-c(RAMLabel, temp$RAMLabel)
     }
     
     ## variable names
@@ -857,28 +857,28 @@ ram2lavaan<-function(model){
 	} 
 
 	## Generate a lavaan model
-	nEq<-nrow(ramMatrix)
+	nEq<-nrow(RAMMatrix)
 	lavaanModel<-NULL
 	for (i in 1:nEq){
 		arrowType<-"~"
-		if (ramMatrix[i,3]==2) arrowType="=~"
-		if (ramMatrix[i,3]==3) arrowType="~~"
+		if (RAMMatrix[i,3]==2) arrowType="=~"
+		if (RAMMatrix[i,3]==3) arrowType="~~"
 		
-		if (ramMatrix[i,4]==1){
-			if (is.na(ramMatrix[i,5]) & is.na(ramLabel[i])) preLabel<-NULL
-			if (is.na(ramMatrix[i,5]) & !is.na(ramLabel[i])) preLabel<-paste(ramLabel[i], "*", sep="")
-			if (!is.na(ramMatrix[i,5]) & is.na(ramLabel[i])) preLabel<-paste("start(",ramMatrix[i,5],")", "*", sep="")
-			if (!is.na(ramMatrix[i,5]) & !is.na(ramLabel[i])) {
-				multMod<-varname[ramMatrix[i,1]]
-				if (ramMatrix[i,3]==2) {multMod<-varname[ramMatrix[i,2]]}
-				preLabel<-paste(ramLabel[i], "*",multMod,"+start(",ramMatrix[i,5],")", "*", sep="")
+		if (RAMMatrix[i,4]==1){
+			if (is.na(RAMMatrix[i,5]) & is.na(RAMLabel[i])) preLabel<-NULL
+			if (is.na(RAMMatrix[i,5]) & !is.na(RAMLabel[i])) preLabel<-paste(RAMLabel[i], "*", sep="")
+			if (!is.na(RAMMatrix[i,5]) & is.na(RAMLabel[i])) preLabel<-paste("start(",RAMMatrix[i,5],")", "*", sep="")
+			if (!is.na(RAMMatrix[i,5]) & !is.na(RAMLabel[i])) {
+				multMod<-varname[RAMMatrix[i,1]]
+				if (RAMMatrix[i,3]==2) {multMod<-varname[RAMMatrix[i,2]]}
+				preLabel<-paste(RAMLabel[i], "*",multMod,"+start(",RAMMatrix[i,5],")", "*", sep="")
 			}
 		}else{
-			preLabel<-paste(ramMatrix[i,5],"*",sep="")
+			preLabel<-paste(RAMMatrix[i,5],"*",sep="")
 		}
 		
-		temp<-paste(varname[ramMatrix[i,2]], arrowType, preLabel, varname[ramMatrix[i,1]], "\n", sep="")
-		if (ramMatrix[i,3]==2) temp<-paste(varname[ramMatrix[i,1]], arrowType, preLabel, varname[ramMatrix[i,2]], "\n", sep="")
+		temp<-paste(varname[RAMMatrix[i,2]], arrowType, preLabel, varname[RAMMatrix[i,1]], "\n", sep="")
+		if (RAMMatrix[i,3]==2) temp<-paste(varname[RAMMatrix[i,1]], arrowType, preLabel, varname[RAMMatrix[i,2]], "\n", sep="")
 
 		lavaanModel<-paste(lavaanModel, temp)
 	}
@@ -887,12 +887,12 @@ ram2lavaan<-function(model){
 
 
 ## Fit a RAM model using Lavaan and return to the RAM matrix
-ramFit<-function(ramModel, data, type=c('ram','lavaan'), digits=3, zero.print="0", ...){
-  if (missing(type)) type = 'ram'
-  if (type=='ram') {
-    lavaanModel<-ram2lavaan(ramModel)
+RAMFit<-function(RAMModel, data, type=c('RAM','lavaan'), digits=3, zero.print="0", ...){
+  if (missing(type)) type = 'RAM'
+  if (type=='RAM') {
+    lavaanModel<-RAM2lavaan(RAMModel)
   }else{    
-    lavaanModel<-ramModel
+    lavaanModel<-RAMModel
   }
 	fitModel<-lavaan(model= lavaanModel, data=data, ...)
 	parTable<-fitModel@ParTable
@@ -941,7 +941,7 @@ ramFit<-function(ramModel, data, type=c('ram','lavaan'), digits=3, zero.print="0
 	#cat("Model fit statistics and indices\n")
 	#cat("--------------------------------\n")
 	#print(fitInd)
-	## Print the parameter estimates
+	## Print the paRAMeter estimates
 	A.na<-A
 	A.na[A==0]<-NA
 	S.na<-S
@@ -952,7 +952,7 @@ ramFit<-function(ramModel, data, type=c('ram','lavaan'), digits=3, zero.print="0
 	Sse.na[Sse==0]<-NA
 	
 	cat("\n--------------------\n")
-	cat("Parameter estimates:\n")
+	cat("PaRAMeter estimates:\n")
 	cat("--------------------\n")
 	cat("\nMatrix A\n\n")
 	print(A.na, digits=digits,na.print = zero.print)
@@ -960,7 +960,7 @@ ramFit<-function(ramModel, data, type=c('ram','lavaan'), digits=3, zero.print="0
 	print(S.na,digits=digits,na.print = zero.print)
   
 	cat("\n----------------------------------------\n")
-	cat("Standard errors for parameter estimates:\n")
+	cat("Standard errors for paRAMeter estimates:\n")
 	cat("----------------------------------------\n")
 	cat("\nMatrix A\n\n")
 	print(Ase.na,digits=digits,na.print = zero.print)

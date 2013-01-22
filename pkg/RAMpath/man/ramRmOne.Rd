@@ -1,5 +1,5 @@
-\name{ramRmOne}
-\alias{ramRmOne}
+\name{RAMRmOne}
+\alias{RAMRmOne}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Internal function
@@ -7,7 +7,7 @@ Internal function
 \description{
 Internal function}
 \usage{
-ramRmOne(input)
+RAMRmOne(input)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

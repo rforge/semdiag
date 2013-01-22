@@ -1,17 +1,17 @@
-\name{ramFlip}
-\alias{ramFlip}
+\name{RAMFlip}
+\alias{RAMFlip}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Flip the ram path
+Flip the RAM path
 }
 \description{
-Flip the ram path}
+Flip the RAM path}
 \usage{
-ramFlip(input)
+RAMFlip(input)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{input}{
-An ram path
+An RAM path
 }
 }

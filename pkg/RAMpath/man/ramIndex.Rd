@@ -1,5 +1,5 @@
-\name{ramIndex}
-\alias{ramIndex}
+\name{RAMIndex}
+\alias{RAMIndex}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 To be added
@@ -7,7 +7,7 @@ To be added
 \description{
 To be added}
 \usage{
-ramIndex(input)
+RAMIndex(input)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
