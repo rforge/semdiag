@@ -1,5 +1,5 @@
 \name{summary.alpha}
-\alias{summary.alpha}
+\alias{summary}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Print alpha and its confidence interval.
@@ -7,7 +7,7 @@ Print alpha and its confidence interval.
 \description{
 Print alpha and its confidence interval.}
 \usage{
-summary.alpha(res, prob = 0.05)
+summary(res, prob = 0.05)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

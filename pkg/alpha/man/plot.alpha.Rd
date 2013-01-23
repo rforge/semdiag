@@ -1,5 +1,5 @@
 \name{plot.alpha}
-\alias{plot.alpha}
+\alias{plot}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Alpha related plot

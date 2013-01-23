@@ -730,7 +730,8 @@ cronbach<-function(y, varphi=0.1, se=FALSE, complete=FALSE){
 }
 
 
-plot.alpha<-function(res, weight=TRUE, profile=5, diag=FALSE, length=10){
+plot.alpha<-function(x, weight=TRUE, profile=5, diag=FALSE, length=10){
+	res<-x
 	#par(ask=TRUE)
 	y<-res$y
 	## find the smallest weight
@@ -779,7 +780,8 @@ plot.alpha<-function(res, weight=TRUE, profile=5, diag=FALSE, length=10){
 	}
 }
 
-summary.alpha<-function(res, prob=.05){
+summary.alpha<-function(object, prob=.05){
+	res<-object
 	cat("\nThe estimated alpha is \n")
 	
 	t0.txt <- sprintf("  %-20s", "alpha")
