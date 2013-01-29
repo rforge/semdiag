@@ -1,5 +1,6 @@
 \name{summary.alpha}
 \alias{summary}
+\alias{summary.alpha}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Print alpha and its confidence interval.
@@ -7,16 +8,17 @@ Print alpha and its confidence interval.
 \description{
 Print alpha and its confidence interval.}
 \usage{
-summary(res, prob = 0.05)
+\method{summary}{alpha}(object, prob = 0.05,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{res}{
+  \item{object}{
 Results from the function \code{\link{cronbach}}.
 }
   \item{prob}{
 Alpha level for confidence interval.
 }
+  \item{...}{Option can be passed to the summary function.}
 }
 \author{
 Zhiyong Zhang and Ke-Hai Yuan

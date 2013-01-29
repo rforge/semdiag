@@ -690,10 +690,7 @@ cronbach<-function(y, varphi=0.1, se=FALSE, complete=FALSE){
 	
 	sigma<-cov1$sigma
 
-	vbar<-mean(diag(sigma))
-	cbar<-(sum(sigma)-sum(diag(sigma)))/(p*(p-1)/2)
-
-	alpha<-p*cbar/(vbar+(p-1)*cbar)
+	alpha<-p/(p-1)*(1-sum(diag(sigma))/sum(sigma))
 
 	## robust standard error
 	se.alpha<-NA
@@ -730,7 +727,7 @@ cronbach<-function(y, varphi=0.1, se=FALSE, complete=FALSE){
 }
 
 
-plot.alpha<-function(x, weight=TRUE, profile=5, diag=FALSE, length=10){
+plot.alpha<-function(x, weight=TRUE, profile=5, diag=FALSE, length=10,...){
 	res<-x
 	#par(ask=TRUE)
 	y<-res$y
@@ -752,9 +749,9 @@ plot.alpha<-function(x, weight=TRUE, profile=5, diag=FALSE, length=10){
 	
 	if (weight){
 		par(mfrow=c(2,1))
-		plot(res$weight$w1, ylim=c(0,1), xlab='Case number', ylab='Weight w1', main='Weights for mean estimates')
+		plot(res$weight$w1, ylim=c(0,1), xlab='Case number', ylab='Weight w1', main='Weights for mean estimates',...)
 		text(idx, res$weight$w1[idx], idx, pos=1, col='red')
-		plot(res$weight$w2, ylim=c(0,1), xlab='Case number', ylab='Weight w2', main='Weights for covariance estimates')
+		plot(res$weight$w2, ylim=c(0,1), xlab='Case number', ylab='Weight w2', main='Weights for covariance estimates',...)
 		text(idx, res$weight$w2[idx], idx, pos=1, col='red')
 		par(mfrow=c(1,1))
 	} 
@@ -780,7 +777,7 @@ plot.alpha<-function(x, weight=TRUE, profile=5, diag=FALSE, length=10){
 	}
 }
 
-summary.alpha<-function(object, prob=.05){
+summary.alpha<-function(object, prob=.05,...){
 	res<-object
 	cat("\nThe estimated alpha is \n")
 	

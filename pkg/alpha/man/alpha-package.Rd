@@ -27,6 +27,4 @@ Zhang, Z. & Yuan, K.-H. (2013). Robust Cronbach's alpha.
 \keyword{robust}
 \keyword{alpha}
 \keyword{Cronbach}
-\examples{
 
-}
