@@ -727,9 +727,9 @@ cronbach<-function(y, varphi=0.1, se=FALSE, complete=FALSE){
 }
 
 
-plot.alpha<-function(x, weight=TRUE, profile=5, diag=FALSE, length=10,...){
+plot.alpha<-function(x, type="weight", profile=5, interval=0.01,...){
+	## type: weight, profile, diagnosis
 	res<-x
-	#par(ask=TRUE)
 	y<-res$y
 	## find the smallest weight
 	if (profile==0) outcase<-5
@@ -747,7 +747,7 @@ plot.alpha<-function(x, weight=TRUE, profile=5, diag=FALSE, length=10,...){
 		idx<-which(res$weight$w1 <= temp[profile])
 	}
 	
-	if (weight){
+	if (substr(type,1,1)=="w"){
 		par(mfrow=c(2,1))
 		plot(res$weight$w1, ylim=c(0,1), xlab='Case number', ylab='Weight w1', main='Weights for mean estimates',...)
 		text(idx, res$weight$w1[idx], idx, pos=1, col='red')
@@ -756,24 +756,23 @@ plot.alpha<-function(x, weight=TRUE, profile=5, diag=FALSE, length=10,...){
 		par(mfrow=c(1,1))
 	} 
 	
-	if (profile>0){		
+	if (substr(type,1,1)=="p"){		
 		## generate the plot
 		p<-ncol(y)
-		plot(1:p, m, type='l', ylim=c(l.min, l.max), lwd=3, ylab='Score', xlab='Variable number', main='Profile plot')		
+		plot(1:p, m, type='l', ylim=c(l.min, l.max), lwd=3, ylab='Score', xlab='Variable number', main='Profile plot',...)		
 		for (i in idx){
 			lines(1:p, y[i, ])
 		}
 	}
-	#par(ask=FALSE)
 	
-	if (diag){
+	if (substr(type,1,1)=="d"){
 		varphi<-res$varphi
-		phi<-seq(0, varphi, length=length)
+		phi<-seq(0, varphi, by=interval)
 		alpha.diag<-NULL
-		for (i in 1:length){
+		for (i in 1:length(phi)){
 			alpha.diag<-c(alpha.diag, cronbach(y, phi[i])$alpha)
 		}
-		plot(phi, alpha.diag, xlab='varphi', ylab='alpha')
+		plot(phi, alpha.diag, xlab='varphi', ylab='alpha',...)
 	}
 }
 
