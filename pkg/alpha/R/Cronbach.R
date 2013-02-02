@@ -671,9 +671,12 @@ plot.alpha<-function(x, type="weight", profile=5, interval=0.01,...){
 	if (substr(type,1,1)=="p"){
 		## generate the plot
 		p<-ncol(y)
-		plot(1:p, res$musig$mu, type='l', ylim=c(l.min, l.max), lwd=3, ylab='Score', xlab='Item number', ...)		
+		plot(1:p, res$musig$mu, type='l', ylim=c(l.min, l.max), lwd=3, ylab='Score', xlab='Item number', ...)
+		ltyno<-1		
 		for (i in idx){
-			lines(1:p, y[i, ])
+			lines(1:p, y[i, ], lty=ltyno, ...)
+			#text(1:p, y[i,], i)
+			ltyno<-ltyno+1
 		}
 	}
 	
