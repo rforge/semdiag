@@ -28,7 +28,7 @@ In addition, a matrix of 0/1 is also used to indicate missing data. 1 means miss
   \item{x}{Data ordered according to missing data pattern}
   \item{misinfo}{Missing data pattern matrix}
   \item{mispat}{Missing data pattern in better readable form.}
-  \item{id}{The original case id.}
+  \item{y}{The original data.}
 }
 \references{
 Yuan, K.-H., & Zhang, Z. (2012). Robust Structural Equation Modeling with Missing Data and Auxiliary Variables. Psychometrika, 77(4), 803-826.
