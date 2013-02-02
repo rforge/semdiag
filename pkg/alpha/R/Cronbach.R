@@ -15,7 +15,7 @@ rsem.pattern<-function(x,print=FALSE){
   ##                      the remaining corresponding to missing variables
   if (missing(x)) stop("A data set has to be provided!")
   if (!is.matrix(x)) x<-as.matrix(x)
-  
+  y<-x
   n<-dim(x)[1]
   p<-dim(x)[2]
   misorder<-rep(0,n)
@@ -28,11 +28,11 @@ rsem.pattern<-function(x,print=FALSE){
   }
   ## Combine data with missing pattern indicator
   ## order data according to misorder
-  id<-1:n
+  #id<-1:n
   temp<-order(misorder)
   x<-x[temp,]
   misn<-misorder[temp]
-  id<-id[temp]
+  #id<-id[temp]
   
   ##identifying the subscripts of missing variables and put them in misinfo;
   mi<-0; nmi<-0;oi<-0; noi<-0;
@@ -105,7 +105,7 @@ rsem.pattern<-function(x,print=FALSE){
   
   if (print) print(mispat)
   
-  invisible(list(misinfo=misinfo, mispat=mispat, x=x, id=id))
+  invisible(list(misinfo=misinfo, mispat=mispat, x=x, y=y))
 }
 
 
@@ -114,131 +114,44 @@ rsem.pattern<-function(x,print=FALSE){
 ## Function rsem.weight                     ##
 ##############################################
 
-rsem.weight<-function(xpattern, varphi, mu0, sig0){
-	x<-xpattern$x
-  misinfo<-xpattern$misinfo
-  
-  n<-dim(x)[1]
-  p<-dim(x)[2]
-	
+rsem.weight<-function(x, varphi, mu0, sig0){
+	##x<-xpattern$x
+	if (!is.matrix(x)) x<-as.matrix(x)
+	n<-dim(x)[1]
+	p<-dim(x)[2]
 	prob<-1-varphi ## chi-square p-value
-    chip<-qchisq(prob, p)
-    ck<-sqrt(chip)
-    cbeta<-( p*pchisq(chip, p+2) + chip*(1-prob) )/p
-    wi1all<-wi2all<-NULL
-    
-    sumx<-rep(0,p); sumxx<-array(0,dim=c(p,p)); sumw1<-0; sumw2<-0;
-    npat<-dim(misinfo)[1]  ## number of missing data patterns
-    p1<-misinfo[1,2]       ## number of observed variables in pattern 1
-    n1<-misinfo[1,1]       ## number of cases in pattern 1
-    if (p1==p){            ## complete data
-      sigin <- solve(sig0)  ## matrix inverse
-      for (i in 1:n1){
-        xi<-x[i,]
-        xi0<-xi-mu0
-        di2<-xi0%*%sigin%*%xi0
-        di<-sqrt(di2)
-        ## Huber weight functions
-        if (di<=ck){
-          wi1<-1
-          wi2<-1/cbeta
-          wi1all<-c(wi1all,  wi1)
-          wi2all<-c(wi2all,  wi2)
-        }else{
-          wi1<-ck/di
-          wi2<-wi1*wi1/cbeta
-          wi1all<-c(wi1all,  wi1)
-          wi2all<-c(wi2all,  wi2)
-        } ## end Huber weight        
-      } ## end for
-    }else{ ## end p1==p
-      ## with missing data
-      if (varphi==0){
-        ck1<-1e+10
-        cbeta1<-1
-      }else{ 
-        chip1<-qchisq(prob, p1)
-        ck1<-sqrt(chip1)
-        cbeta1<-( p1*pchisq(chip1,p1+2) + chip1*(1-prob) )/p1
-      }
-      o1<-misinfo[1,3:(2+p1)]
-      m1<-misinfo[1,(2+p1+1):(p+2)]
-      mu_o<-mu0[o1]; mu_m<-mu0[m1]
-      sig_oo<-sig0[o1,o1]; sig_om<-sig0[o1,m1];
-      if (p1==1) {sig_mo<-sig_om}else{sig_mo<-t(sig_om)} 
-      sig_mm<-sig0[m1,m1];
-      sigin_oo<-solve(sig_oo)
-      beta_mo<-sig_mo%*%sigin_oo
-      
-      delt <- array(0, dim=c(p,p))
-      delt[m1,m1]<-sig_mm - beta_mo%*%sig_om
-      for (i in 1:n1){
-        xi<-x[i,]
-        xi_o<-xi[o1]
-        xi0_o<-xi_o-mu_o
-        stdxi_o<-sigin_oo%*%xi0_o
-        di2<-xi0_o%*%stdxi_o
-        di<-sqrt(di2)
-        if (di<=ck1){ ##Huber weight
-          wi1<-1
-          wi2<-1/cbeta1
-          wi1all<-c(wi1all,  wi1)
-          wi2all<-c(wi2all,  wi2)
-        }else{
-          wi1<-ck1/di
-          wi2<-wi1*wi1/cbeta1
-          wi1all<-c(wi1all,  wi1)
-          wi2all<-c(wi2all,  wi2)
-        }
-      } ##end for 1:n1  
-    }## end of (p1=p)
-    ## start from pattern 2	
-    if (npat>1){
-      snj<-n1	
-      for (j in 2:npat){
-        nj<-misinfo[j,1]; pj<-misinfo[j,2];
-        oj<-misinfo[j, 3:(2+pj)]; mj<-misinfo[j, (2+pj+1):(p+2)];
-        mu_o<-mu0[oj]; mu_m<-mu0[mj];
-        sig_oo<-sig0[oj,oj]; sig_om<-sig0[oj,mj];
-        if (pj==1) {sig_mo<-sig_om}else{sig_mo<-t(sig_om)} 
-        sig_mm<-sig0[mj,mj];
-        sigin_oo<-solve(sig_oo)
-        beta_mo<-sig_mo%*%sigin_oo
-        delt <- array(0, dim=c(p,p))
-        delt[mj,mj]<-sig_mm - beta_mo%*%sig_om
-        if (varphi==0){
-          ckj<-10e+10
-          cbetaj<-1
-        }else{
-          chipj<-qchisq(prob,pj)
-          ckj<-sqrt(chipj)
-          cbetaj<- ( pj*pchisq(chipj, pj+2) + chipj*(1-prob) )/pj
-        }
-        for (i in ((snj+1):(snj+nj))){
-          xi<-x[i,]
-          xi_o<-xi[oj]
-          xi0_o<-xi_o - mu_o
-          stdxi_o<-sigin_oo%*%xi0_o
-          di2<-xi0_o%*%stdxi_o
-          di<-sqrt(di2)
-          if (di<=ckj){ ##Huber weight
-            wi1<-1
-            wi2<-1/cbetaj
-            wi1all<-c(wi1all,  wi1)
-            wi2all<-c(wi2all,  wi2)
-          }else{
-            wi1<-ckj/di
-            wi2<-wi1*wi1/cbetaj
-            wi1all<-c(wi1all,  wi1)
-            wi2all<-c(wi2all,  wi2)
-          }
-        }
-        snj<-snj+nj
-      } ## for (j in 2:npat)
-    }
-    id<-xpattern$id
-    wi1all<-wi1all[id]
-    wi2all<-wi2all[id]
+	wi1all<-wi2all<-NULL
+	if (varphi==0){
+		wi1all<-wi2all<-rep(1, n)
+	}else{
+		for (i in 1:n){
+			## take out one row of x
+			xi<-x[i, ]
+			xid<-which(!is.na(xi))
+			xic<-xi[xid]
+			
+			ximu<-mu0[xid]
+			xisig<-as.matrix(sig0[xid, xid])
+			xidiff<-as.matrix(xic-ximu)
+			
+			di2<-t(xidiff)%*%solve(xisig)%*%xidiff
+			di<-sqrt(di2)
+			
+			pi<-length(xic)
+    		chip<-qchisq(prob, pi)
+    		ck<-sqrt(chip)
+    		cbeta<-( pi*pchisq(chip,pi+2) + chip*(1-prob) )/pi
+    		
+			if (di <= ck){
+				wi1all<-c(wi1all, 1)
+				wi2all<-c(wi2all, 1/cbeta)
+			}else{
+				wi1<-ck/di
+				wi1all<-c(wi1all, wi1)
+				wi2all<-c(wi2all, wi1*wi1/cbeta)
+			}
+		}		
+    }       
     return(list(w1=wi1all, w2=wi2all))
 }
 
@@ -409,8 +322,7 @@ rsem.emmusig<-function(xpattern, varphi=.1, max.it=1000, st='i'){
   if (n_it>=max.it) warning("The maximum number of iteration was exceeded. Please increase max.it in the input.")
   rownames(sig1)<-colnames(sig1)
   names(mu1)<-colnames(sig1)
-  weight<-NULL
-  if (varphi!=0) weight<-rsem.weight(xpattern, varphi, mu1, sig1)
+  weight<-rsem.weight(xpattern$y, varphi, mu1, sig1)
   list(mu=mu1, sigma=sig1, max.it=n_it, weight=weight)
 }
 
@@ -721,7 +633,7 @@ cronbach<-function(y, varphi=0.1, se=FALSE, complete=FALSE){
 	
 	if (varphi>0) cat('About ', round(prop.down,2), '% of cases were downweighted.\n', sep='')
 	
-	alphaobject<-list(alpha=alpha, se=se.alpha, weight=weight, y=y, varphi=varphi)
+	alphaobject<-list(alpha=alpha, se=se.alpha, weight=weight, y=y, varphi=varphi, musig=cov1)
 	class(alphaobject)<-'alpha'
 	invisible(alphaobject)	
 }
@@ -756,10 +668,10 @@ plot.alpha<-function(x, type="weight", profile=5, interval=0.01,...){
 		par(mfrow=c(1,1))
 	} 
 	
-	if (substr(type,1,1)=="p"){		
+	if (substr(type,1,1)=="p"){
 		## generate the plot
 		p<-ncol(y)
-		plot(1:p, m, type='l', ylim=c(l.min, l.max), lwd=3, ylab='Score', xlab='Variable number', main='Profile plot',...)		
+		plot(1:p, res$musig$mu, type='l', ylim=c(l.min, l.max), lwd=3, ylab='Score', xlab='Item number', ...)		
 		for (i in idx){
 			lines(1:p, y[i, ])
 		}
