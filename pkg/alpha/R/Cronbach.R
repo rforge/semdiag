@@ -611,7 +611,7 @@ cronbach<-function(y, varphi=0.1, se=FALSE, complete=FALSE){
 		firstd<-NULL
 		
 		for (i in 1:p){
-			for (j in 1:i){
+			for (j in i:p){
 				if (i==j){
 					temp<--p/(p-1)*(sum(sigma)-sum(diag(sigma)))/((sum(sigma))^2)
 				}else{
@@ -622,7 +622,7 @@ cronbach<-function(y, varphi=0.1, se=FALSE, complete=FALSE){
 		}
 		q<-p+p*(p+1)/2
 		gamma<-s$Gamma[(p+1):q, (p+1):q]
-		se.alpha<-sqrt(firstd%*%gamma%*%t(t(firstd)))
+		se.alpha<-sqrt(firstd%*%gamma%*%t(t(firstd)))/sqrt(n)
 	}
 	
 	if (varphi>0) prop.down<-(n-sum(weight$w1==1))/n*100
@@ -645,10 +645,10 @@ plot.alpha<-function(x, type="weight", profile=5, interval=0.01,...){
 	y<-res$y
 	## find the smallest weight
 	if (profile==0) outcase<-5
-	l.min<-min(y, na.rm=T)
-	l.max<-max(y, na.rm=T)
+	l.min<-min(y, na.rm=TRUE)
+	l.max<-max(y, na.rm=TRUE)
 		
-	m<-apply(y, 2, mean, na.rm=T)
+	m<-apply(y, 2, mean, na.rm=TRUE)
 		
 	## find the smallest cases
 	temp<-sort(res$weight$w1)
@@ -663,7 +663,7 @@ plot.alpha<-function(x, type="weight", profile=5, interval=0.01,...){
 		par(mfrow=c(2,1))
 		plot(res$weight$w1, ylim=c(0,1), xlab='Case number', ylab='Weight w1', main='Weights for mean estimates',...)
 		text(idx, res$weight$w1[idx], idx, pos=1, col='red')
-		plot(res$weight$w2, ylim=c(0,1), xlab='Case number', ylab='Weight w2', main='Weights for covariance estimates',...)
+		plot(res$weight$w2, ylim=c(0,ylim=c(0,max(res$weight$w2)), xlab='Case number', ylab='Weight w2', main='Weights for covariance estimates',...)
 		text(idx, res$weight$w2[idx], idx, pos=1, col='red')
 		par(mfrow=c(1,1))
 	} 
@@ -671,7 +671,10 @@ plot.alpha<-function(x, type="weight", profile=5, interval=0.01,...){
 	if (substr(type,1,1)=="p"){
 		## generate the plot
 		p<-ncol(y)
-		plot(1:p, res$musig$mu, type='l', ylim=c(l.min, l.max), lwd=3, ylab='Score', xlab='Item number', ...)
+		plot(1:p, res$musig$mu, type='l', ylim=c(l.min, l.max), lwd=3, ylab='Score', xlab='', axes=FALSE, ...)
+		box()
+		axis(1, at=1:p, labels=names(y), las=2)
+		axis(2)
 		ltyno<-1		
 		for (i in idx){
 			lines(1:p, y[i, ], lty=ltyno, ...)
