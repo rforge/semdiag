@@ -639,7 +639,7 @@ cronbach<-function(y, varphi=0.1, se=FALSE, complete=FALSE){
 }
 
 
-plot.alpha<-function(x, type="weight", profile=5, interval=0.01,...){
+plot.alpha<-function(x, type="weight", profile=5, interval=0.01, pos='topright', ...){
 	## type: weight, profile, diagnosis
 	res<-x
 	y<-res$y
@@ -663,7 +663,8 @@ plot.alpha<-function(x, type="weight", profile=5, interval=0.01,...){
 		par(mfrow=c(2,1))
 		plot(res$weight$w1, ylim=c(0,1), xlab='Case number', ylab='Weight w1', main='Weights for mean estimates',...)
 		text(idx, res$weight$w1[idx], idx, pos=1, col='red')
-		plot(res$weight$w2, ylim=c(0,ylim=c(0,max(res$weight$w2)), xlab='Case number', ylab='Weight w2', main='Weights for covariance estimates',...)
+		plot(res$weight$w2, ylim=c(0,max(res$weight$w2)), xlab='Case number', ylab='Weight w2', main='Weights for covariance estimates',...)
+		
 		text(idx, res$weight$w2[idx], idx, pos=1, col='red')
 		par(mfrow=c(1,1))
 	} 
@@ -680,6 +681,9 @@ plot.alpha<-function(x, type="weight", profile=5, interval=0.01,...){
 			lines(1:p, y[i, ], lty=ltyno, ...)
 			#text(1:p, y[i,], i)
 			ltyno<-ltyno+1
+		}
+		if (!is.null(pos)){
+			legend(pos, legend=idx, lty=1:ltyno, ...)
 		}
 	}
 	
