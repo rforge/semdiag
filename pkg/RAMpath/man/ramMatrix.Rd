@@ -1,15 +1,15 @@
-\name{RAMMatrix}
-\alias{RAMMatrix}
+\name{ramMatrix}
+\alias{ramMatrix}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Generate RAM matrices based on RAM input}
+Generate ram matrices based on ram input}
 \description{
-Generate RAM matrices based on RAM input}
+Generate ram matrices based on ram input}
 \usage{
-RAMMatrix(model)
+ramMatrix(model)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{model}{
-An RAM model}
+An ram model}
 }

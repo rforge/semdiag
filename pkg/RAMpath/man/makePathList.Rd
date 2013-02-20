@@ -12,7 +12,7 @@ makePathList(AMatrix, indirect = TRUE)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{AMatrix}{
-A matrix from the RAM matrices
+A matrix from the ram matrices
 }
   \item{indirect}{
 Whether to generate all indirect effects}

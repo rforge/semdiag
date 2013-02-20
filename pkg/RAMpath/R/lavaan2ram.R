@@ -1,5 +1,5 @@
-## Lavaan to RAM
-lavaan2RAM<-function(fitModel, digits=2, zero.print="0", RAM.out=TRUE, fit=FALSE){
+## Lavaan to ram
+lavaan2ram<-function(fitModel, digits=2, zero.print="0", ram.out=TRUE, fit=FALSE){
 	parTable<-fitModel@ParTable
 	parEst<-fitModel@Fit@est
 	parSE<-fitModel@Fit@se
@@ -43,9 +43,9 @@ lavaan2RAM<-function(fitModel, digits=2, zero.print="0", RAM.out=TRUE, fit=FALSE
 		cat("Model fit statistics and indices\n")
 		print(fitInd)
 	}
-	if (RAM.out){
+	if (ram.out){
 		for (g in 1:ngroup){
-			## Print the paRAMeter estimates
+			## Print the parameter estimates
 			A.na<-A[[g]]
 			A.na[A[[g]]==0]<-NA
 			S.na<-S[[g]]
@@ -59,7 +59,7 @@ lavaan2RAM<-function(fitModel, digits=2, zero.print="0", RAM.out=TRUE, fit=FALSE
 	  		cat("--------------------\n")
 			
 	  		cat("\n--------------------\n")
-	  		cat("PaRAMeter estimates:\n")
+	  		cat("Parameter estimates:\n")
 	  		cat("--------------------\n")
 	  		cat("\nMatrix A\n\n")
 	  		print(A.na, digits=digits,na.print = zero.print)
@@ -67,7 +67,7 @@ lavaan2RAM<-function(fitModel, digits=2, zero.print="0", RAM.out=TRUE, fit=FALSE
 	  		print(S.na,digits=digits,na.print = zero.print)
 	  
 	  		cat("\n----------------------------------------\n")
-	  		cat("Standard errors for paRAMeter estimates:\n")
+	  		cat("Standard errors for parameter estimates:\n")
 	  		cat("----------------------------------------\n")
 	  		cat("\nMatrix A\n\n")
 	  		print(Ase.na,digits=digits,na.print = zero.print)
@@ -115,7 +115,7 @@ lavaan2RAM<-function(fitModel, digits=2, zero.print="0", RAM.out=TRUE, fit=FALSE
 	cat("Model fit statistics and indices\n")
 	print(fitInd)
 	}
-	## Print the paRAMeter estimates
+	## Print the parameter estimates
 	A.na<-A
 	A.na[A==0]<-NA
 	S.na<-S
@@ -125,9 +125,9 @@ lavaan2RAM<-function(fitModel, digits=2, zero.print="0", RAM.out=TRUE, fit=FALSE
 	Sse.na<-Sse
 	Sse.na[Sse==0]<-NA
 	
-	if (RAM.out){
+	if (ram.out){
 	  cat("\n--------------------\n")
-	  cat("PaRAMeter estimates:\n")
+	  cat("Parameter estimates:\n")
 	  cat("--------------------\n")
 	  cat("\nMatrix A\n\n")
 	  print(A.na, digits=digits,na.print = zero.print)
@@ -135,7 +135,7 @@ lavaan2RAM<-function(fitModel, digits=2, zero.print="0", RAM.out=TRUE, fit=FALSE
 	  print(S.na,digits=digits,na.print = zero.print)
 	  
 	  cat("\n----------------------------------------\n")
-	  cat("Standard errors for paRAMeter estimates:\n")
+	  cat("Standard errors for parameter estimates:\n")
 	  cat("----------------------------------------\n")
 	  cat("\nMatrix A\n\n")
 	  print(Ase.na,digits=digits,na.print = zero.print)
@@ -149,24 +149,24 @@ lavaan2RAM<-function(fitModel, digits=2, zero.print="0", RAM.out=TRUE, fit=FALSE
 	}
 }
 
-RAMVF<-function(RAMout, ylim, xlim, ninterval=10, scale=.1, length=.25, ...){
-	ind<-which(RAMout$lavaan@ParTable$label=="betax")[1]
-	betax<-RAMout$lavaan@Fit@est[ind]
+ramVF<-function(ramout, ylim, xlim, ninterval=10, scale=.1, length=.25, ...){
+	ind<-which(ramout$lavaan@ParTable$label=="betax")[1]
+	betax<-ramout$lavaan@Fit@est[ind]
 	
-	ind<-which(RAMout$lavaan@ParTable$label=="gammax")[1]
-	gammax<-RAMout$lavaan@Fit@est[ind]
+	ind<-which(ramout$lavaan@ParTable$label=="gammax")[1]
+	gammax<-ramout$lavaan@Fit@est[ind]
 	
-	ind<-which(RAMout$lavaan@ParTable$label=="betay")[1]
-	betay<-RAMout$lavaan@Fit@est[ind]
+	ind<-which(ramout$lavaan@ParTable$label=="betay")[1]
+	betay<-ramout$lavaan@Fit@est[ind]
 	
-	ind<-which(RAMout$lavaan@ParTable$label=="gammay")[1]
-	gammay<-RAMout$lavaan@Fit@est[ind]
+	ind<-which(ramout$lavaan@ParTable$label=="gammay")[1]
+	gammay<-ramout$lavaan@Fit@est[ind]
 	
-	ind<-which(RAMout$lavaan@ParTable$label=="mxs")[1]
-	mux<-RAMout$lavaan@Fit@est[ind]
+	ind<-which(ramout$lavaan@ParTable$label=="mxs")[1]
+	mux<-ramout$lavaan@Fit@est[ind]
 	
-	ind<-which(RAMout$lavaan@ParTable$label=="mys")[1]
-	muy<-RAMout$lavaan@Fit@est[ind]
+	ind<-which(ramout$lavaan@ParTable$label=="mys")[1]
+	muy<-ramout$lavaan@Fit@est[ind]
 	
 	x<-seq(xlim[1],xlim[2], length=ninterval)
 	y<-seq(ylim[1],ylim[2], length=ninterval)

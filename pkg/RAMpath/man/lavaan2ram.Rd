@@ -1,12 +1,12 @@
-\name{lavaan2RAM}
-\alias{lavaan2RAM}
+\name{lavaan2ram}
+\alias{lavaan2ram}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Convert lavaan output to RAM matrices}
 \description{
 Convert lavaan output to RAM matrices}
 \usage{
-lavaan2RAM(fitModel, digits = 2, zero.print = "0", RAM.out = TRUE, fit = FALSE)
+lavaan2ram(fitModel, digits = 2, zero.print = "0", ram.out = TRUE, fit = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -16,7 +16,7 @@ Digits for number print}
   \item{zero.print}{
 Format zeros in the matrix
 }
-  \item{RAM.out}{
+  \item{ram.out}{
 Whether print RAM matrices
 }
   \item{fit}{

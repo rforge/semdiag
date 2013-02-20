@@ -3,17 +3,17 @@
 \alias{plot}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Plot the path diagRAM according to RAM path and bridges
+Plot the path diagram according to RAM path and bridges
 }
 \description{
-Plot the path diagRAM according to RAM path and bridges}
+Plot the path diagram according to RAM path and bridges}
 \usage{
 \method{plot}{RAMpath}(x, file, from, to, type = c("path", "bridge"), size = c(8, 8), node.font = c("Helvetica", 14), edge.font = c("Helvetica", 10), rank.direction = c("LR", "TB"), digits = 2, output.type = c("graphics", "dot"), graphics.fmt = "pdf", dot.options = NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-Output from the \code{\link{RAMPathBridge}} function
+Output from the \code{\link{ramPathBridge}} function
 }
   \item{file}{
 File name for the generated figures
@@ -48,10 +48,10 @@ Digits of numbers to plot
 If "graphics", the default, both a ".dot" file and a graphics file will be created.
 }
   \item{graphics.fmt}{
-a graphics format recognized by the dot progRAM; the default is "pdf"; graphics.fmt is also used for the extension of the graphics file that is created.
+a graphics format recognized by the dot program; the default is "pdf"; graphics.fmt is also used for the extension of the graphics file that is created.
 }
   \item{dot.options}{
-options to be passed to the dot progRAM, given as a character string.
+options to be passed to the dot program, given as a character string.
 }
   \item{\dots}{
 Other options for plot

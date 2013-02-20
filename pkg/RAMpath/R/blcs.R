@@ -2,14 +2,14 @@
 ## Johnny Zhang & Jack McArdle, 
 ## Created on May 26, 2012
 
-RAMLCS<-function(data, ## data to be used
+ramLCS<-function(data, ## data to be used
 	y, ## variables x to be used
 	timey, ##
-	RAM.out=FALSE,
+	ram.out=FALSE,
 	betay, my0, mys, varey, vary0, varys, vary0ys,...){
 	if (missing(data)) stop("No data was provided!")
 	if (missing(y)) stop("Missing y variables!")
-	if (!is.data.fRAMe(data)) stop("The provided data set is not a data fRAMe!")
+	if (!is.data.frame(data)) stop("The provided data set is not a data frame!")
 	
 	varname<-names(data)
 	ny<-length(y)
@@ -123,27 +123,27 @@ RAMLCS<-function(data, ## data to be used
 	}
 	fitModel<-lavaan(model=model, data=data, ...)
 	summary(fitModel, fit.measures=TRUE)
-	if (RAM.out){ 
-		RAM=lavaan2RAM(fitModel)
-		invisible(return(list(model=model, lavaan=fitModel, RAM=RAM)))
+	if (ram.out){ 
+		ram=lavaan2ram(fitModel)
+		invisible(return(list(model=model, lavaan=fitModel, ram=ram)))
 	}else{
-	  RAM=lavaan2RAM(fitModel,RAM.out=FALSE)
-		invisible(return(list(model=model, lavaan=fitModel, RAM=RAM)))
+	  ram=lavaan2ram(fitModel,ram.out=FALSE)
+		invisible(return(list(model=model, lavaan=fitModel, ram=ram)))
 	}
 }
 
 
-RAMBLCS<-function(
+ramBLCS<-function(
 	data, ## data to be used
 	y, ## variables x to be used
 	x, ## variables y to be used
 	timey, ##
 	timex, ##
-	RAM.out=FALSE,
+	ram.out=FALSE,
 	betax, betay, gammax, gammay, mx0, mxs, my0, mys, varex, varey, varx0, vary0, varxs, varys, varx0y0, varx0xs, vary0ys, varx0ys, vary0xs, varxsys,...){
 	if (missing(data)) stop("No data was provided!")
 	if (missing(y)) stop("Missing y variables!")
-	if (!is.data.fRAMe(data)) stop("The provided data set is not a data fRAMe!")
+	if (!is.data.frame(data)) stop("The provided data set is not a data frame!")
 	
 	varname<-names(data)
 	ny<-length(y)
@@ -418,11 +418,11 @@ RAMBLCS<-function(
 	fitModel<-lavaan(model=model, data=data, ...)
 
 	summary(fitModel, fit.measures=TRUE)
-	if (RAM.out){ 
-		RAM=lavaan2RAM(fitModel)
-		invisible(return(list(model=model, lavaan=fitModel, RAM=RAM)))
+	if (ram.out){ 
+		ram=lavaan2ram(fitModel)
+		invisible(return(list(model=model, lavaan=fitModel, ram=ram)))
 	}else{
-	  RAM=lavaan2RAM(fitModel,RAM.out=FALSE)
-		invisible(return(list(model=model, lavaan=fitModel, RAM=RAM)))
+	  ram=lavaan2ram(fitModel,ram.out=FALSE)
+		invisible(return(list(model=model, lavaan=fitModel, ram=ram)))
 	}
 }

@@ -1,5 +1,5 @@
-\name{RAMVF}
-\alias{RAMVF}
+\name{ramVF}
+\alias{ramVF}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Generate a vector field plot based on the bivariate lcsm
@@ -8,11 +8,11 @@ Generate a vector field plot based on the bivariate lcsm
 Generate a vector field plot based on the bivariate lcsm
 }
 \usage{
-RAMVF(RAMout, ylim, xlim, ninterval=10, scale=.1, length=.25, ...)}
+ramVF(ramout, ylim, xlim, ninterval=10, scale=.1, length=.25, ...)}
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{RAMout}{
-Output from the RAMBLCS function
+  \item{ramout}{
+Output from the ramBLCS function
 }
   \item{ylim}{
 Range of y data, for example, c(0,80) from 0 to 80
@@ -35,6 +35,6 @@ Options for plot and arrows function.
 }
 \examples{
 data(ex3)
-test.blcs<-RAMBLCS(ex3, 1:6, 7:12, RAM.out=TRUE)
-RAMVF(test.blcs, c(0,80),c(0,80), length=.05, xlab='X', ylab='Y',scale=.5, ninterval=9)
+test.blcs<-ramBLCS(ex3, 1:6, 7:12, ram.out=TRUE)
+ramVF(test.blcs, c(0,80),c(0,80), length=.05, xlab='X', ylab='Y',scale=.5, ninterval=9)
 }
