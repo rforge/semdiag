@@ -8,13 +8,11 @@ Calculate weight for each subject
 Calculate weight for each subject in estimating the mean and covariance matrix.
 }
 \usage{
-rsem.weight(xpattern, varphi, mu0, sig0)
+rsem.weight(x, varphi, mu0, sig0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{xpattern}{
-Missing data pattern object from the function \code{rsem.pattern}.
-}
+  \item{xpattern}{Data}
   \item{varphi}{
 Downweight rate.
 }

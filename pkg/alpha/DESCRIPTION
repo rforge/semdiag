@@ -1,7 +1,7 @@
 Package: alpha
 Type: Package
 Title: Robust Cronbach's alpha with missing and non-normal data
-Version: 0.15
+Version: 0.2
 Date: 2013-01-22
 Depends: MASS
 Author: Zhiyong Zhang and Ke-Hai Yuan
