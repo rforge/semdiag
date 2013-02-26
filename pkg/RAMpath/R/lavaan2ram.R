@@ -149,7 +149,7 @@ lavaan2ram<-function(fitModel, digits=2, zero.print="0", ram.out=TRUE, fit=FALSE
 	}
 }
 
-ramVF<-function(ramout, ylim, xlim, ninterval=10, scale=.1, length=.25, ...){
+ramVF<-function(ramout, ylim, xlim, ninterval=10, scale=.1, length=.25, scatter=TRUE, n=20, alpha=.95, ...){
 	ind<-which(ramout$lavaan@ParTable$label=="betax")[1]
 	betax<-ramout$lavaan@Fit@est[ind]
 	
@@ -183,6 +183,21 @@ ramVF<-function(ramout, ylim, xlim, ninterval=10, scale=.1, length=.25, ...){
 	
 	plot(x,y,type='n', ...)
 	arrows(x,y,x1,y1,length=length,...)	
+	
+	if (scatter){
+		alldata<-ramout$lavaan@Data@X[[1]]
+		xdata<-c(alldata[1:n, ramout$info$x])
+		ydata<-c(alldata[1:n, ramout$info$y])
+		points(xdata, ydata, col='grey', ...)
+		
+		## add confidence interval
+		##
+		xall <- c(alldata[,ramout$info$x])
+		yall <- c(alldata[,ramout$info$y])
+		
+		require(ellipse)		       
+		       lines(ellipse(cor(xall, yall), level=alpha, scale=c(sd(xall),sd(yall)), centre=c(mean(xall),mean(yall))), lwd=1.5, col="green")
+	}
 	
 	invisible(cbind(x,y,x1,y1))
 }
