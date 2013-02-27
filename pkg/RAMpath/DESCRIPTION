@@ -1,7 +1,7 @@
 Package: RAMpath
 Type: Package
 Title: RAMpath
-Version: 0.3.2
+Version: 0.3.3
 Date: 2012-05-29
 Author: Zhiyong Zhang, Jack McArdle, Aki Hamagami, & Kevin Grimm
 Maintainer: Zhiyong Zhang <zzhang4@nd.edu>
