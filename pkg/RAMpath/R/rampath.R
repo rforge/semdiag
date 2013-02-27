@@ -340,6 +340,7 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
 	if (!is.null(tBridgelist)) tBridgelist$value<-round(tBridgelist$value,digits)
 	tPathSig<-pathbridge$path$tPathSig
 	tSpanSig<-pathbridge$span$tPathSig
+	tBridgelist$pathName <- gsub("[[:space:]]+", "", tBridgelist$pathName)
 	
 	output.type <- match.arg(output.type)
 	
@@ -360,12 +361,17 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
 		cat(file = handle, paste("  edge [fontname=\"", edge.font[1],"\" fontsize=", edge.font[2], "];\n", sep = ""))
 		cat(file = handle, "  center=1;\n")
 		
-    if (!is.null(latent)){
-		for (lat in latent) {
-			cat(file = handle, paste("  \"", lat, "\" [shape=ellipse]\n",sep = ""))
-		}
-    }
-	
+    	if (!is.null(latent)){
+			for (lat in latent) {
+				cat(file = handle, paste("  \"", lat, "\" [shape=ellipse]\n",sep = ""))
+			}
+    	}
+    	
+    	## plot the mean if necessary
+    	if (max(abs(rammatrix$M))>0){
+    		cat(file = handle, paste("   \"1\" [shape=triangle]\n",sep = ""))
+    	}
+    	
 		## single headed arrows	
 		for (i in 1:npath){
 			sig<-''
@@ -377,6 +383,21 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
 			
 			cat(file = handle, paste("  \"", varname[tPathlist$fromVar[i]], "\" -> \"", varname[tPathlist$toVar[i]], "\" [label=\"",tPathlist$value[i], sig, "\"];\n", sep = ""))
 		}
+		
+		## for intercept / means
+		if (max(abs(rammatrix$M))>0){
+			Mpath<-which(abs(rammatrix$M)>0)
+    		for (i in Mpath){
+    			sig<-''
+    			if (rammatrix$Mse[i]!=0){
+    				temp<-rammatrix$M[i]/rammatrix$Mse[i]
+    				if (abs(temp)>1.96) sig<-'*'
+    			}
+    			
+    			cat(file = handle, paste("  \"1\" -> \"", rownames(rammatrix$M)[i], "\" [label=\"",round(rammatrix$M[i],digits=digits), sig, "\"];\n", sep = ""))
+    		}
+    	}
+    	
 		## double headed arrows	
 		for (i in 1:nspan){
 			sig<-''
@@ -387,6 +408,7 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
 			}
 			if (tSpanlist$varA[i] >= tSpanlist$varB[i]) cat(file = handle, paste("  \"", varname[tSpanlist$varA[i]], "\" -> \"", varname[tSpanlist$varB[i]], "\" [label=\"", tSpanlist$value[i], sig, "\"  dir=both];\n", sep = ""))
 		}
+		
 	
 		cat(file = handle, "}\n")
 		if (output.type == "graphics" && !missing(file)){
@@ -586,6 +608,7 @@ summary.RAMpath<-function(object, from, to, type=c("path","bridge"),...){
 	tSpanlist<-pathbridge$span
 	rammatrix<-pathbridge$ram
 	varname<-rammatrix$varname	
+	nvar<-length(varname)
 	
 	if (missing(from)|missing(to)){	
 	## print the paths
@@ -596,7 +619,7 @@ summary.RAMpath<-function(object, from, to, type=c("path","bridge"),...){
 	cat('Path and its decomposions:\n\n')
 	nString<-max(nchar(tPathlist$tPathName))
 
-	txt<-sprintf(paste("%-",nString+8,"s %3s %12s %9s\n",sep=""), "Path Name", "", "value", "%")
+	txt<-sprintf(paste("%-",nString+8,"s %3s %12s %9s\n",sep=""), "Path Name", "", "Value", "Pecent")
 	cat(txt)
 	for (i in 1:npath){
 		index<-which(tPathlist$fromVar==tUniquePath$tUniquePath[i,1] & tPathlist$toVar==tUniquePath$tUniquePath[i,2])
@@ -622,9 +645,9 @@ summary.RAMpath<-function(object, from, to, type=c("path","bridge"),...){
 		## col1: path col2: value col3: percent
 		nString<-max(nchar(tBridgelist$pathName))
 		cat('Covariance and its bridges:\n\n')
-		txt<-sprintf(paste("%-",nString+8,"s %3s %12s %9s\n",sep=""), "Path Name", "", "value", "%")
+		txt<-sprintf(paste("%-",nString+8,"s %3s %12s %9s\n",sep=""), "Path Name", "", "Value", "Percent")
 		cat(txt)
-		nvar<-length(varname)
+		
 	
 		for (i in 1:nvar){
 			for (k in 1:i){
@@ -665,13 +688,13 @@ summary.RAMpath<-function(object, from, to, type=c("path","bridge"),...){
 		if (type=="path"){						
 			cat('Path and its decomposions:\n\n')
 			nString<-max(nchar(tPathlist$tPathName))
-			txt<-sprintf(paste("%-",nString+8,"s %3s %12s %9s\n",sep=""), "Path Name", "", "value", "percent")
+			txt<-sprintf(paste("%-",nString+8,"s %3s %12s %9s\n",sep=""), "Path Name", "", "Value", "Percent")
 			cat(txt)
 
 			index<-which(tPathlist$fromVar==varA & tPathlist$toVar==varB)
 			if (length(index)==0) stop(paste("No such path from ",varname[varA]," to ",varname[varB], sep=""))
 			if (length(index)>0){
-				name<-paste(varname[varA],">", varname[varB],sep="")
+				name<-paste(varname[varA]," > ", varname[varB],sep="")
 				path<-length(index)
 				value<-sum(tPathlist$value[index])
 				percent<-100
@@ -691,13 +714,13 @@ summary.RAMpath<-function(object, from, to, type=c("path","bridge"),...){
 			## col1: path col2: value col3: percent
 			nString<-max(nchar(tBridgelist$pathName))
 			cat("Covariance and its bridges:\n\n")
-			txt<-sprintf(paste("%-",nString+8,"s %3s %12s %9s\n",sep=""), "Path Name", "", "value", "percent")
+			txt<-sprintf(paste("%-",nString+8,"s %3s %12s %9s\n",sep=""), "Path Name", "", "Value", "Percent")
 			cat(txt)
 					
 			index<-which(tBridgelist$varA==varA & tBridgelist$varB==varB)
 			if (length(index)==0) stop(paste("No covariance between ", varname[varA], " and ", varname[varB], sep=""))
 			if (length(index)>0){
-				name<-paste(varname[varA],"<>",varname[varB],sep='')
+				name<-paste(varname[varA]," <> ",varname[varB],sep='')
 				path<-length(index)
 				value<-sum(tBridgelist$value[index])
 				percent<-100
@@ -953,7 +976,7 @@ ramFit<-function(ramModel, data, type=c('ram','lavaan'), digits=3, zero.print="0
 	
 	nrow<-length(varName)
 	A<-S<-Ase<-Sse<-matrix(0,nrow,nrow,dimnames=list(varName, varName))
-	
+	M<-Mse<-matrix(0,nrow,1,dimnames=list(varName, 'M'))
 	for (j in parTable$id){
 		if (parTable$op[j]=="~"){
 			A[parTable$lhs[j], parTable$rhs[j]]<-parEst[j]
@@ -1004,7 +1027,7 @@ ramFit<-function(ramModel, data, type=c('ram','lavaan'), digits=3, zero.print="0
 	print(Sse.na,digits=digits,na.print = zero.print)
   lname<-NULL
 	if (nrow>manifest) lname=varName[(manifest+1):nrow]
-	invisible(return(list(A=A, S=S, Ase=Ase, Sse=Sse, fit=fitInd, lavaan=fitModel, nvar=nrow, manifest=manifest,latent=latent,lname=lname,varname=varName)))
+	invisible(return(list(A=A, S=S, Ase=Ase, Sse=Sse, M=M, Mse=Mse, fit=fitInd, lavaan=fitModel, nvar=nrow, manifest=manifest,latent=latent,lname=lname,varname=varName)))
 }
 
 
