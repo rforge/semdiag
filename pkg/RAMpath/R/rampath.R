@@ -341,6 +341,7 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
 	tPathSig<-pathbridge$path$tPathSig
 	tSpanSig<-pathbridge$span$tPathSig
 	tBridgelist$pathName <- gsub("[[:space:]]+", "", tBridgelist$pathName)
+	tPathlist$tPathName <- gsub("[[:space:]]+", "", tPathlist$tPathName)
 	
 	output.type <- match.arg(output.type)
 	
