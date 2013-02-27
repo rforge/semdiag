@@ -127,13 +127,13 @@ ramRmOne<-function(input){
 ## Modified from Boker's Rampath2000 article and S scripts
 ## makePathList, makeSpanList, makeBridgeList
 
-makePathList <- function(AMatrix, indirect=TRUE) {
+makePathList <- function(AMatrix, Ase, indirect=TRUE) {
 	k <- 0
 	tIndex <- 1:10000
 	tFrom <- tTo <- tStartID <- tFromID <- tLength <- tValue <- rep(0, 10000)
 	tPath <- rep(NULL,10000) ## Save paths
-	tPathName<-rep(NULL,10000)
-	
+	tPathName<-tPathSig<-rep(NULL,10000)
+		
 	tNames<-rownames(AMatrix)
 	if (is.null(tNames)) tNames<-1:nrow(AMatrix)	
 	for (i in 1:nrow(AMatrix)) {
@@ -148,6 +148,11 @@ makePathList <- function(AMatrix, indirect=TRUE) {
 				tValue[k] <- AMatrix[i,j]
 				tPath[k]<-paste(j,' > ',i,sep='')
 				tPathName[k]<-paste(tNames[j],' > ',tNames[i],sep='')
+				if (!missing(Ase)){
+					if (Ase[i,j] != 0){
+						tPathSig[k]<-abs(AMatrix[i,j]/Ase[i,j])
+					}
+				}				
 			}
 		}
 	}
@@ -183,16 +188,17 @@ makePathList <- function(AMatrix, indirect=TRUE) {
 	return(list(index=tIndex[1:k], fromVar=tFrom[1:k], 
 	            toVar=tTo[1:k], startID=tStartID[1:k], 
 	            fromID=tFromID[1:k], length=tLength[1:k], 
-				value=tValue[1:k], tPath=tPath[1:k], tPathName=tPathName[1:k], nPath=m))
+				value=tValue[1:k], tPath=tPath[1:k], tPathName=tPathName[1:k], nPath=m, tPathSig=tPathSig[1:m]))
 }
 
 
-makeSpanList <- function(SMatrix) {
+makeSpanList <- function(SMatrix, Sse) {
 	k <- 0
 	tIndex <- c(1:10000)
 	tVarA <- tVarB <- tValue <- rep(0, 10000)
 	tPath <- rep(NULL,10000) ## Save paths
-	tPathName <- rep(NULL,10000)
+	tPathName <- tPathSig <- tPathSE <- rep(NULL,10000)
+	
 	tNames<-rownames(SMatrix)
 	if (is.null(tNames)) tNames<-1:nrow(SMatrix)
 	
@@ -205,10 +211,18 @@ makeSpanList <- function(SMatrix) {
 				tValue[k] <- SMatrix[i,j]
 				tPath[k]<-paste(j,' <> ',i,sep='')
 				tPathName[k]<-paste(tNames[j],' <> ',tNames[i],sep='')
+				
+				if (!missing(Sse)){
+					tPathSE[k] <- Sse[i,j]
+					if (tPathSE[k] != 0){
+						tPathSig[k]<-abs(tValue[k]/tPathSE[k])												
+						#cat(tValue[k], ' ', tPathSE[k], ' ', tPathSig[k],  " \n")
+					}
+				}
 			}
 		}
 	}
-	return(list(index=tIndex[1:k], varA=tVarA[1:k], varB=tVarB[1:k], value=tValue[1:k], tPath=tPath[1:k], tPathName=tPathName[1:k]))
+	return(list(index=tIndex[1:k], varA=tVarA[1:k], varB=tVarB[1:k], value=tValue[1:k], tPath=tPath[1:k], tPathName=tPathName[1:k], tPathSig=tPathSig[1:k]))
 }
 
 makeBridgeList <- function(pathList, spanList) {
@@ -283,14 +297,22 @@ makeBridgeList <- function(pathList, spanList) {
 	return(list(index=tIndex[1:k], varA=tVarA[1:k], 
 	            varB=tVarB[1:k], spanID=tSpanID[1:k], 
 	            path1ID=tPath1ID[1:k], path2ID=tPath2ID[1:k], 
-				value=tValue[1:k], path=tPath[1:k],pathName=tPathName[1:k]))
+				value=tValue[1:k], path=tPath[1:k],pathName=tPathName[1:k], tPathSig=pathList$tPathSig, tSpanSig=spanList$tPathSig))
 }
 
-ramPathBridge<-function(rammatrix, allbridge=TRUE, indirect=TRUE){
+ramPathBridge<-function(rammatrix, allbridge=FALSE, indirect=TRUE){
 	Amatrix<-rammatrix$A
 	Smatrix<-rammatrix$S
-	tPathlist <- makePathList(Amatrix,indirect=indirect)
-    tSpanlist <- makeSpanList(Smatrix)
+	if (is.null(rammatrix$Ase)) {
+		tPathlist <- makePathList(Amatrix,indirect=indirect)
+	}else{
+		tPathlist <- makePathList(Amatrix,rammatrix$Ase,indirect=indirect)
+	}
+    if (is.null(rammatrix$Sse)) {
+    	tSpanlist <- makeSpanList(Smatrix)
+    }else{
+    	tSpanlist <- makeSpanList(Smatrix,rammatrix$Sse)
+    }
     tBridgelist<-NULL
     if (allbridge) tBridgelist <- makeBridgeList(tPathlist, tSpanlist)
     ramobject<-list(path=tPathlist, bridge=tBridgelist, span=tSpanlist, ram=rammatrix)
@@ -316,7 +338,8 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
 	tPathlist$value<-round(tPathlist$value,digits)
 	tSpanlist$value<-round(tSpanlist$value,digits)
 	if (!is.null(tBridgelist)) tBridgelist$value<-round(tBridgelist$value,digits)
-	
+	tPathSig<-pathbridge$path$tPathSig
+	tSpanSig<-pathbridge$span$tPathSig
 	
 	output.type <- match.arg(output.type)
 	
@@ -345,11 +368,24 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
 	
 		## single headed arrows	
 		for (i in 1:npath){
-			cat(file = handle, paste("  \"", varname[tPathlist$fromVar[i]], "\" -> \"", varname[tPathlist$toVar[i]], "\" [label=\"",tPathlist$value[i], "\"];\n", sep = ""))
+			sig<-''
+			if (!is.null(tPathSig)){
+				if (!is.na(tPathSig[i])){
+					if (tPathSig[i]>1.96) sig<-'*'
+				}
+			}
+			
+			cat(file = handle, paste("  \"", varname[tPathlist$fromVar[i]], "\" -> \"", varname[tPathlist$toVar[i]], "\" [label=\"",tPathlist$value[i], sig, "\"];\n", sep = ""))
 		}
 		## double headed arrows	
 		for (i in 1:nspan){
-			if (tSpanlist$varA[i] >= tSpanlist$varB[i]) cat(file = handle, paste("  \"", varname[tSpanlist$varA[i]], "\" -> \"", varname[tSpanlist$varB[i]], "\" [label=\"", tSpanlist$value[i], "\"  dir=both];\n", sep = ""))
+			sig<-''
+			if (!is.null(tSpanSig)){
+				if (!is.na(tSpanSig[i])){
+					if (tSpanSig[i]>1.96) sig<-'*'
+				}
+			}
+			if (tSpanlist$varA[i] >= tSpanlist$varB[i]) cat(file = handle, paste("  \"", varname[tSpanlist$varA[i]], "\" -> \"", varname[tSpanlist$varB[i]], "\" [label=\"", tSpanlist$value[i], sig, "\"  dir=both];\n", sep = ""))
 		}
 	
 		cat(file = handle, "}\n")
