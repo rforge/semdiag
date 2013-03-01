@@ -663,14 +663,14 @@ summary.RAMpath<-function(object, from, to, type=c("path","bridge"), se=FALSE, .
 					path<-length(index)
 					value<-sum(tBridgelist$value[index])
 					percent<-100
-					txt<-sprintf(paste("%-",nString+8,"s %3.0f %12.3f %9.2f\n",sep=""), name, path, value, percent)
+					txt<-sprintf(paste("%-",nString+8,"s %4.0f %12.3f %9.2f\n",sep=""), name, path, value, percent)
 					cat(txt)
 					for (j in 1:length(index)){
 						name<-tBridgelist$pathName[index[j]]
 						path<-j
 						value.j<-tBridgelist$value[index[j]]
 						percent.j<-value.j/value*100
-						txt<-sprintf(paste("  %-",nString+6,"s   %3.0f %12.3f %9.2f\n",sep=""), name, path, value.j, percent.j)
+						txt<-sprintf(paste("  %-",nString+6,"s   %4.0f %12.3f %9.2f\n",sep=""), name, path, value.j, percent.j)
 						cat(txt)
 					}## end of j loop
 		
@@ -679,7 +679,7 @@ summary.RAMpath<-function(object, from, to, type=c("path","bridge"), se=FALSE, .
 					path<-0
 					value<-NA
 					percent<-NA
-					txt<-sprintf(paste("%-",nString+8,"s   %3.0f %12.3f %9.2f\n",sep=""), name, path, value, percent)
+					txt<-sprintf(paste("%-",nString+8,"s   %4.0f %12.3f %9.2f\n",sep=""), name, path, value, percent)
 					cat(txt)
 				}
 			}
