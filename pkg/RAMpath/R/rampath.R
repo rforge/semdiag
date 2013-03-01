@@ -370,7 +370,8 @@ plot.RAMpath <- function (x, file, from, to, type=c("path","bridge"), size = c(8
     	
     	## plot the mean if necessary
     	if (max(abs(rammatrix$M))>0){
-    		cat(file = handle, paste("   \"1\" [shape=triangle]\n",sep = ""))
+    		cat(file = handle, paste("  \"1\" [shape=triangle]\n",sep = ""))
+    		cat(file = handle, paste("  \"1\" -> \"1\" [label=\"1\"   dir=both]\n",sep = ""))
     	}
     	
 		## single headed arrows	
