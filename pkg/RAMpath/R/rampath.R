@@ -602,7 +602,7 @@ ramUniquePath<-function(tPathlist){
 	return(list(tUniquePath=tUniquePath[1:k, ], tUniqueName=name))
 }
 
-summary.RAMpath<-function(object, from, to, type=c("path","bridge"),...){
+summary.RAMpath<-function(object, from, to, type=c("path","bridge"), se=FALSE, ...){
   pathbridge<-object
 	if (length(type)>1) type<-type[1]
 	tPathlist<-pathbridge$path
@@ -621,7 +621,8 @@ summary.RAMpath<-function(object, from, to, type=c("path","bridge"),...){
 	cat('Path and its decomposions:\n\n')
 	nString<-max(nchar(tPathlist$tPathName))
 
-	txt<-sprintf(paste("%-",nString+8,"s %3s %12s %9s\n",sep=""), "Path Name", "", "Value", "Pecent")
+	txt<-sprintf(paste("%-",nString+8,"s %4s %12s %9s\n",sep=""), "Path Name", "", "Value", "Pecent")
+	if (se) txt<-sprintf(paste("%-",nString+8,"s %4s %12s %12s %9s\n",sep=""), "Path Name", "", "Value", "se", "Pecent")
 	cat(txt)
 	for (i in 1:npath){
 		index<-which(tPathlist$fromVar==tUniquePath$tUniquePath[i,1] & tPathlist$toVar==tUniquePath$tUniquePath[i,2])
@@ -630,14 +631,17 @@ summary.RAMpath<-function(object, from, to, type=c("path","bridge"),...){
 			path<-length(index)
 			value<-sum(tPathlist$value[index])
 			percent<-100
-			txt<-sprintf(paste("%-",nString+8,"s %3.0f %12.3f %9.2f\n",sep=""), name, path, value, percent)
+			txt<-sprintf(paste("%-",nString+8,"s %4.0f %12.3f %9.2f\n",sep=""), name, path, value, percent)
+			if (se) txt<-sprintf(paste("%-",nString+8,"s %4.0f %12.3f %12s %9.2f\n",sep=""), name, path, value, " ", percent)
 			cat(txt)
 			for (j in 1:length(index)){
 				name<-tPathlist$tPathName[index[j]]
 				path<-j
 				value.j<-tPathlist$value[index[j]]
 				percent.j<-value.j/value*100
-				txt<-sprintf(paste("  %-",nString+6,"s %3.0f %12.3f %9.2f\n",sep=""), name, path, value.j, percent.j)
+				txt<-sprintf(paste("  %-",nString+6,"s   %4.0f %12.3f %9.2f\n",sep=""), name, path, value.j, percent.j)
+				se.j<-ramEffectSE(object, name)
+				if (se) txt<-sprintf(paste("  %-",nString+6,"s   %4.0f %12.3f %12.3f %9.2f\n",sep=""), name, path, value.j, se.j, percent.j)
 				cat(txt)
 			}
 		}
@@ -647,7 +651,7 @@ summary.RAMpath<-function(object, from, to, type=c("path","bridge"),...){
 		## col1: path col2: value col3: percent
 		nString<-max(nchar(tBridgelist$pathName))
 		cat('Covariance and its bridges:\n\n')
-		txt<-sprintf(paste("%-",nString+8,"s %3s %12s %9s\n",sep=""), "Path Name", "", "Value", "Percent")
+		txt<-sprintf(paste("%-",nString+8,"s %4s %12s %9s\n",sep=""), "Path Name", "", "Value", "Percent")
 		cat(txt)
 		
 	
@@ -666,7 +670,7 @@ summary.RAMpath<-function(object, from, to, type=c("path","bridge"),...){
 						path<-j
 						value.j<-tBridgelist$value[index[j]]
 						percent.j<-value.j/value*100
-						txt<-sprintf(paste("  %-",nString+6,"s %3.0f %12.3f %9.2f\n",sep=""), name, path, value.j, percent.j)
+						txt<-sprintf(paste("  %-",nString+6,"s   %3.0f %12.3f %9.2f\n",sep=""), name, path, value.j, percent.j)
 						cat(txt)
 					}## end of j loop
 		
@@ -675,7 +679,7 @@ summary.RAMpath<-function(object, from, to, type=c("path","bridge"),...){
 					path<-0
 					value<-NA
 					percent<-NA
-					txt<-sprintf(paste("%-",nString+8,"s %3.0f %12.3f %9.2f\n",sep=""), name, path, value, percent)
+					txt<-sprintf(paste("%-",nString+8,"s   %3.0f %12.3f %9.2f\n",sep=""), name, path, value, percent)
 					cat(txt)
 				}
 			}
