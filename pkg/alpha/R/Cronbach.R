@@ -643,8 +643,13 @@ plot.alpha<-function(x, type="weight", profile=5, interval=0.01, pos='topright',
 	## type: weight, profile, diagnosis
 	res<-x
 	y<-res$y
+	outcase.temp<-sum(res$weight$w1<1)
 	## find the smallest weight
-	if (profile==0) outcase<-5
+	if (profile==0){
+		outcase<-5
+		if (outcase.temp<5) outcase<-outcase.temp
+	}
+	if (outcase.temp<5) profile<-outcase.temp
 	l.min<-min(y, na.rm=TRUE)
 	l.max<-max(y, na.rm=TRUE)
 		
