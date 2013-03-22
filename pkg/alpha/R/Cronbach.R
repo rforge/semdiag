@@ -639,7 +639,7 @@ cronbach<-function(y, varphi=0.1, se=FALSE, complete=FALSE){
 }
 
 
-plot.alpha<-function(x, type="weight", profile=5, interval=0.01, pos='topright', ...){
+plot.alpha<-function(x, type="weight", profile=5, interval=0.01, center=TRUE, pos='topright', ...){
 	## type: weight, profile, diagnosis
 	res<-x
 	y<-res$y
@@ -650,10 +650,6 @@ plot.alpha<-function(x, type="weight", profile=5, interval=0.01, pos='topright',
 		if (outcase.temp<5) outcase<-outcase.temp
 	}
 	if (outcase.temp<5) profile<-outcase.temp
-	l.min<-min(y, na.rm=TRUE)
-	l.max<-max(y, na.rm=TRUE)
-		
-	m<-apply(y, 2, mean, na.rm=TRUE)
 		
 	## find the smallest cases
 	temp<-sort(res$weight$w1)
@@ -676,8 +672,21 @@ plot.alpha<-function(x, type="weight", profile=5, interval=0.01, pos='topright',
 	
 	if (substr(type,1,1)=="p"){
 		## generate the plot
+		
+		if (center){
+			for (i in 1:nrow(y)){
+				y[i, ]<-y[i, ]-res$musig$mu
+			}
+		}
+		l.min<-min(y, na.rm=TRUE)
+		l.max<-max(y, na.rm=TRUE)
+	
 		p<-ncol(y)
-		plot(1:p, res$musig$mu, type='l', ylim=c(l.min, l.max), lwd=3, ylab='Score', xlab='', axes=FALSE, ...)
+		if (center){
+			plot(1:p, rep(0,p), type='l', ylim=c(l.min, l.max), lwd=3, ylab='Score', xlab='', axes=FALSE, ...)
+		}else{
+			plot(1:p, res$musig$mu, type='l', ylim=c(l.min, l.max), lwd=3, ylab='Score', xlab='', axes=FALSE, ...)
+		}
 		box()
 		axis(1, at=1:p, labels=names(y), las=2)
 		axis(2)
