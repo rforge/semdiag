@@ -39,11 +39,5 @@ Data should be a matrix. To change a data frame to a matrix, using data.matrix(x
 \seealso{
 \code{\link{rsem.emmusig}}
 }
-\examples{
-data(y)
-miss_pattern<-rsem.pattern(y)
-musig<-rsem.emmusig(miss_pattern)
-Ascov<-rsem.Ascov(miss_pattern, musig)
-Ascov
-}
+
 

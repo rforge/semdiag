@@ -27,7 +27,18 @@ Zhiyong Zhang and Ke-Hai Yuan
 Zhang, Z. & Yuan, K.-H. (2013). Robust Cronbach's alpha.
 }
 \examples{
-data(y)
-alpha<-cronbach(y)
-summary(alpha)
+data(holzinger)
+spatial<-holzinger[, c('visual', 'cubes', 'paper', 'lozenge', 'paperrev','flagssub')]
+verbal<-holzinger[, c('general', 'paragrap', 'sentence', 'wordc', 'wordm')]
+speed<-holzinger[, c('add', 'code', 'counting', 'straight')]
+memory<-holzinger[, c('wordr', 'numberr', 'figurer', 'object', 'numberf', 'figurew')]
+
+alpha.spatial<-cronbach(spatial)
+## diagnostic plot
+plot(alpha.spatial, type='d')
+
+## alpha with varphi=.01 & standard error
+alpha.spatial<-cronbach(spatial, varphi=.01, se=TRUE)
+## confidence interval
+summary(alpha.spatial)
 }

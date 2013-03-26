@@ -41,9 +41,4 @@ Zhiyong Zhang and Ke-Hai Yuan
 \seealso{
 \code{\link{rsem.emmusig}}
 }
-\examples{
-data(y)
-miss_pattern<-rsem.pattern(y)
-musig<-rsem.emmusig(miss_pattern)
-musig
-}
+

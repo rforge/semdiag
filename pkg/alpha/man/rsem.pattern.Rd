@@ -37,8 +37,3 @@ Yuan, K.-H., & Zhang, Z. (2012). Robust Structural Equation Modeling with Missin
 Zhiyong Zhang and Ke-Hai Yuan
 }
 
-\examples{
-data(y)
-miss_pattern<-rsem.pattern(y)
-miss_pattern
-}

@@ -12,7 +12,7 @@ rsem.weight(x, varphi, mu0, sig0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{xpattern}{Data}
+  \item{x}{Data}
   \item{varphi}{
 Downweight rate.
 }
