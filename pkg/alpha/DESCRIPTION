@@ -6,6 +6,6 @@ Date: 2013-01-22
 Depends: MASS
 Author: Zhiyong Zhang and Ke-Hai Yuan
 Maintainer: Zhiyong Zhang <zzhang4@nd.edu>
-Description: An R package to calculate coefficient with missing data and non-normal data. Robust standard error and confidence interval are also provided.
+Description: An R package to calculate coefficient alpha with missing data and non-normal data. Robust standard error and confidence interval are also provided.
 License: GPL
 LazyLoad: yes
