@@ -6,6 +6,6 @@ Date: 2013-01-22
 Depends: MASS
 Author: Zhiyong Zhang and Ke-Hai Yuan
 Maintainer: Zhiyong Zhang <zzhang4@nd.edu>
-Description: An R package to calculate Cronbach's coefficient alpha with missing data and non-normal data. Robust standard error and confidence interval are also provided.
+Description: Cronbach's alpha is one of the most widely used reliability or internal consistency measures in social, behavioral and education sciences. Alpha is reported in nearly every study that involves measuring a construct through multiple test items. The package alpha calculates Cronbach's coefficient alpha with missing data and non-normal data. Robust standard error and confidence interval are also provided. Future release will add functions to calculate other reliability measures.
 License: GPL
 LazyLoad: yes
