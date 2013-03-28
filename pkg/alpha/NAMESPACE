@@ -1,1 +1,1 @@
-exportPattern("^[[:coefficientalpha:]]+")
+exportPattern("^[[:alpha:]]+")

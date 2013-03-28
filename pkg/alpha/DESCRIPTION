@@ -1,4 +1,4 @@
-Package: coefficientalpha
+Package: alpha
 Type: Package
 Title: Robust Cronbach's alpha with missing and non-normal data
 Version: 0.2.4
