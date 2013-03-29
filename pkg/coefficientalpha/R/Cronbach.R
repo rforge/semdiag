@@ -674,9 +674,15 @@ plot.alpha<-function(x, type="weight", profile=5, interval=0.01, center=TRUE, po
 		## generate the plot
 		
 		if (center){
-			for (i in 1:nrow(y)){
-				y[i, ]<-y[i, ]-res$musig$mu
-			}
+      if (scale){
+         for (i in 1:nrow(y)){
+				   y[i, ]<-(y[i, ]-res$musig$mu)/sqrt(diag(res$musig$sigma))
+			   }
+      }else{
+         for (i in 1:nrow(y)){
+				   y[i, ]<-y[i, ]-res$musig$mu
+			   }
+      }			
 		}
 		l.min<-min(y, na.rm=TRUE)
 		l.max<-max(y, na.rm=TRUE)
@@ -690,14 +696,20 @@ plot.alpha<-function(x, type="weight", profile=5, interval=0.01, center=TRUE, po
 		box()
 		axis(1, at=1:p, labels=names(y), las=2)
 		axis(2)
-		ltyno<-1		
+		ltyno<-1	
+    idx.type<-NULL	
 		for (i in idx){
 			lines(1:p, y[i, ], lty=ltyno, ...)
 			#text(1:p, y[i,], i)
 			ltyno<-ltyno+1
+      ## type of outliers
+      temp.type<-'(O)'
+      if (max(y[i, ], na.rm=TRUE)<0)  temp.type<-'(L-)'
+      if (min(y[i, ], na.rm=TRUE)>0)  temp.type<-'(L+)'
+      idx.type<- c(idx.type, temp.type)
 		}
 		if (!is.null(pos)){
-			legend(pos, legend=idx, lty=1:ltyno, ...)
+			legend(pos, legend=paste(idx, idx.type), lty=1:ltyno, ...)
 		}
 	}
 	

@@ -8,7 +8,7 @@ Alpha related plot
 \description{
 Generate plot related to alpha. Three plot can be generated. (1) The weight plot will plot the weight associated with alpha calculation. (2) Profile plot will plot the cases with smallest weights and the average value. (3) The diagnostic plot plots the alpha according to different values of the tuning parameter.}
 \usage{
-\method{plot}{alpha}(x, type="weight", profile=5, interval=0.01,center=TRUE,pos="topright",...)
+\method{plot}{alpha}(x, type="weight", profile=5, interval=0.01,center=TRUE, scale=FALSE, pos="topright",...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,6 +26,9 @@ Number of cases used on the profile plot. At most 10.}
 The interval used in the diagnostic plot. The default is 0.01.}
 \item{center}{
  Whether to center the data in the profile plot.
+}
+\item{scale}{
+ Whether to scale the data using variance parameters in the profile plot.
 }
   \item{pos}{Position of legend. If pos=NULL, no legend is plotted.}
 \item{...}{Options can be passed to the \code{\link{plot}} function.}
@@ -59,4 +62,36 @@ plot(alpha.spatial, type='w')
 
 ## profile plot
 plot(alpha.spatial, type='p')
+
+
+alpha.verbal<-cronbach(verbal, varphi=.02, se=TRUE)
+## confidence interval
+summary(alpha.verbal)
+
+## weight plot
+plot(alpha.verbal)
+
+## profile plot
+plot(alpha.verbal, type='p', profile=6)
+
+alpha.speed<-cronbach(speed, varphi=.01, se=TRUE)
+## confidence interval
+summary(alpha.speed)
+
+## weight plot
+plot(alpha.speed)
+
+## profile plot
+plot(alpha.speed, type='p', pos='topleft')
+
+alpha.memory<-cronbach(memory, varphi=.04, se=TRUE)
+## confidence interval
+summary(alpha.memory)
+
+## weight plot
+plot(alpha.memory)
+
+## profile plot
+plot(alpha.memory, type='p', profile=10, pos='bottomright')
+ plot(alpha.memory, type='p', profile=10, scale=T, pos='bottomright')
 }
