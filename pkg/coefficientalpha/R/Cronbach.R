@@ -639,7 +639,7 @@ cronbach<-function(y, varphi=0.1, se=FALSE, complete=FALSE){
 }
 
 
-plot.alpha<-function(x, type="weight", profile=5, interval=0.01, center=TRUE, pos='topright', ...){
+plot.alpha<-function(x, type="weight", profile=5, interval=0.01, center=TRUE, scale=FALSE, pos='topright', ...){
 	## type: weight, profile, diagnosis
 	res<-x
 	y<-res$y
