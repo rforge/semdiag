@@ -93,5 +93,5 @@ plot(alpha.memory)
 
 ## profile plot
 plot(alpha.memory, type='p', profile=10, pos='bottomright')
- plot(alpha.memory, type='p', profile=10, scale=T, pos='bottomright')
+ plot(alpha.memory, type='p', profile=10, scale=TRUE, pos='bottomright')
 }
