@@ -8,7 +8,7 @@ Print alpha and its confidence interval.
 \description{
 Print alpha and its confidence interval.}
 \usage{
-\method{summary}{alpha}(object, prob = 0.05,...)
+\method{summary}{alpha}(object, prob = 0.95,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -16,7 +16,7 @@ Print alpha and its confidence interval.}
 Results from the function \code{\link{cronbach}}.
 }
   \item{prob}{
-Alpha level for confidence interval.
+Alpha level for confidence interval. By default, the 95% CI is calculated.
 }
   \item{...}{Option can be passed to the summary function.}
 }

@@ -724,7 +724,8 @@ plot.alpha<-function(x, type="weight", profile=5, interval=0.01, center=TRUE, sc
 	}
 }
 
-summary.alpha<-function(object, prob=.05,...){
+summary.alpha<-function(object, prob=.95,...){
+    if (prob > .5) prob <- 1 - prob
 	res<-object
 	cat("\nThe estimated alpha is \n")
 	
