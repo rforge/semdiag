@@ -102,7 +102,7 @@ Comment<-function(package="base",comment=NULL,lib.loc = NULL){
 	}		
 }
 
-view<-function(package="base",lib.loc = NULL){
+view<-function(package="base",comment=FALSE, ncomment=1:5, lib.loc = NULL){
 	dir <- system.file(package = "RCurl", lib.loc = lib.loc)
 	if (dir == ""){
 		URL<-paste('http://rstats.psychstat.org/comments.php?name=',  package, sep='')
@@ -111,10 +111,28 @@ view<-function(package="base",lib.loc = NULL){
 		library('RCurl')
 		rating<-getURL(paste('http://rstats.psychstat.org/comments.php?name=',  package, sep=''))
 		temp<-strsplit(rating, "\n")
-		temp<-temp[[1]][2]
-		temp<-unlist(strsplit(temp, ";", fixed=TRUE))
+		rate<-temp[[1]][2]
+		rate<-unlist(strsplit(rate, ";", fixed=TRUE))
 		for (i in 1:4){
-			cat(temp[i], "\n")
+			cat(rate[i], "\n")
+		}
+		cat("\n")
+		if (comment){
+			if (length(temp[[1]])==3) stop("No comment available yet")
+			a<-temp[[1]][4]
+			b<-strsplit(a, "</tr><tr>", fixed=TRUE)
+			d<-strsplit(b[[1]], "</td> <td>", fixed=TRUE)
+			nd<-length(d)-1
+			cat("There are ", nd, " comments in total.\n")
+			if (max(ncomment)>nd){
+				ncomment<-1:nd
+			}
+			for (i in (ncomment+1)){
+				txt<-d[[i]]
+				txt<-sub("</td>","",txt[2],fixed=TRUE)
+				txt<-sub("</tr>","",txt,fixed=TRUE)
+				cat(i, txt, "\n")
+			}
 		}
 	}		
 }

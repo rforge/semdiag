@@ -8,13 +8,15 @@ View the usage information about an package
 View the usage information about an package
 }
 \usage{
-view(package="base",lib.loc = NULL)
+view(package="base",comment=FALSE, ncomment=1:5, lib.loc = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{package}{
 The name of the package to comment on. The default is R base.
 }
+\item{comment}{Whether show comments}
+\item{ncomment}{The index of the comments to show}
   \item{lib.loc}{
 a character vector describing the location of R library trees to search through, or NULL. The default value of NULL corresponds to checking the loaded namespace, then all libraries currently known in .libPaths().
 }
