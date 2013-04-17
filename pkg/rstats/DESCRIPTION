@@ -1,10 +1,10 @@
 Package: rstats
 Type: Package
 Title: R package usage statistics
-Version: 1.0
+Version: 0.1
 Date: 2013-04-16
 Author: Zhiyong Zhang
 Maintainer: Zhiyong Zhang <johnnyzhz@gmail.com>
 Suggests: RCurl
-Description: Allow users to share download information of a package and rate and comment on the package within R directly.
+Description: Allow users to share download information, rate, and comment on a package within R directly.
 License: GPL

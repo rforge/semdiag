@@ -1,112 +1,119 @@
 ## R function to rate the package
-download<-function(package,...){
-	pkgpath <- find.package(package, ...)
-    if (length(pkgpath) == 0L) {
-		gettextf("there is no package called %s", sQuote(package))
+download<-function(package="base",lib.loc = NULL){
+	dir <- system.file(package = package, lib.loc = lib.loc)
+    if (dir == "") {
+		gettextf("You have not installed the package %s. You can only rate a package you installed already. Thanks. ", sQuote(package))
 	}else{
-		pkgpath <- find.package('RCurl', ...)
-		if (length(pkgpath) == 0L){
-			URL<-paste('http://rstats.psychstat.org/rate.php?type=1&name=',  package, sep='')
-		browseURL(URL)
-		#URL
+		meta <- packageDescription(pkg = package)
+		meta <- URLencode(paste(meta$Version, ";", meta$Built, ";", meta$Maintainer), TRUE)
+		dir <- system.file(package = "RCurl", lib.loc = lib.loc)
+		if (dir == ""){
+			URL<-paste('http://rstats.psychstat.org/rate.php?type=1&name=',  package, '&meta=', meta, sep='')
+			browseURL(URL)
 		}else{
 			library('RCurl')
-			getForm("http://rstats.psychstat.org/rate.php", type='1', name=package, rcurl='1')
+			getForm("http://rstats.psychstat.org/rate.php", type='1', name=package, meta=meta, rcurl='1')
 		}
-	}		
+	}
+	cat("Thanks for your feedback!\n")
 }
 
-like<-function(package,...){
-	pkgpath <- find.package(package, ...)
-    if (length(pkgpath) == 0L) {
-		gettextf("there is no package called %s", sQuote(package))
+like<-function(package="base",lib.loc = NULL){
+	dir <- system.file(package = package, lib.loc = lib.loc)
+    if (dir == "") {
+		gettextf("You have not installed the package %s. You can only rate a package you installed already. Thanks. ", sQuote(package))
 	}else{
-		pkgpath <- find.package('RCurl', ...)
-		if (length(pkgpath) == 0L){
-		URL<-paste('http://rstats.psychstat.org/rate.php?type=2&name=', package, sep='')
-		browseURL(URL)
-		#URL
+		meta <- packageDescription(pkg = package)
+		meta <- URLencode(paste(meta$Version, ";", meta$Built, ";", meta$Maintainer), TRUE)
+		dir <- system.file(package = "RCurl", lib.loc = lib.loc)
+		if (dir == ""){
+			URL<-paste('http://rstats.psychstat.org/rate.php?type=2&name=', package, '&meta=', meta, sep='')
+			browseURL(URL)
 		}else{
 			library('RCurl')
-			getForm("http://rstats.psychstat.org/rate.php", type='2', name=package, rcurl='1')
+			getForm("http://rstats.psychstat.org/rate.php", type='2', name=package, meta=meta, rcurl='1')
 		}
 	}		
+	cat("Thanks for your feedback!\n")
 }
 
-dislike<-function(package,...){
-	pkgpath <- find.package(package, ...)
-    if (length(pkgpath) == 0L) {
-		gettextf("there is no package called %s", sQuote(package))
+dislike<-function(package="base",lib.loc = NULL){
+	dir <- system.file(package = package, lib.loc = lib.loc)
+    if (dir == "") {
+		gettextf("You have not installed the package %s. You can only rate a package you installed already. Thanks. ", sQuote(package))
 	}else{
-		pkgpath <- find.package('RCurl', ...)
-		if (length(pkgpath) == 0L){
-			URL<-paste('http://rstats.psychstat.org/rate.php?type=3&name=', package, sep='')
-		browseURL(URL)
-		#URL
+		meta <- packageDescription(pkg = package)
+		meta <- URLencode(paste(meta$Version, ";", meta$Built, ";", meta$Maintainer), TRUE)
+		dir <- system.file(package = "RCurl", lib.loc = lib.loc)
+		if (dir == ""){
+			URL<-paste('http://rstats.psychstat.org/rate.php?type=3&name=', package, '&meta=', meta, sep='')
+			browseURL(URL)
 		}else{
 			library('RCurl')
-			getForm("http://rstats.psychstat.org/rate.php", type='3', name=package, rcurl='1')
+			getForm("http://rstats.psychstat.org/rate.php", type='3', name=package, meta=meta, rcurl='1')
 		}
-	}		
+	}
+	cat("Thanks for your feedback!\n")	
 }
 
-rate<-function(package,rating,...){
-	
-	pkgpath <- find.package(package, ...)
-    if (length(pkgpath) == 0L) {
-		gettextf("there is no package called %s", sQuote(package))
+rate<-function(package="base",rating=5,lib.loc = NULL){
+	dir <- system.file(package = package, lib.loc = lib.loc)
+    if (dir == "") {
+		gettextf("You have not installed the package %s. You can only rate a package you installed already. Thanks. ", sQuote(package))
 	}else{
 		if (rating %in% 1:5){	
-			pkgpath <- find.package('RCurl', ...)
-		if (length(pkgpath) == 0L){
-			URL<-paste( 'http://rstats.psychstat.org/rate.php?type=4&name=', package, '&rating=',rating,sep='')
-		browseURL(URL)
-		#URL
+			meta <- packageDescription(pkg = package)
+			meta <- URLencode(paste(meta$Version, ";", meta$Built, ";", meta$Maintainer), TRUE)
+			dir <- system.file(package = "RCurl", lib.loc = lib.loc)
+			if (dir == ""){
+				URL<-paste( 'http://rstats.psychstat.org/rate.php?type=4&name=', package, '&rating=', rating, '&meta=', meta, sep='')
+				browseURL(URL)
+			}else{
+				library('RCurl')
+				getForm("http://rstats.psychstat.org/rate.php", type='4', name=package, rating=rating, meta=meta, rcurl='1')
+			}
+				cat("Thanks for your feedback!\n")
 		}else{
-			library('RCurl')
-			getForm("http://rstats.psychstat.org/rate.php", type='4', name=package, rating=rating, rcurl='1')
+			cat('The rating has to be 1 from 5.')
 		}
-		}else{
-		  cat('The rating has to be 1 from 5.')
-		}
-	}		
+	}
 }
 
-Comment<-function(package,comment,...){
-	
-	pkgpath <- find.package(package, ...)
-    if (length(pkgpath) == 0L) {
-		gettextf("there is no package called %s", sQuote(package))
+Comment<-function(package="base",comment=NULL,lib.loc = NULL){ 
+	dir <- system.file(package = package, lib.loc = lib.loc)
+    if (dir == "") {
+		gettextf("You have not installed the package %s. You can only rate a package you installed already. Thanks. ", sQuote(package))
 	}else{
-		if (comment!=''){
-		pkgpath <- find.package('RCurl', ...)
-		if (length(pkgpath) == 0L){	URL<-paste('http://rstats.psychstat.org/rate.php?type=5&name=', package, '&comment=',URLencode(comment, TRUE),sep='')
-		browseURL(URL)
-		#URL
+		if (!is.null(comment)){
+			meta <- packageDescription(pkg = package)
+			meta <- URLencode(paste(meta$Version, ";", meta$Built, ";", meta$Maintainer), TRUE)
+			dir <- system.file(package = "RCurl", lib.loc = lib.loc)
+			if (dir == ""){	
+				URL<-paste('http://rstats.psychstat.org/rate.php?type=5&name=', package, '&comment=',URLencode(comment, TRUE), '&meta=', meta, sep='')
+				browseURL(URL)
+			}else{
+				library('RCurl')
+				getForm("http://rstats.psychstat.org/rate.php", type='5', name=package, comment=URLencode(comment, TRUE), meta=meta, rcurl='1')
+				cat('Thanks for your feedback!\n')
+			}
 		}else{
-			library('RCurl')
-			getForm("http://rstats.psychstat.org/rate.php", type='5', name=package, comment=URLencode(comment, TRUE), rcurl='1')
-		}
-		}else{
-		  cat('The rating has to be 1 from 5.')
+		  cat('Please provide your comment first.')
 		}
 	}		
 }
 
-view<-function(package,...){
-	pkgpath <- find.package('RCurl', ...)
-	if (length(pkgpath) == 0L){			URL<-paste('http://rstats.psychstat.org/comments.php?name=',  package, sep='')
+view<-function(package="base",lib.loc = NULL){
+	dir <- system.file(package = "RCurl", lib.loc = lib.loc)
+	if (dir == ""){
+		URL<-paste('http://rstats.psychstat.org/comments.php?name=',  package, sep='')
 		browseURL(URL)
-		#URL
 	}else{
 		library('RCurl')
-					rating<-getURL(paste('http://rstats.psychstat.org/comments.php?name=',  package, sep=''))
+		rating<-getURL(paste('http://rstats.psychstat.org/comments.php?name=',  package, sep=''))
 		temp<-strsplit(rating, "\n")
 		temp<-temp[[1]][2]
 		temp<-unlist(strsplit(temp, ";", fixed=TRUE))
-		#rating<-NULL
 		for (i in 1:4){
-			#rating<-c(rating, unlist(strsplit(temp[i], ":", fixed=TRUE))[2])
 			cat(temp[i], "\n")
 		}
 	}		

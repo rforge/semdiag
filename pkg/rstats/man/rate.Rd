@@ -8,17 +8,17 @@ Rate an package using scores 1-5
 Rate an package using scores 1-5
 }
 \usage{
-rate(package, rating, ...)
+rate(package="base",rating=5,lib.loc = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{package}{
-The name of the package
+   \item{package}{
+The name of the package to comment on. The default is R base.
+}
+  \item{lib.loc}{
+a character vector describing the location of R library trees to search through, or NULL. The default value of NULL corresponds to checking the loaded namespace, then all libraries currently known in .libPaths().
 }
   \item{rating}{
 Rating of 1, 2, 3, 4, 5 from Bad, OK, Good, Very Good, Excellent
-}
-  \item{\dots}{
-Argument can be passed to the function find.package.
 }
 }
