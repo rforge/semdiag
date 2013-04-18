@@ -16,8 +16,12 @@ rsem.pattern<-function(x,print=FALSE){
   if (missing(x)) stop("A data set has to be provided!")
   if (!is.matrix(x)) x<-as.matrix(x)
   y<-x
+  ## check to see if all data are missing
+  M<-is.na(x)
+  nM<-max(apply(M,1,sum))
   n<-dim(x)[1]
   p<-dim(x)[2]
+  if (nM==p) stop("Some cases have missing data on all variables. Please delete them first.")
   misorder<-rep(0,n)
   for (i in 1:n){
     misorderj<-0
