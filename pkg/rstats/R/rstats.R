@@ -5,7 +5,7 @@ download<-function(package="base",lib.loc = NULL){
 		gettextf("You have not installed the package %s. You can only rate a package you installed already. Thanks. ", sQuote(package))
 	}else{
 		meta <- packageDescription(pkg = package)
-		meta <- URLencode(paste(meta$Version, ";", meta$Built, ";", meta$Maintainer), TRUE)
+		meta <- URLencode(paste(meta$Version, ";", meta$Built, ";", meta$Maintainer, ";", meta$Repository), TRUE)
 		dir <- system.file(package = "RCurl", lib.loc = lib.loc)
 		if (dir == ""){
 			URL<-paste('http://rstats.psychstat.org/rate.php?type=1&name=',  package, '&meta=', meta, sep='')
@@ -24,7 +24,7 @@ like<-function(package="base",lib.loc = NULL){
 		gettextf("You have not installed the package %s. You can only rate a package you installed already. Thanks. ", sQuote(package))
 	}else{
 		meta <- packageDescription(pkg = package)
-		meta <- URLencode(paste(meta$Version, ";", meta$Built, ";", meta$Maintainer), TRUE)
+		meta <- URLencode(paste(meta$Version, ";", meta$Built, ";", meta$Maintainer, ";", meta$Repository), TRUE)
 		dir <- system.file(package = "RCurl", lib.loc = lib.loc)
 		if (dir == ""){
 			URL<-paste('http://rstats.psychstat.org/rate.php?type=2&name=', package, '&meta=', meta, sep='')
@@ -43,7 +43,7 @@ dislike<-function(package="base",lib.loc = NULL){
 		gettextf("You have not installed the package %s. You can only rate a package you installed already. Thanks. ", sQuote(package))
 	}else{
 		meta <- packageDescription(pkg = package)
-		meta <- URLencode(paste(meta$Version, ";", meta$Built, ";", meta$Maintainer), TRUE)
+		meta <- URLencode(paste(meta$Version, ";", meta$Built, ";", meta$Maintainer, ";", meta$Repository), TRUE)
 		dir <- system.file(package = "RCurl", lib.loc = lib.loc)
 		if (dir == ""){
 			URL<-paste('http://rstats.psychstat.org/rate.php?type=3&name=', package, '&meta=', meta, sep='')
@@ -63,7 +63,7 @@ rate<-function(package="base",rating=5,lib.loc = NULL){
 	}else{
 		if (rating %in% 1:5){	
 			meta <- packageDescription(pkg = package)
-			meta <- URLencode(paste(meta$Version, ";", meta$Built, ";", meta$Maintainer), TRUE)
+			meta <- URLencode(paste(meta$Version, ";", meta$Built, ";", meta$Maintainer, ";", meta$Repository), TRUE)
 			dir <- system.file(package = "RCurl", lib.loc = lib.loc)
 			if (dir == ""){
 				URL<-paste( 'http://rstats.psychstat.org/rate.php?type=4&name=', package, '&rating=', rating, '&meta=', meta, sep='')
@@ -86,7 +86,7 @@ Comment<-function(package="base",comment=NULL,lib.loc = NULL){
 	}else{
 		if (!is.null(comment)){
 			meta <- packageDescription(pkg = package)
-			meta <- URLencode(paste(meta$Version, ";", meta$Built, ";", meta$Maintainer), TRUE)
+			meta <- URLencode(paste(meta$Version, ";", meta$Built, ";", meta$Maintainer, ";", meta$Repository), TRUE)
 			dir <- system.file(package = "RCurl", lib.loc = lib.loc)
 			if (dir == ""){	
 				URL<-paste('http://rstats.psychstat.org/rate.php?type=5&name=', package, '&comment=',URLencode(comment, TRUE), '&meta=', meta, sep='')
@@ -131,7 +131,7 @@ view<-function(package="base",comment=FALSE, ncomment=1:5, lib.loc = NULL){
 				txt<-d[[i]]
 				txt<-sub("</td>","",txt[2],fixed=TRUE)
 				txt<-sub("</tr>","",txt,fixed=TRUE)
-				cat(i, txt, "\n")
+				cat(i-1, txt, "\n")
 			}
 		}
 	}		
