@@ -1,10 +1,14 @@
-rate<-function(package="base", download=NULL, like=NULL, rating=NULL, comment=NULL, lib.loc = NULL){
+rate<-function(package="base", download=NULL, like=NULL, rating=NULL, comment=NULL, meta=TRUE, lib.loc = NULL){
 	dir <- system.file(package = package, lib.loc = lib.loc)
     if (dir == "") {
 		gettextf("You have not installed the package %s. You can only rate a package you installed already. Thanks. ", sQuote(package))
 	}else{
-		meta <- packageDescription(pkg = package)
-		meta <- paste(meta$Version, ";", meta$Built, ";", meta$Maintainer, ";", meta$Repository)
+		if (meta){
+			meta <- packageDescription(pkg = package)
+			meta <- paste(meta$Version, ";", meta$Built, ";", meta$Maintainer, ";", meta$Repository)
+		}else{
+			meta <- "Not provided"
+		}
 		if (!is.null(download)) download <- '1'
 		if (!is.null(like)) like <- '1'
 		if (!is.null(rating)){

@@ -8,7 +8,7 @@ Rate an package using scores 1-5
 Rate an package using scores 1-5
 }
 \usage{
-rate(package="base", download=NULL, like=NULL, rating=NULL, comment=NULL, lib.loc = NULL)
+rate(package="base", download=NULL, like=NULL, rating=NULL, comment=NULL, meta=TRUE, lib.loc = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -22,6 +22,7 @@ The name of the package to comment on. The default is R base.
   \item{lib.loc}{
 a character vector describing the location of R library trees to search through, or NULL. The default value of NULL corresponds to checking the loaded namespace, then all libraries currently known in .libPaths().
 }
+\item{meta}{Whether to provide meta information of the R package.}
 }
 \example{
 rate(package="rsem", download=1, rating=5,
