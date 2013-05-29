@@ -1,0 +1,21 @@
+\name{setRstats}
+\alias{setRstats}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{
+Set the global parameter for the package
+}
+\description{
+Set the global parameter for the package to save time. See \code{\link{options}} for more information. The inforamtoin is saved in 
+\code{options()$rstats}. Once set, you don't need to provide package name information in other functions anymore.
+}
+\usage{
+setRstats(package='base', email='', name='')
+}
+%- maybe also 'usage' for other objects documented here.
+\arguments{
+  \item{package}{
+The name of the package to comment on. The default is R base.
+}
+  \item{email}{Your email.}
+  \item{name}{Your name.}
+}
