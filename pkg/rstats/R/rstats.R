@@ -1,6 +1,4 @@
-
-
-rate<-function(download=NULL, like=NULL, rating=NULL, comment=NULL, meta=TRUE, package, email, name, lib.loc = NULL){
+download<-function(meta=TRUE, package, email, name, lib.loc = NULL){
 	## check the package name
 	if (missing(package)){
 		if (is.null(options()$rstats)){
@@ -39,16 +37,188 @@ rate<-function(download=NULL, like=NULL, rating=NULL, comment=NULL, meta=TRUE, p
 			meta <- "Not provided"
 		}
 		meta<-URLencode(meta,TRUE)
-		if (!is.null(download)) download <- '1'
-		if (!is.null(like)) like <- '1'
+		download <- '1'
+		like<-NULL
+		rating<-NULL	
+		dir <- system.file(package = "RCurl", lib.loc = lib.loc)
+		comment <- URLencode("A user just downloaded your package. Congratulations!",TRUE)
+		if (dir == ""){	
+			URL<-paste('http://rstats.psychstat.org/rate.php?package=', package, '&download=', download, '&like=', like, '&rating=', rating, '&email=', email, '&user=', user, '&comment=',comment, '&uid=',uid, '&meta=', URLencode(meta,TRUE), sep='')
+			browseURL(URL)
+		}else{
+			library('RCurl')
+			out<-postForm("http://rstats.psychstat.org/rate.php", package=package, download=download, like=like, rating=rating, comment=comment, email=email, user=user, uid=uid, meta=meta)
+			cat(out)
+			
+			view(TRUE, package=package)
+		}
+	}
+}
+
+like<-function(meta=TRUE, package, email, name, lib.loc = NULL){
+	## check the package name
+	if (missing(package)){
+		if (is.null(options()$rstats)){
+			stop('Package name is needed. You can provide it in the function or set it use setRstats().')
+		}else{
+			rstats.op<-options()$rstats
+			package <- rstats.op[1]
+		}
+	}
+	if (missing(email)){
+		if (!is.null(options()$rstats)){
+			rstats.op<-options()$rstats
+			email <- rstats.op[2]
+		}else{
+			email<-''	
+		}
+	}
+	if (missing(name)){
+		if (!is.null(options()$rstats)){
+			rstats.op<-options()$rstats
+			user <- rstats.op[3]
+		}else{
+			user<-''	
+		}
+	}
+	
+	dir <- system.file(package = package, lib.loc = lib.loc)
+    if (dir == "") {
+		gettextf("You have not installed the package %s. You can only rate a package you have installed. Thanks. ", sQuote(package))
+	}else{
+		uid<-URLencode(uniqueID(),TRUE)
+		if (meta){
+			meta <- packageDescription(pkg = package)
+			meta <- paste(meta$Maintainer, ";", meta$Version, ";", meta$Built, ";", meta$Repository)
+		}else{
+			meta <- "Not provided"
+		}
+		meta<-URLencode(meta,TRUE)
+		download <- NULL
+		like<-'1'
+		rating<-NULL	
+		dir <- system.file(package = "RCurl", lib.loc = lib.loc)
+		comment <- URLencode("A user liked your package. Congratulations!",TRUE)
+		if (dir == ""){	
+			URL<-paste('http://rstats.psychstat.org/rate.php?package=', package, '&download=', download, '&like=', like, '&rating=', rating, '&email=', email, '&user=', user, '&comment=',comment, '&uid=',uid, '&meta=', URLencode(meta,TRUE), sep='')
+			browseURL(URL)
+		}else{
+			library('RCurl')
+			out<-postForm("http://rstats.psychstat.org/rate.php", package=package, download=download, like=like, rating=rating, comment=comment, email=email, user=user, uid=uid, meta=meta)
+			cat(out)
+			
+			view(TRUE, package=package)
+		}
+	}
+}
+
+comment<-function(comment, meta=TRUE, package, email, name, lib.loc = NULL){
+	## check the package name
+	if (missing(package)){
+		if (is.null(options()$rstats)){
+			stop('Package name is needed. You can provide it in the function or set it use setRstats().')
+		}else{
+			rstats.op<-options()$rstats
+			package <- rstats.op[1]
+		}
+	}
+	if (missing(email)){
+		if (!is.null(options()$rstats)){
+			rstats.op<-options()$rstats
+			email <- rstats.op[2]
+		}else{
+			email<-''	
+		}
+	}
+	if (missing(name)){
+		if (!is.null(options()$rstats)){
+			rstats.op<-options()$rstats
+			user <- rstats.op[3]
+		}else{
+			user<-''	
+		}
+	}
+	
+	dir <- system.file(package = package, lib.loc = lib.loc)
+    if (dir == "") {
+		gettextf("You have not installed the package %s. You can only rate a package you have installed. Thanks. ", sQuote(package))
+	}else{
+		uid<-URLencode(uniqueID(),TRUE)
+		if (meta){
+			meta <- packageDescription(pkg = package)
+			meta <- paste(meta$Maintainer, ";", meta$Version, ";", meta$Built, ";", meta$Repository)
+		}else{
+			meta <- "Not provided"
+		}
+		meta<-URLencode(meta,TRUE)
+		download <- NULL
+		like<-NULL
+		rating<-NULL	
+		dir <- system.file(package = "RCurl", lib.loc = lib.loc)
+		comment <- URLencode(comment,TRUE)
+		if (dir == ""){	
+			URL<-paste('http://rstats.psychstat.org/rate.php?package=', package, '&download=', download, '&like=', like, '&rating=', rating, '&email=', email, '&user=', user, '&comment=',comment, '&uid=',uid, '&meta=', URLencode(meta,TRUE), sep='')
+			browseURL(URL)
+		}else{
+			library('RCurl')
+			out<-postForm("http://rstats.psychstat.org/rate.php", package=package, download=download, like=like, rating=rating, comment=comment, email=email, user=user, uid=uid, meta=meta)
+			cat(out)
+			
+			view(TRUE, package=package)
+		}
+	}
+}
+
+
+rate<-function(rating=5, meta=TRUE, package, email, name, lib.loc = NULL){
+	## check the package name
+	if (missing(package)){
+		if (is.null(options()$rstats)){
+			stop('Package name is needed. You can provide it in the function or set it use setRstats().')
+		}else{
+			rstats.op<-options()$rstats
+			package <- rstats.op[1]
+		}
+	}
+	if (missing(email)){
+		if (!is.null(options()$rstats)){
+			rstats.op<-options()$rstats
+			email <- rstats.op[2]
+		}else{
+			email<-''	
+		}
+	}
+	if (missing(name)){
+		if (!is.null(options()$rstats)){
+			rstats.op<-options()$rstats
+			user <- rstats.op[3]
+		}else{
+			user<-''	
+		}
+	}
+	
+	dir <- system.file(package = package, lib.loc = lib.loc)
+    if (dir == "") {
+		gettextf("You have not installed the package %s. You can only rate a package you have installed. Thanks. ", sQuote(package))
+	}else{
+		uid<-URLencode(uniqueID(),TRUE)
+		if (meta){
+			meta <- packageDescription(pkg = package)
+			meta <- paste(meta$Maintainer, ";", meta$Version, ";", meta$Built, ";", meta$Repository)
+		}else{
+			meta <- "Not provided"
+		}
+		meta<-URLencode(meta,TRUE)
+		download <- NULL
+		like <- NULL
 		if (!is.null(rating)){
 			if (!(rating %in% 1:5)) stop('The rating has to be 1 from 5.')
 			rating <- as.character(rating)
 		}else{
-			rating<-'0'
+			stop('You have to provide a rating between 1 and 5.')
 		}			
 		dir <- system.file(package = "RCurl", lib.loc = lib.loc)
-		comment <- URLencode(comment,TRUE)
+		comment <- URLencode("A user just rated your package.",TRUE)
 		if (dir == ""){	
 			URL<-paste('http://rstats.psychstat.org/rate.php?package=', package, '&download=', download, '&like=', like, '&rating=', rating, '&email=', email, '&user=', user, '&comment=',comment, '&uid=',uid, '&meta=', URLencode(meta,TRUE), sep='')
 			browseURL(URL)
@@ -254,3 +424,4 @@ uniqueID<-function(){
 	
 	paste(p3,p4,sep=';')
 }
+

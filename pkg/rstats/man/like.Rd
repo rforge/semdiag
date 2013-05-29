@@ -1,18 +1,17 @@
-\name{rate}
-\alias{rate}
+\name{like}
+\alias{like}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Rate an package using scores 1-5
+Like a package
 }
 \description{
-Rate an package using scores 1-5. See \code{\link{setRstats}} on how to set global options on package information.
+Like a package. See \code{\link{setRstats}} on how to set global options on package information.
 }
 \usage{
-rate(rating=5, meta=TRUE, package, email, name, lib.loc = NULL)
+like(meta=TRUE, package, email, name, lib.loc = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-\item{rating}{Rating of 1, 2, 3, 4, 5 from Bad, OK, Good, Very Good, Excellent}
 \item{package}{
 The name of the package to comment on. The default is R base.
 }

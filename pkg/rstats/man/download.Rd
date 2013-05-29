@@ -1,18 +1,17 @@
-\name{rate}
-\alias{rate}
+\name{download}
+\alias{download}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Rate an package using scores 1-5
+A package is downloaded
 }
 \description{
-Rate an package using scores 1-5. See \code{\link{setRstats}} on how to set global options on package information.
+A package is downloaded. See \code{\link{setRstats}} on how to set global options on package information.
 }
 \usage{
-rate(rating=5, meta=TRUE, package, email, name, lib.loc = NULL)
+download(meta=TRUE, package, email, name, lib.loc = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-\item{rating}{Rating of 1, 2, 3, 4, 5 from Bad, OK, Good, Very Good, Excellent}
 \item{package}{
 The name of the package to comment on. The default is R base.
 }
