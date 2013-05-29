@@ -23,7 +23,3 @@ a character vector describing the location of R library trees to search through,
 }
 \item{meta}{Whether to provide meta information of the R package.}
 }
-
-\examples{
-ask('how to use the package? Do you have a manual?', package="rsem")
-}
