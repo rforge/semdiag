@@ -1,7 +1,7 @@
 Package: rstats
 Type: Package
 Title: R package usage statistics
-Version: 0.1
+Version: 0.11
 Date: 2013-04-16
 Author: Zhiyong Zhang
 Maintainer: Zhiyong Zhang <johnnyzhz@gmail.com>
