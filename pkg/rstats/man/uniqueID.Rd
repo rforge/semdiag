@@ -15,5 +15,5 @@ To generate such an ID, information from functions \code{\link{Sys.getenv}} and 
 
 Note that information regarding OS is also used. For example, on my PC, it is \code{Windows;7 x64;build 7601, Service Pack 1;x86-64}.
 
-On our webserver, the unique information is converted to md5 harsh. 
+On our webserver, the unique information is converted to an md5 hash value. 
 }

@@ -5,7 +5,7 @@
 Set the global parameter for the package
 }
 \description{
-Set the global parameter for the package to save time. See \code{\link{options}} for more information. The inforamtoin is saved in 
+Set the global parameter for the package to save time. See \code{\link{options}} for more information. The information is saved in 
 \code{options()$rstats}. Once set, you don't need to provide package name information in other functions anymore.
 }
 \usage{
