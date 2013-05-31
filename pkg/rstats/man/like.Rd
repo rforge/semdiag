@@ -8,7 +8,7 @@ Like a package
 Like a package. See \code{\link{setRstats}} on how to set global options on package information.
 }
 \usage{
-like(meta=TRUE, package, email, name, lib.loc = NULL)
+like(package, email, name, meta=TRUE, lib.loc = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

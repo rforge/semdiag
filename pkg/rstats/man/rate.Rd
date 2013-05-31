@@ -8,7 +8,7 @@ Rate an package using scores 1-5
 Rate an package using scores 1-5. See \code{\link{setRstats}} on how to set global options on package information.
 }
 \usage{
-rate(rating=5, meta=TRUE, package, email, name, lib.loc = NULL)
+rate(rating=5, package, email, name, meta=TRUE, lib.loc = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

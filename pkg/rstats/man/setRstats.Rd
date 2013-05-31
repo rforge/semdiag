@@ -9,7 +9,7 @@ Set the global parameter for the package to save time. See \code{\link{options}}
 \code{options()$rstats}. Once set, you don't need to provide package name information in other functions anymore.
 }
 \usage{
-setRstats(package='base', email='', name='')
+setRstats(package='base', email='', name='',cc='')
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -18,4 +18,5 @@ The name of the package to comment on. The default is R base.
 }
   \item{email}{Your email.}
   \item{name}{Your name.}
+  \item{cc}{cc the question, for example, to r-help@r-project.org.}
 }

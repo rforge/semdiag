@@ -1,4 +1,4 @@
-download<-function(meta=TRUE, package, email, name, lib.loc = NULL){
+download<-function(package, email, name, meta=TRUE,  lib.loc = NULL){
 	## check the package name
 	if (missing(package)){
 		if (is.null(options()$rstats)){
@@ -55,7 +55,7 @@ download<-function(meta=TRUE, package, email, name, lib.loc = NULL){
 	}
 }
 
-like<-function(meta=TRUE, package, email, name, lib.loc = NULL){
+like<-function(package, email, name, meta=TRUE, lib.loc = NULL){
 	## check the package name
 	if (missing(package)){
 		if (is.null(options()$rstats)){
@@ -112,7 +112,7 @@ like<-function(meta=TRUE, package, email, name, lib.loc = NULL){
 	}
 }
 
-comment<-function(comment, meta=TRUE, package, email, name, lib.loc = NULL){
+comment<-function(comment, package, email, name, meta=TRUE, lib.loc = NULL){
 	## check the package name
 	if (missing(package)){
 		if (is.null(options()$rstats)){
@@ -170,7 +170,7 @@ comment<-function(comment, meta=TRUE, package, email, name, lib.loc = NULL){
 }
 
 
-rate<-function(rating=5, meta=TRUE, package, email, name, lib.loc = NULL){
+rate<-function(rating=5, package, email, name, meta=TRUE,  lib.loc = NULL){
 	## check the package name
 	if (missing(package)){
 		if (is.null(options()$rstats)){
@@ -268,7 +268,7 @@ view<-function(comment=FALSE, ncomment=1:5, package, lib.loc = NULL){
 	}		
 }
 
-ask<-function(comment=NULL, package,  email, name, meta=TRUE, lib.loc = NULL){
+ask<-function(comment=NULL, package,  email, name, cc, meta=TRUE, lib.loc = NULL){
 	## check the package name
 	if (missing(package)){
 		if (is.null(options()$rstats)){
@@ -294,7 +294,14 @@ ask<-function(comment=NULL, package,  email, name, meta=TRUE, lib.loc = NULL){
 			user<-''	
 		}
 	}
-	
+	if (missing(cc)){
+		if (!is.null(options()$rstats)){
+			rstats.op<-options()$rstats
+			cc <- rstats.op[4]
+		}else{
+			cc<-''	
+		}
+	}
 	dir <- system.file(package = package, lib.loc = lib.loc)
     if (dir == "") {
 		gettextf("You have not installed the package %s. You can only ask a question about a package you have installed. Thanks. ", sQuote(package))
@@ -310,18 +317,18 @@ ask<-function(comment=NULL, package,  email, name, meta=TRUE, lib.loc = NULL){
 		comment<-URLencode(comment,TRUE)
 		dir <- system.file(package = "RCurl", lib.loc = lib.loc)
 		if (dir == ""){	
-			URL<-paste('http://rstats.psychstat.org/ask.php?name=', package, '&comment=',comment, '&email=', email, '&user=', user, '&uid=',uid, '&meta=', meta, sep='')
+			URL<-paste('http://rstats.psychstat.org/ask.php?name=', package, '&comment=',comment, '&email=', email, '&user=', user, '&cc=', cc, '&uid=',uid, '&meta=', meta, sep='')
 			browseURL(URL)
 		}else{
 			library('RCurl')
-			out<-postForm("http://rstats.psychstat.org/ask.php", package=package, comment=comment, email=email, user=user, uid=uid, meta=meta)
+			out<-postForm("http://rstats.psychstat.org/ask.php", package=package, comment=comment, email=email, user=user, cc=cc, uid=uid, meta=meta)
 			cat(out)
 		}
 	}
 }
 
 
-reply<-function(id, comment=NULL, package, email, name, meta=TRUE, lib.loc = NULL){
+reply<-function(id, comment=NULL, package, email, name, cc, meta=TRUE, lib.loc = NULL){
 	
 	if (missing(id)) stop('The id of the question or comment is needed! Please use view() function to find out the id.')
 		
@@ -350,6 +357,15 @@ reply<-function(id, comment=NULL, package, email, name, meta=TRUE, lib.loc = NUL
 			user<-''	
 		}
 	}
+	
+	if (missing(cc)){
+		if (!is.null(options()$rstats)){
+			rstats.op<-options()$rstats
+			cc <- rstats.op[4]
+		}else{
+			cc<-''	
+		}
+	}
 	uid<-URLencode(uniqueID(),TRUE)
 		if (meta){
 			meta <- packageDescription(pkg = package)
@@ -361,13 +377,12 @@ reply<-function(id, comment=NULL, package, email, name, meta=TRUE, lib.loc = NUL
 		comment<-URLencode(comment,TRUE)
 		dir <- system.file(package = "RCurl", lib.loc = lib.loc)
 		if (dir == ""){	
-			URL<-paste('http://rstats.psychstat.org/reply.php?package=', package, '&comment=',comment, '&email=', email, '&user=', user, '&uid=',uid, '&meta=', meta, sep='')
+			URL<-paste('http://rstats.psychstat.org/reply.php?package=', package, '&comment=',comment, '&email=', email, '&user=', user,  '&cc=', cc,  '&uid=',uid, '&meta=', meta, sep='')
 			browseURL(URL)
 		}else{
 			library('RCurl')
-			out<-postForm("http://rstats.psychstat.org/reply.php", package=package, id=as.character(id), comment=comment, email=email, user=user, uid=uid, meta=meta)
-			cat(out)
-			
+			out<-postForm("http://rstats.psychstat.org/reply.php", package=package, id=as.character(id), comment=comment, email=email, user=user, cc=cc, uid=uid, meta=meta)
+			cat(out)			
 			viewreply(id=id, package=package)
 		}
 }
@@ -393,8 +408,8 @@ viewreply<-function(id, package, lib.loc = NULL){
 	}		
 }
 
-setRstats<-function(package='base', email='', name=''){
-	options(rstats=c(package, email,name))
+setRstats<-function(package='base', email='', name='', cc=''){
+	options(rstats=c(package, email, name, cc))
 }
 
 uniqueID<-function(){

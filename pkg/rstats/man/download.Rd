@@ -8,7 +8,7 @@ A package is downloaded
 A package is downloaded. See \code{\link{setRstats}} on how to set global options on package information.
 }
 \usage{
-download(meta=TRUE, package, email, name, lib.loc = NULL)
+download(package, email, name, meta=TRUE, lib.loc = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

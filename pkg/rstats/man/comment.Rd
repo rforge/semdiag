@@ -8,7 +8,7 @@ Provide comments to a package
 Provide comments to a package. See \code{\link{setRstats}} on how to set global options on package information.
 }
 \usage{
-comment(comment, meta=TRUE, package, email, name, lib.loc = NULL)
+comment(comment, package, email, name, meta=TRUE, lib.loc = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
