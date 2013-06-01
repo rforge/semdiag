@@ -112,7 +112,7 @@ like<-function(package, email, name, meta=TRUE, lib.loc = NULL){
 	}
 }
 
-comment<-function(comment, package, email, name, meta=TRUE, lib.loc = NULL){
+feedback<-function(comment, package, email, name, meta=TRUE, lib.loc = NULL){
 	## check the package name
 	if (missing(package)){
 		if (is.null(options()$rstats)){
