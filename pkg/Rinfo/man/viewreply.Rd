@@ -5,7 +5,7 @@
 View replies to a question
 }
 \description{
-View replies to a question. See \code{\link{setRstats}} on how to set global options on package information.
+View replies to a question. See \code{\link{setRinfo}} on how to set global options on package information.
 }
 \usage{
 viewreply(id, package, lib.loc = NULL)

@@ -5,7 +5,7 @@
 A package is downloaded
 }
 \description{
-A package is downloaded. See \code{\link{setRstats}} on how to set global options on package information.
+A package is downloaded. See \code{\link{setRinfo}} on how to set global options on package information.
 }
 \usage{
 download(package, email, name, meta=TRUE, lib.loc = NULL)

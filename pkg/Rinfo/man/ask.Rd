@@ -5,7 +5,7 @@
 Ask a question about a package
 }
 \description{
-Ask a question about a package. See \code{\link{setRstats}} on how to set global options on package information.
+Ask a question about a package. See \code{\link{setRinfo}} on how to set global options on package information.
 }
 \usage{
 ask(comment=NULL, package,  email, name, cc, meta=TRUE, lib.loc = NULL)

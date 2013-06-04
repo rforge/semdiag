@@ -5,7 +5,7 @@
 Provide comment/feedback to a package
 }
 \description{
-Provide comments to a package. See \code{\link{setRstats}} on how to set global options on package information.
+Provide comments to a package. See \code{\link{setRinfo}} on how to set global options on package information.
 }
 \usage{
 feedback(comment, package, email, name, meta=TRUE, lib.loc = NULL)

@@ -5,7 +5,7 @@
 View the usage information about an package
 }
 \description{
-View the usage information about an package. See \code{\link{setRstats}} on how to set global options on package information.
+View the usage information about an package. See \code{\link{setRinfo}} on how to set global options on package information.
 }
 \usage{
 view(comment=FALSE, ncomment=1:5, package, lib.loc = NULL)

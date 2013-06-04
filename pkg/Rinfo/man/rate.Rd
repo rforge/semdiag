@@ -5,7 +5,7 @@
 Rate an package using scores 1-5
 }
 \description{
-Rate an package using scores 1-5. See \code{\link{setRstats}} on how to set global options on package information.
+Rate an package using scores 1-5. See \code{\link{setRinfo}} on how to set global options on package information.
 }
 \usage{
 rate(rating=5, package, email, name, meta=TRUE, lib.loc = NULL)
