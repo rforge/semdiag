@@ -5,7 +5,7 @@
 Like a package
 }
 \description{
-Like a package. See \code{\link{setRstats}} on how to set global options on package information.
+Like a package. See \code{\link{setRinfo}} on how to set global options on package information.
 }
 \usage{
 like(package, email, name, meta=TRUE, lib.loc = NULL)

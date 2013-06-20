@@ -5,7 +5,7 @@
 Reply to a question
 }
 \description{
-Reply to a question. See \code{\link{setRstats}} on how to set global options on package information.
+Reply to a question. See \code{\link{setRinfo}} on how to set global options on package information.
 }
 \usage{
 reply(id, comment=NULL, package, email, name, cc, meta=TRUE, lib.loc = NULL)
