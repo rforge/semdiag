@@ -8,7 +8,10 @@ Conducting power analysis based on Sobel test
 Different from \code{\link{power.boot}}, this function conduct power analysis based on the Sobel test.
 }
 \usage{
-power.basic(model, indirect = NULL, nobs, nrep = 1000, alpha = 0.95, skewness = NULL, kurtosis = NULL, ovnames = NULL, se = "default", estimator = "default", parallel = "no", ncore = Sys.getenv("NUMBER_OF_PROCESSORS"), cl = NULL, ...)
+power.basic(model, indirect = NULL, nobs, nrep = 1000, alpha = 0.95, 
+skewness = NULL, kurtosis = NULL, ovnames = NULL, se = "default", 
+estimator = "default", parallel = "no", ncore = Sys.getenv("NUMBER_OF_PROCESSORS"), 
+cl = NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

@@ -8,7 +8,10 @@ Generate a power curve
 Generate a power curve either based on Sobel test or bootstrap
 }
 \usage{
-power.curve(model, indirect=NULL, nobs=100, type='basic', nrep=1000, nboot=1000, alpha=.95, skewness=NULL, kurtosis=NULL, ovnames=NULL, se="default", estimator="default", parallel="no", ncore=Sys.getenv('NUMBER_OF_PROCESSORS'), cl=NULL, ...)
+power.curve(model, indirect=NULL, nobs=100, type='basic', nrep=1000, 
+nboot=1000, alpha=.95, skewness=NULL, kurtosis=NULL, ovnames=NULL, 
+se="default", estimator="default", parallel="no", 
+ncore=Sys.getenv('NUMBER_OF_PROCESSORS'), cl=NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

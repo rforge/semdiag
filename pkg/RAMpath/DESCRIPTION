@@ -1,7 +1,7 @@
 Package: RAMpath
 Type: Package
-Title: RAMpath
-Version: 0.3.5
+Title: Structural Equation Modeling using the reticular action model (RAM) Notation
+Version: 0.3.6
 Date: 2012-05-29
 Author: Zhiyong Zhang, Jack McArdle, Aki Hamagami, & Kevin Grimm
 Maintainer: Zhiyong Zhang <zzhang4@nd.edu>
@@ -13,7 +13,7 @@ Description: RAMpath is a rewrite of RAMpath software developed by John
         latent change score models.
 Depends: R (>= 2.0), lavaan, ellipse
 License: GPL-2
-URL: http://rpackages.psychstat.org
+URL: http://nd.psychstat.org
 Repository: CRAN
 Repository/R-Forge/Project: semdiag
 Repository/R-Forge/Revision: 36

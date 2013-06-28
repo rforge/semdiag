@@ -1446,7 +1446,7 @@ summary.power<-function(object, ...) {
     def.idx <- which(object@ParTable$op == ":=")
     if(length(def.idx) > 0) {
         if(object@Data@ngroups > 1) cat("\n")
-        cat("Indirect effects:\n")
+        cat("Indirect/Mediation effects:\n")
         NAMES[def.idx] <- makeNames(  object@ParTable$lhs[def.idx], "")
         for(i in def.idx) {
             print.estimate(name=NAMES[i], i)
