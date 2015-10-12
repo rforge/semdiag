@@ -8,13 +8,13 @@ Estimating autocorrelations for vectorized moving block bootstrap samples.
 This function computes autocorrelations for vectorized moving block bootstrap samples when the position indices for pairs of observations are given. This function is not intended to use separately from functions pair.VMB and VMB.
 }
 \usage{
-corr.VMB(pair.id.M, x)
+corr.VMB(pair.id.M, data)
 }
 \arguments{
   \item{pair.id.M}{
 a list of position indices of pairs of observations to calculate autocorrelations. An object returned by the function pair.VMB. 
 }
-  \item{x}{
+  \item{data}{
 a numeric vector of time series data with no missing values.
 }
 }

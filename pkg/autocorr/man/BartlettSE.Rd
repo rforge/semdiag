@@ -8,10 +8,10 @@ Standard error estimates based on Bartlett's formula
 BartlettSE is a wrapper of Bartlett_Shumway. This function returns standard error estimates of autocorrelations up to lagmax.
 }
 \usage{
-BartlettSE(x, L, lagmax)
+BartlettSE(data, L, lagmax)
 }
 \arguments{
-  \item{x}{
+  \item{data}{
 a numeric vector of time series data with no missing values
 }
   \item{L}{

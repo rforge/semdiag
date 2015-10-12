@@ -8,11 +8,11 @@ The acceleration for the vectorized moving block bootstrap.
 This function computes the acceleration constants for the vectorized moving block bootstrap.
 }
 \usage{
-JN.VMB(x, lagmax, l)
+JN.VMB(data, lagmax, l)
 }
 
 \arguments{
-  \item{x}{
+  \item{data}{
 a vector of time series data with no missing values.
 }
   \item{lagmax}{

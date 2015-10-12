@@ -8,7 +8,7 @@ The surrogate data method
 This function Surrogate carries out the surrogate data method for testing autocorrelations. 
 }
 \usage{
-Surrogate(acf.est, ahat, x, a1, a2, boot, lagmax)
+Surrogate(acf.est, ahat, data, a1, a2, boot, lagmax)
 }
 
 \arguments{
@@ -18,7 +18,7 @@ a vector of sample autocorrelation estimates up to lagmax.
   \item{ahat}{
 a vector of estimated acceleration constants for autocorrelations up to lagmax. An Object returned by JN.NB
 }
-  \item{x}{
+  \item{data}{
 a vector of time series data with no missing values.
 }
   \item{a1}{

@@ -8,11 +8,11 @@ The acceleration constant for the surrogate data method.
 This function JN.NB computes the acceleration constant for the surrogate data method by sequentially deleting one observation from the sample data points.
 }
 \usage{
-JN.NB(x, lagmax)
+JN.NB(data, lagmax)
 }
 
 \arguments{
-  \item{x}{
+  \item{data}{
 a numeric vector of time series data with no missing values.
 }
   \item{lagmax}{

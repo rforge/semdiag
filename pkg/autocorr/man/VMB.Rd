@@ -8,7 +8,7 @@ The vectorized moving block bootstrap
 This function VMB performs the vectorized moving block bootstrap to carry out tests on autocorrelations.
 }
 \usage{
-VMB(acf.est, ahat, x, l, a1, a2, B, lagmax)
+VMB(acf.est, ahat, data, l, a1, a2, boot, lagmax)
 }
 
 \arguments{
@@ -18,7 +18,7 @@ a vector of sample autocorrelation estimates up to lagmax.
   \item{ahat}{
 a vector of estimated acceleration constants for autocorrelations up to lagmax. An object returned by JN.VMB
 }
-  \item{x}{
+  \item{data}{
 a vector of time series data with no missing values.
 }
   \item{l}{
@@ -30,7 +30,7 @@ a scaler or a numeric vector of percentage(s) for the lower limit(s) of confiden
   \item{a2}{
 a scaler or a numeric vector of percentage(s) for the lower limit(s) of confidence intervals.
 }
-  \item{B}{
+  \item{boot}{
 number of bootstrap replications.
 }
   \item{lagmax}{
