@@ -19,7 +19,7 @@ a vector of sample autocorrelation estimates up to lagmax.
 a vector of estimated acceleration constants for autocorrelations up to lagmax. An object returned by JN.VMB
 }
   \item{data}{
-a vector of time series data with no missing values.
+a vector of time series data.
 }
   \item{l}{
 block size for the vectorized moving block bootstrap.
@@ -39,6 +39,8 @@ maximum lag at which to calculate autocorrelations.
 }
 \details{
 The vectorized moving block bootstrap constructs blocks by splitting the original time series data of length n.t into n.t-l+1 blocks of length l. These n.t-l+1 blocks are then resampled with replacement. Observations in the selected blocks and observations h lags later are paired and are used to compute the estimate for the autocorrelation at lag h.
+
+In the presence of missing values, estimates of autocorrelations are computed from complete cases, which may not be valid.
 }
 \value{
 a list containing two components:

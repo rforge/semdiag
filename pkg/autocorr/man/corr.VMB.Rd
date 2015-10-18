@@ -15,10 +15,11 @@ corr.VMB(pair.id.M, data)
 a list of position indices of pairs of observations to calculate autocorrelations. An object returned by the function pair.VMB. 
 }
   \item{data}{
-a numeric vector of time series data with no missing values.
+a numeric vector of time series data.
 }
 }
-
+\details{In the presence of missing values, estimates of autocorrelations are computed from complete cases, which may not be valid.
+}
 \value{
 a vector of estimated autocorrelations.
 }

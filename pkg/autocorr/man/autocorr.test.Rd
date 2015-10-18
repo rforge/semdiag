@@ -13,7 +13,7 @@ autocorr.test(x, lagmax = 3, method = "surrogate", alpha = 0.05, L = 30, B = 100
 
 \arguments{
   \item{x}{
-a numeric vector of time series data with no missing values.
+a numeric vector of time series data.
 }
   \item{lagmax}{
 maximum lag at which to calculate autocorrelations.
@@ -40,8 +40,7 @@ The autocorr.test function will perform tests on autocorrelations using four dif
 The surrogate data method simulates the sampling distribution of autocorrelation under the null by shuflying the order of the time series data. The conventional 1/T approximation method is motivated by the fact that under the null, the time series data reduced to uncorrelated data and uses the standard error estimator of correlations (sqrt(1/N)) as that of autocorrelations. The Bartlett's formula method computes standard error estimates of aucorrelations according to Bartlett's formula. The vectorized moving block bootstrap method simulates the sampling distribution of autocorrelations under the alternative by implementing an improved version of the moving block bootstrap which tackles the "bad joints" problem in the conventional simple moving block bootstrap. 
 }
 \value{
-The function autocorr.test returns a table in which rows correspond to autocorrelations at various lags; and columns report sample estimates of autocorrelations, standard error estimates and z statistics (if the asymptotic 1/T approximation method is selected) or the upper and lower limits of the constructed confidence intervals, and whether the test is significant given the chosen significance level.
-}
+The function autocorr.test returns a table in which rows correspond to autocorrelations at various lags; and columns report sample estimates of autocorrelations, standard error estimates and z statistics (if the asymptotic 1/T approximation method is selected) or the upper and lower limits of the constructed confidence intervals, and whether the test is significant given the chosen significance level.}
 \references{
 Bartlett, M. S. (1955). An introduction to stochastic processes. Cambridge: Cambridge University Press.
 Shumway, R. H., & Stoffer, D. S. (2006). Time series analysis and its applications with r examples (2nd ed.). New York: Springer.

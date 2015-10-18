@@ -13,7 +13,7 @@ JN.VMB(data, lagmax, l)
 
 \arguments{
   \item{data}{
-a vector of time series data with no missing values.
+a vector of time series data.
 }
   \item{lagmax}{
 maximum lag at which to calculate autocorrelations.
@@ -24,6 +24,8 @@ block size of the vectorized moving block bootstrap
 }
 \details{
 Computation of this jackknife estimate of acceleration involves computing autocorrelations based on pairs of observations from samples with l consecutive observations left out at a time.
+
+In the presence of missing values, estimates of autocorrelations are computed from complete cases, which may not be valid.
 }
 \value{
 a vector of the acceleration constants for autocorrelations up to lagmax.

@@ -12,7 +12,7 @@ BartlettSE(data, L, lagmax)
 }
 \arguments{
   \item{data}{
-a numeric vector of time series data with no missing values
+a numeric vector of time series data.
 }
   \item{L}{
 an upper limit for the summed terms. Default is 30.
@@ -23,6 +23,7 @@ maximum lag at which to calculate autocorrelations.
 }
 \details{
 Compute standard error estimates using Bartlett's formula.
+In the presence of missing values, estimates of autocorrelations are computed from complete cases, which may not be valid. 
 }
 \value{
 a vector of standard error estimates of autocorrelations up to lagmax.

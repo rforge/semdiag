@@ -13,7 +13,7 @@ JN.NB(data, lagmax)
 
 \arguments{
   \item{data}{
-a numeric vector of time series data with no missing values.
+a numeric vector of time series data.
 }
   \item{lagmax}{
 maximum lag at which to compute the acceleration constants for different autocorrelations.
@@ -21,6 +21,8 @@ maximum lag at which to compute the acceleration constants for different autocor
 }
 \details{
 This function iteratively deletes one data point at a time from the original sample and computes autocorrelations at each iteration. The acceleration constant is obtained by computing a quantity similar to the skewness of autocorrelation estimates at different iterations.
+
+In the presence of missing values, estimates of autocorrelations are computed from complete cases, which may not be valid.
 }
 \value{
 a vector of accelerations for autocorrelations up to lagmax.

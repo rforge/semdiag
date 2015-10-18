@@ -19,7 +19,7 @@ a vector of sample autocorrelation estimates up to lagmax.
 a vector of estimated acceleration constants for autocorrelations up to lagmax. An Object returned by JN.NB
 }
   \item{data}{
-a vector of time series data with no missing values.
+a vector of time series data.
 }
   \item{a1}{
 a scaler or a numeric vector of percentage(s) for the lower limit(s) of confidence intervals.
@@ -34,7 +34,9 @@ number of surrogate data sets
 maximum lag at which to calculate autocorrelations
 }
 }
-
+\details{
+In the presence of missing values, estimates of autocorrelations are computed from complete cases, which may not be valid.
+}
 \value{
 a list containing two components:
 se	standard error estimates for autocorrelations under the null.
