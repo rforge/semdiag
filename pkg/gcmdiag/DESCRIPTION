@@ -5,7 +5,7 @@ Version: 1.0
 Date: 2015-12-08
 Author: Xin Tong and Zhiyong Zhang
 Maintainer: Xin Tong <xtong@virginia.edu>
-Depends: MASS, semdiag
+Depends: MASS, sem, semdiag
 Description: This is a package for outlier and leverage observation diagnostics for growth curve modeling.
 License: GPL-2
 LazyLoad: yes

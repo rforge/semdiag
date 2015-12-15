@@ -1,6 +1,5 @@
 \name{gcmdiag-package}
 \alias{gcmdiag-package}
-\alias{gcmdiag}
 \docType{package}
 \title{Growth curve modeling diagnostics}
 \description{Outlier and leverage observation diagnostics for growth curve modeling using six methods}
