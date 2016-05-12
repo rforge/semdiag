@@ -1,0 +1,13 @@
+Package: logistic4p
+Type: Package
+Title: Logistic Regression with Misclassification in Dependent Variables
+Version: 1.0
+Date: 2016-05-02
+Depends:
+    MASS
+Author: Haiyan Liu and Zhiyong Zhang
+Maintainer: Zhiyong Zhang <johnnyzhz@gmail.com>
+Description: Error in a binary dependent variable, also known as misclassification, has not drawn much attention in psychology. Ignoring misclassification in logistic regression can result in misleading parameter estimates and statistical inference. This package conducts logistic regression analysis with misspecification in outcome variables. 
+License: GPL
+LazyLoad: yes
+RoxygenNote: 5.0.1
