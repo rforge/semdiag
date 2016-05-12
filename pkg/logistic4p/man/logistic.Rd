@@ -41,6 +41,8 @@ Haiyan Liu and Zhiyong Zhang
 
 \examples{
 data(nlsy)
+y=nlsy[,1]
+x=nlsy[, -1]
 mod=logistic(x,y)
 
 summary(mod)

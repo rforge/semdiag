@@ -50,7 +50,7 @@ Haiyan Liu and Zhiyong Zhang
 data(nlsy)
 y=nlsy[,1]
 x=nlsy[, -1]
-mod=logistic4p.e(x, y, initial, max.iter = 1000, epsilon = 1e-06, detail = FALSE)
+mod=logistic4p.e(x, y, max.iter = 1000, epsilon = 1e-06, detail = FALSE)
 
 }
 

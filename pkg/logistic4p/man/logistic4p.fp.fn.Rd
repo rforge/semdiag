@@ -45,6 +45,8 @@ Haiyan Liu and Zhiyong Zhang
 
 \examples{
 data(nlsy)
+y=nlsy[,1]
+x=nlsy[, -1]
 mod=logistic4p.fp.fn(x,y)
 
 
