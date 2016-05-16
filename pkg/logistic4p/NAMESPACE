@@ -1,4 +1,4 @@
-export(logistic4p,logistic,logistic4p.fp.fn,logistic4p.fp,logistic4p.fn)
+export(logistic4p,logistic,logistic4p.fp.fn,logistic4p.fp,logistic4p.fn,logistic4p.e)
 S3method(print, logistic4p)
 importFrom(MASS,ginv)
 importFrom("stats", "pnorm")
