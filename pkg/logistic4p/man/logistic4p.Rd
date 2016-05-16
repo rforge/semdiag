@@ -87,7 +87,7 @@ x=nlsy[,-1]
 
 mod1=logistic4p(x,y)
 mod1
-modl$estimates
+mod1$estimates
 
 mod2=logistic4p(x,y, model='fp.fn')
 
