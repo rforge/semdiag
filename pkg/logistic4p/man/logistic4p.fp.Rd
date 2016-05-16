@@ -49,7 +49,9 @@ Haiyan Liu and Zhiyong Zhang
 data(nlsy)
 y=nlsy[,1]
 x=nlsy[, -1]
+\dontrun{
 mod.fp=logistic4p.fp(x, y, max.iter = 1000, epsilon = 1e-06, detail = FALSE)
+}
 
 }
 

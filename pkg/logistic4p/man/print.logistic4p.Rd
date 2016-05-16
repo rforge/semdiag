@@ -27,8 +27,9 @@ Haiyan Liu and Zhiyong Zhang
 data(nlsy)
 y=nlsy[,1]
 x=nlsy[,-1]
-
+\dontrun{
 mod=logistic4p(x,y)
 print(mod)
+}
 }
 
