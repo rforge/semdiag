@@ -81,6 +81,7 @@ Haiyan Liu and Zhiyong Zhang
 
 
 \examples{
+\dontrun{ 
 data(nlsy)
 y=nlsy[, 1]
 x=nlsy[,-1]
@@ -92,5 +93,5 @@ mod1$estimates
 mod2=logistic4p(x,y, model='fp.fn')
 
 mod3=logistic4p(x,y, model='fn')
-
+}
 }
