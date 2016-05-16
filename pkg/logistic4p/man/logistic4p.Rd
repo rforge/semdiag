@@ -8,7 +8,8 @@ Logistic Regressions with Misclassification Correction
 logistic4p is used to fit logistic regressions with correction of the misclassifications in the binary dependent variable. It is specified by 
 }
 \usage{
-logistic4p(x, y, initial, model = c("lg", "fp.fn", "fp", "fn", "equal"), max.iter = 1000, epsilon = 1e-06, detail = FALSE)
+logistic4p(x, y, initial, model = c("lg", "fp.fn", "fp", "fn", "equal"),
+max.iter = 1000, epsilon = 1e-06, detail = FALSE)
 }
 
 \arguments{
@@ -85,7 +86,7 @@ y=nlsy[, 1]
 x=nlsy[,-1]
 
 mod1=logistic4p(x,y)
-summary(mod1)
+mod1
 modl$estimates
 
 mod2=logistic4p(x,y, model='fp.fn')
