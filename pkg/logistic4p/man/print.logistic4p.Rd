@@ -29,6 +29,6 @@ y=nlsy[,1]
 x=nlsy[,-1]
 
 mod=logistic4p(x,y)
-print.logistic4p(mod)
+print(mod)
 }
 
