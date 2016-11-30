@@ -1,0 +1,10 @@
+Package: pautocorr
+Type: Package
+Title: Testing Autocorrelation and Partial Autocorrelation through Bootstrap and Surrogate Methods
+Version: 0.1
+Date: 2015-09-25
+Author: Zijun Ke & Zhiyong Zhang
+Maintainer: Zijun Ke <keziyun@mail.sysu.edu.cn>
+Description: Different methods for testing autocorrelation and partial autocorrelation are implemented. Two asymptotic methods including the 1/T approximation method and the Bartlett's formula method are implemented. Two resampling techniques including the moving block bootstrap and the surrogate data method are also provided.
+License: GPL
+

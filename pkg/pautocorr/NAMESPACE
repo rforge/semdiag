@@ -1,0 +1,4 @@
+exportPattern("^[[:alpha:]]+")
+importFrom("graphics", "abline", "legend", "lines", "par", "plot")
+importFrom("stats", "acf", "cor", "na.omit", "na.pass", "pnorm",
+             "qnorm", "quantile", "sd")
