@@ -9,7 +9,7 @@ plot the results of pautocorr.test
 This function visualizes the results of function pautocorr.test.
 }
 \usage{
-plot(x,alpha=0.05,
+\method{plot}{pautocorr}(x,alpha=0.05,
 	layout.v = c(2,2),
 	legendpos = list(A='bottomright',B ='topleft'),...)
 }
