@@ -5,8 +5,9 @@
 # Complete-data analysis is performed.
 # 1/sqrt(T) is modified
 pautocorr.test <- function(x,lagmax=3,
-		method='all',alpha = 0.05,L=30,B=1000, digits=3,
+		method='all',alpha = 0.05,L=30,B=2000, digits=3,
 		print = FALSE){
+		
 	if (missing(x)){
 		stop("Error: Data needed")
 	}
@@ -94,7 +95,9 @@ pautocorr.test <- function(x,lagmax=3,
 					round(x, digits)
 				}})
 		if(method == 'all'){
+			print('ACF Results')
 			print(acf.res)
+			print('PACF Results')
 			print(pacf.res)
 		}else{
 			print('ACF Results')
@@ -118,66 +121,79 @@ pautocorr.test <- function(x,lagmax=3,
 ##   Plot Results     
 ##-----------------------------------------------##
 
-plot.pautocorr <- function(x, method,
-	plot.control = list(layout.v = c(2,2),
-	legendpos = list(A='bottomright',B ='topleft')), ...){
+plot.pautocorr <- function(x,alpha = 0.05,
+	layout.v = c(2,2),
+	legendpos = list(A='bottomright',B ='topleft'),...){
 	acf.res = x$acf.res
 	pacf.res = x$pacf.res
+	lagmax = nrow(acf.res$Asymptotic)
 
-	if(method == 'all'){
-		par(mfrow = plot.control$layout.v)
-		# hypothesis testing under the null
-		yl = c(min(acf.res$Surrogate[,-c(4,7)])-0.2,max(acf.res$Surrogate[,-c(4,7)])+0.1)
-		plot(acf.res$Asymptotic[,'Est.'],type = 'h',
-			ylim = yl,ylab = 'ACF',xlab = 'Lag')
-		abline(h=1.96*acf.res$Asymptotic[1,2],col = 'red',lty = 2)
-		abline(h=-1.96*acf.res$Asymptotic[1,2],col = 'red',lty = 2)
-		lines(1:lagmax,acf.res$Surrogate[,'95%CI LB'],col = 'blue',lty = 2)
-		lines(1:lagmax,acf.res$Surrogate[,'95%CI UB'],col = 'blue',lty = 2)
-		lines(1:lagmax,acf.res$Surrogate[,'BCa 95%CI LB'],col = 'green',lty = 2)
-		lines(1:lagmax,acf.res$Surrogate[,'BCa 95%CI UB'],col = 'green',lty = 2)
+	par(mfrow = layout.v)
+	# hypothesis testing under the null
+	yl = c(min(acf.res$Surrogate[,-c(4,7)])-0.2,max(acf.res$Surrogate[,-c(4,7)])+0.1)
+	plot(acf.res$Asymptotic[,'Est.'],type = 'h',
+		ylim = yl,ylab = 'ACF',xlab = 'Lag')
+	abline(h=1.96*acf.res$Asymptotic[1,2],col = 'red',lty = 2)
+	abline(h=-1.96*acf.res$Asymptotic[1,2],col = 'red',lty = 2)
+	lines(1:lagmax,acf.res$Surrogate[,paste((1-alpha)*100,'%CI LB',sep='')],col = 'blue',lty = 2)
+	lines(1:lagmax,acf.res$Surrogate[,paste((1-alpha)*100,'%CI UB',sep='')],col = 'blue',lty = 2)
+	lines(1:lagmax,acf.res$Surrogate[,paste('BCa ',(1-alpha)*100,'%CI LB',sep='')],col = 'green',lty = 2)
+	lines(1:lagmax,acf.res$Surrogate[,paste('BCa ',(1-alpha)*100,'%CI UB',sep='')],col = 'green',lty = 2)
 
-		yl = c(min(pacf.res$Surrogate[,-c(4,7)])-0.2,max(pacf.res$Surrogate[,-c(4,7)])+0.1)		
-		plot(pacf.res$Asymptotic[,'Est.'],type = 'h',
-			ylim = yl,
-			ylab = 'PACF',xlab = 'Lag')
-		abline(h=1.96*pacf.res$Asymptotic[1,2],col = 'red',lty = 2)
-		abline(h=-1.96*pacf.res$Asymptotic[1,2],col = 'red',lty = 2)
-		lines(1:lagmax,pacf.res$Surrogate[,'95%CI LB'],col = 'blue',lty = 2)
-		lines(1:lagmax,pacf.res$Surrogate[,'95%CI UB'],col = 'blue',lty = 2)
-		lines(1:lagmax,pacf.res$Surrogate[,'BCa 95%CI LB'],col = 'green',lty = 2)
-		lines(1:lagmax,pacf.res$Surrogate[,'BCa 95%CI UB'],col = 'green',lty = 2)
-		legend(plot.control$legendpos$A,c('1/T','Surrogate','Surrogate-BCa'),
+	yl = c(min(pacf.res$Surrogate[,-c(4,7)])-0.2,max(pacf.res$Surrogate[,-c(4,7)])+0.1)		
+	plot(pacf.res$Asymptotic[,'Est.'],type = 'h',
+		ylim = yl,
+		ylab = 'PACF',xlab = 'Lag')
+	abline(h=1.96*pacf.res$Asymptotic[1,2],col = 'red',lty = 2)
+	abline(h=-1.96*pacf.res$Asymptotic[1,2],col = 'red',lty = 2)
+	lines(1:lagmax,pacf.res$Surrogate[,paste((1-alpha)*100,'%CI LB',sep='')],col = 'blue',lty = 2)
+	lines(1:lagmax,pacf.res$Surrogate[,paste((1-alpha)*100,'%CI UB',sep='')],col = 'blue',lty = 2)
+	lines(1:lagmax,pacf.res$Surrogate[,paste('BCa ',(1-alpha)*100,'%CI LB',sep='')],col = 'green',lty = 2)
+	lines(1:lagmax,pacf.res$Surrogate[,paste('BCa ',(1-alpha)*100,'%CI UB',sep='')],col = 'green',lty = 2)
+	if(is.numeric(legendpos$A)){
+		legend(legendpos$A[1],legendpos$A[2],
+		c('1/T','Surrogate','Surrogate-BCa'),
 		col = c('red','blue','green'),lty = rep(2,3),cex = 0.7,bty = 'n')
-		
-		# the alternative
-		yl = c(min(acf.res$VMB[,-c(4,7)])-0.2,max(acf.res$VMB[,-c(4,7)])+0.1)
-		plot(acf.res$Asymptotic[,'Est.'],type = 'n',
-				ylim = yl,ylab = 'ACF',xlab = 'Lag')
-		abline(h = 0)
-		for(li in 1:lagmax){
-			lines(rep(li,2),acf.res$VMB[li,c('95%CI LB','95%CI UB')],
-				col = 'red',lty = 2,type = 'b')	
-			lines(rep(li+0.1,2),acf.res$VMB[li,c('BCa 95%CI LB','BCa 95%CI UB')],
-				col = 'blue',lty = 2,type = 'b')
-			try(lines(rep(li+0.2,2),acf.res$Bartlett[li,c('95%CI LB','95%CI UB')],
-				col = 'green',lty = 2,type = 'b'))
-		}
-		
-		yl = c(min(pacf.res$VMB[,-c(4,7)])-0.2,max(pacf.res$VMB[,-c(4,7)])+0.1)
-		plot(pacf.res$Asymptotic[,'Est.'],type = 'n',
-				ylim = yl,ylab = 'PACF',xlab = 'Lag')
-		abline(h = 0)
-		for(li in 1:lagmax){
-			lines(rep(li,2),pacf.res$VMB[li,c('95%CI LB','95%CI UB')],
-				col = 'red',lty = 2,type = 'b')	
-			lines(rep(li+0.1,2),pacf.res$VMB[li,c('BCa 95%CI LB','BCa 95%CI UB')],
-				col = 'blue',lty = 2,type = 'b')
-		}
-		legend(plot.control$legendpos$B,c('VMB','VMB-BCa','Bartlett'),
-			col = c('red','blue','green'),lty = rep(2,3),cex = 0.7,bty = 'n')
+	}else{
+		legend(legendpos$A,c('1/T','Surrogate','Surrogate-BCa'),
+		col = c('red','blue','green'),lty = rep(2,3),cex = 0.7,bty = 'n')
+	}
+
+	
+	# the alternative
+	yl = c(min(acf.res$Bartlett[,-c(4)])-0.2,max(acf.res$Bartlett[,-c(4)])+0.1)
+	plot(acf.res$Asymptotic[,'Est.'],type = 'n',
+			ylim = yl,ylab = 'ACF',xlab = 'Lag')
+	abline(h = 0)
+	for(li in 1:lagmax){
+		lines(rep(li,2),acf.res$VMB[li,paste((1-alpha)*100,c('%CI LB','%CI UB'),sep='')],
+			col = 'red',lty = 2,type = 'b')	
+		lines(rep(li+0.1,2),acf.res$VMB[li, paste('BCa ',(1-alpha)*100,c('%CI LB','%CI UB'),sep='')],
+			col = 'blue',lty = 2,type = 'b')
+		try(lines(rep(li+0.2,2),acf.res$Bartlett[li,paste((1-alpha)*100,c('%CI LB','%CI UB'),sep='')],
+			col = 'green',lty = 2,type = 'b'))
 	}
 	
+	yl = c(min(pacf.res$VMB[,-c(4,7)])-0.2,max(pacf.res$VMB[,-c(4,7)])+0.1)
+	plot(pacf.res$Asymptotic[,'Est.'],type = 'n',
+			ylim = yl,ylab = 'PACF',xlab = 'Lag')
+	abline(h = 0)
+	for(li in 1:lagmax){
+		lines(rep(li,2),pacf.res$VMB[li,paste((1-alpha)*100,c('%CI LB','%CI UB'),sep='')],
+			col = 'red',lty = 2,type = 'b')	
+		lines(rep(li+0.1,2),pacf.res$VMB[li, paste('BCa ',(1-alpha)*100,c('%CI LB','%CI UB'),sep='')],
+			col = 'blue',lty = 2,type = 'b')
+	}
+	if(is.numeric(legendpos$B)){
+		legend(legendpos$B[1],legendpos$B[2],
+		c('VMB','VMB-BCa','Bartlett'),
+		col = c('red','blue','green'),lty = rep(2,3),cex = 0.7,bty = 'n')
+	}else{
+		legend(legendpos$B,c('VMB','VMB-BCa','Bartlett'),
+		col = c('red','blue','green'),lty = rep(2,3),cex = 0.7,bty = 'n')
+	}
+
+
 }
 
 ##-----------------------------------------------##
@@ -233,6 +249,7 @@ Durbin_Levinson_rho <- function(rho){
 	}
 	return(phi)
 }
+
 ##------------------------------##
 ## Bartlett's method
 ##------------------------------##
@@ -388,11 +405,16 @@ Surrogate<-function(ahat,data,a1,a2,boot,lagmax){
 	pacf.y<-matrix(NA,nrow=boot,ncol=lagmax)
 	n.t<-length(data)
 	for(i in 1:boot){
-		data.b<-data[sample(1:n.t,n.t,replace=FALSE)]
-		acf.y[i,]<-acf(data.b,lag.max=lagmax,plot=F,
-			na.action = na.pass)$acf[2:(lagmax+1)]
-		pacf.y[i,]<-acf(data.b,lag.max=lagmax,plot=F,
-			na.action = na.pass,type = 'partial')$acf[1:lagmax]
+		for(j in 1:50){
+			data.b<-data[sample(1:n.t,n.t,replace=FALSE)]
+			tmp.acf<-acf(data.b,lag.max=lagmax,plot=F,
+				na.action = na.pass)$acf[2:(lagmax+1)]
+			tmp.pacf<-acf(data.b,lag.max=lagmax,plot=F,
+				na.action = na.pass,type = 'partial')$acf[1:lagmax]
+			if(sum(abs(tmp.pacf>1) + abs(tmp.pacf < (-1)),na.rm = TRUE)==0){break}
+		}
+		acf.y[i,]	<- tmp.acf
+		pacf.y[i,]	<- tmp.pacf
 	}
 	acf.l <- list(se = apply(acf.y,2,sd,na.rm = TRUE),
 			CI = list(per = Perc.CI(acf.y,a1,a2),
