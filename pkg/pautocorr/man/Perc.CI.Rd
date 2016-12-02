@@ -1,38 +1,48 @@
 \name{Perc.CI}
 \alias{Perc.CI}
-
+\alias{BCa.CI}
+%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Percentile intervals.
+Percentile and Bias-corrected and accelerated (BCa) intervals
 }
 \description{
-This function constructs percentile intervals.
+Function Perc.CI constructs percentile intervals.
+Function BCa.CI constructs BCa intervals.
 }
 \usage{
 Perc.CI(est.b, a1, a2)
+BCa.CI(est.b, est, B, ahat, a1, a2)
 }
-
+%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{est.b}{
-a matrix of bootstrap sample estimates for multiple variables. Each column represents one variable.
+  \item{est.b}{a matrix of bootstrap sample estimates for multiple variables. Each column represents one variable.}
+  \item{a1,a2}{the percentages for the lower and upper limits of confidence intervals.}
+  \item{est}{the original sample estimates.}
+  \item{B}{number of replications.}
+  \item{ahat}{estimated acceleration constant.}
 }
-  \item{a1}{
-a scaler or a numeric vector of percentage(s) for the lower limit(s) of confidence intervals.
+\details{
+In the presence of missing values, estimates of autocorrelations are computed based on available cases, which may not be valid.
 }
-  \item{a2}{
-a scaler or a numeric vector of percentage(s) for the upper limit(s) of confidence intervals.
-}
+\value{a matrix of the obtained confidence intervals for (partial) autocorrelations.}
+
+\references{Efron, B., & Tibshirani, R. J. (1994). An introduction to the bootstrap. Chapman and Hall/CRC.}
+
+\author{Zijun Ke <keziyun@mail.sysu.edu.cn> and Zhiyong Zhang <zhiyongzhang@nd.edu>}
+\note{
+%%  ~~further notes~~
 }
 
-\value{
-a list with components of a size the same as that of a1. Each component records estimated confidence intervals with a confidence level specified by each element in a1. The first column in each component reports the lower limits of the estimated confidence intervals, whereas the second reports the upper limits.
-}
-\references{
-Efron, B., & Tibshirani, R. J. (1994). An introduction to the bootstrap. Chapman and Hall/CRC.
-}
-\author{
-Zijun Ke <keziyun@mail.sysu.edu.cn> and Zhiyong Zhang <zhiyongzhang@nd.edu>
-}
+%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-BCa.CI
 }
+\examples{
+##---- Should be DIRECTLY executable !! ----
+##-- ==>  Define data, use random,
+##--	or do  help(data=index)  for the standard data sets.
+}
+% Add one or more standard keywords, see file 'KEYWORDS' in the
+% R documentation directory.
+\keyword{ ~kwd1 }
+\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

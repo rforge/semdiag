@@ -1,56 +1,73 @@
 \name{Surrogate}
 \alias{Surrogate}
+\alias{JN.NB}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{The surrogate data method}
 
-\title{
-The surrogate data method
-}
 \description{
-This function Surrogate carries out the surrogate data method for testing autocorrelations. 
+Function Surrogate carries out the surrogate data method for testing (partial) autocorrelations. 
+Function JN.NB computes the acceleration constant for the surrogate data method by sequentially deleting one observation from the sample data points.
 }
 \usage{
-Surrogate(ahat, data, a1, a2, boot, lagmax)
+Surrogate(acf.est, ahat, x, a1, a2, boot, lagmax)
+JN.NB(x, lagmax)
 }
+%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{ahat}{
-a vector of estimated acceleration constants for autocorrelations up to lagmax. An Object returned by JN.NB
-}
-  \item{data}{
-a vector of time series data.
-}
-  \item{a1}{
-a scaler or a numeric vector of percentage(s) for the lower limit(s) of confidence intervals.
-}
-  \item{a2}{
-a scaler or a numeric vector of percentage(s) for the upper limit(s) of confidence intervals.
-}
-  \item{boot}{
-number of surrogate data sets
-}
-  \item{lagmax}{
-maximum lag at which to calculate autocorrelations
-}
+  \item{acf.est}{a vector of sample autocorrelation estimates up to lagmax.}
+  \item{ahat}{a vector of estimated acceleration constants for autocorrelations up to lagmax. An object returned by JN.NB.}
+  \item{x}{a vector of time series data.}
+  \item{a1,a2}{the percentages for the lower and upper limits of confidence intervals.}
+  \item{boot}{number of surrogate data sets}
+  \item{lagmax}{maximum lag at which to calculate (partial) autocorrelations}
 }
 \details{
-In the presence of missing values, estimates of autocorrelations are computed from complete cases, which may not be valid.
+Function JN.NB iteratively deletes one data point at a time from the original sample and computes (partial) autocorrelation estimates at each iteration. The acceleration constant is obtained by computing a quantity similar to the skewness of (partial) autocorrelation estimates at different iterations.
+
+In the presence of missing values, estimates of (partial) autocorrelations are computed from complete cases, which may not be valid.
 }
 \value{
-a list containing two components:
-se	standard error estimates for autocorrelations under the null.
-CI	a list of estimated confidence intervals for autocorrelations under the null. Contain two components:
-	per	percentile intervals
-	BCa	bias-corrected and accelerated intervals.
+The function Surrogate returns a list with two components:
+	\item{acf}{
+		\item{se}{standard error estimates for autocorrelations.}
+		\item{CI}{a list of estimated confidence intervals for autocorrelations. Contain two elements:
+			\item{per}{percentile intervals}
+			\item{BCa}{bias-corrected and accelerated intervals.}
+		}
+	}
+	\item{pacf}{
+		\item{se}{standard error estimates for partial autocorrelations.}
+		\item{CI}{a list of estimated confidence intervals for partial autocorrelations. Contain two elements:
+			\item{per}{percentile intervals}
+			\item{BCa}{bias-corrected and accelerated intervals.}
+		}
+	}
+	
+Function JN.NB returns a vector of accelerations for autocorrelations up to lagmax.
 
 }
+
 \references{
-Ke, Z. & Zhang, Z. (2015). Testing Autocorrelations: Asymptotic Methods versus Resampling Techniques
-
 Theiler, J., Eubank, S., Longtin, A., Galdrikan, B., & Farmer, J. D. (1992). Testing for nonlinearity in time series: The method of surrogate data. Physica D, 58, 77-94.
+Efron, B., & Tibshirani, R. J. (1994). An introduction to the bootstrap. Chapman and Hall/CRC.
 }
-\author{
-Zijun Ke <keziyun@mail.sysu.edu.cn> and Zhiyong Zhang <zhiyongzhang@nd.edu>
+
+\author{Zijun Ke <keziyun@mail.sysu.edu.cn> and Zhiyong Zhang <zhiyongzhang@nd.edu>}
+\note{
+%%  ~~further notes~~
 }
+
+%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-JN.NB
 }
+\examples{
+##---- Should be DIRECTLY executable !! ----
+##-- ==>  Define data, use random,
+##--	or do  help(data=index)  for the standard data sets.
 
+}
+% Add one or more standard keywords, see file 'KEYWORDS' in the
+% R documentation directory.
+\keyword{ ~kwd1 }
+\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
