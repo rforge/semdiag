@@ -1,5 +1,6 @@
 \name{plot.pautocorr}
 \alias{plot.pautocorr}
+\alias{plot}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 plot the results of pautocorr.test
@@ -8,7 +9,7 @@ plot the results of pautocorr.test
 This function visualizes the results of function pautocorr.test.
 }
 \usage{
-plot.pautocorr(x,alpha=0.05,
+plot(x,alpha=0.05,
 	layout.v = c(2,2),
 	legendpos = list(A='bottomright',B ='topleft'),...)
 }
@@ -33,8 +34,7 @@ A graph with two rows of ACF and PACF plots is generated. The first row visualiz
 
 Note that plots will be generated only when method is set to 'all' in pautocorr.test.
 }
-\references{
-}
+
 \author{
 Zijun Ke <keziyun@mail.sysu.edu.cn> and Zhiyong Zhang <zhiyongzhang@nd.edu>
 }

@@ -12,5 +12,6 @@ This dataset is extracted from the dataset of a large study by Hardy et al. (201
 Hardy, S. A., Zhang, Z., Skalski, J. E., & Melling, B. S. (2014) Daily religious involvement, spirituality, and moroal emotions. Psychology of Religion and Spirituality, 6, 338-348. doi: 10.1037/a0037293
 }
 \examples{
+data(daily.moral)
 head(daily.moral)
 }

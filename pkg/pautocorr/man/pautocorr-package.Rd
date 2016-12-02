@@ -8,20 +8,9 @@ Asymptotic methods and resampling techniques for testing (partial) autocorrelati
 \description{
 Two asymptotic methods (the 1/T approximation method and the Bartlett's formula method) and two resampling techniques (the surrogate data method and the vectorized moving block bootstrap) are implemented to test the significance of (partial) autocorrelations at certain lags.
 }
-\details{
-\tabular{ll}{
-Package: \tab autocorr\cr
-Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2015-09-25\cr
-License: \tab What license is it under?\cr
-}
 
 \author{
-Who wrote it
-
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Zijun Ke and Zhiyong Zhang
+Author: Zijun Ke and Zhiyong Zhang
 Maintainer: Zijun Ke <keziyun@mail.sysu.edu.cn>
 }
 

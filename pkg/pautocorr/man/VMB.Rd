@@ -23,6 +23,7 @@ pair.VMB(id.M, lagmax, n.t)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{acf.est}{a vector of sample autocorrelation estimates up to lagmax.}
+  \item{pacf.est}{a vector of sample partial autocorrelation estimates up to lagmax.}
   \item{ahat}{a vector of estimated acceleration constants for autocorrelations up to lagmax. An object returned by JN.VMB.}
   \item{data}{a vector of time series data.}
   \item{l}{block size for the VMB bootstrap.}

@@ -15,15 +15,11 @@ a vector or a matrix of the lower and upper limit(s) of confidence interval(s) f
 a numeric vector with size equal to the number of rows in CI. Significance is determined by examining whether confidence intervals in CI cover the values in test.value.
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
 a vector of 0 or 1. "1" indicates significant results whereas "0" indicates non-significant results.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
+
 \author{
 Zijun Ke <keziyun@mail.sysu.edu.cn> and Zhiyong Zhang <zhiyongzhang@nd.edu>
 }

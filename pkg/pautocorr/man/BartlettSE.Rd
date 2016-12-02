@@ -10,11 +10,12 @@ Function BartlettSE is a wrapper of Bartlett_Shumway. This function returns stan
 }
 \usage{
 BartlettSE(data, L, lagmax)
-Bartlett_Shumway(data, rho, L, T)
+Bartlett_Shumway(x, rho, L, T)
 }
 
 \arguments{
   \item{data}{a numeric vector of time series data.}
+  \item{x}{lag}
   \item{L}{an upper limit for the summed terms. Default is 30.}
   \item{lagmax}{maximum lag at which to calculate autocorrelations.}
   \item{T}{time series length or number of time points.}

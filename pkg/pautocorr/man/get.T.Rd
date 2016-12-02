@@ -16,5 +16,5 @@ find time series length with missing data
 }
 \details{The returned T for lag l equals the number of available cases (pairs of observations with no missing values) plus l. }
 \value{a vector of size lagmax listing the time series lengthes for different lags}
-\references{}
+
 \author{Zijun Ke <keziyun@mail.sysu.edu.cn> and Zhiyong Zhang <zhiyongzhang@nd.edu>}

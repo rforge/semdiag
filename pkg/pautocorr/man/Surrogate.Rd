@@ -14,7 +14,6 @@ JN.NB(data, lagmax)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{acf.est}{a vector of sample autocorrelation estimates up to lagmax.}
   \item{ahat}{a vector of estimated acceleration constants for autocorrelations up to lagmax. An object returned by JN.NB.}
   \item{data}{a vector of time series data.}
   \item{a1,a2}{the percentages for the lower and upper limits of confidence intervals.}
