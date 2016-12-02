@@ -27,21 +27,19 @@ Function JN.NB iteratively deletes one data point at a time from the original sa
 In the presence of missing values, estimates of (partial) autocorrelations are computed from complete cases, which may not be valid.
 }
 \value{
-The function Surrogate returns a list with two components:
-	\item{acf}{
-		\item{se}{standard error estimates for autocorrelations.}
-		\item{CI}{a list of estimated confidence intervals for autocorrelations. Contain two elements:
-			\item{per}{percentile intervals}
-			\item{BCa}{bias-corrected and accelerated intervals.}
-		}
-	}
-	\item{pacf}{
-		\item{se}{standard error estimates for partial autocorrelations.}
-		\item{CI}{a list of estimated confidence intervals for partial autocorrelations. Contain two elements:
-			\item{per}{percentile intervals}
-			\item{BCa}{bias-corrected and accelerated intervals.}
-		}
-	}
+The function Surrogate returns a list with two components: acf and pacf.
+
+For acf:
+
+se: standard error estimates for autocorrelations.
+
+CI: a list of estimated confidence intervals for autocorrelations. Contain two elements: per and BCa
+
+For acf:
+
+se: standard error estimates for partial autocorrelations.
+
+CI: a list of estimated confidence intervals for partial autocorrelations. Contain two elements: per and BCa
 	
 Function JN.NB returns a vector of accelerations for autocorrelations up to lagmax.
 
@@ -53,21 +51,3 @@ Efron, B., & Tibshirani, R. J. (1994). An introduction to the bootstrap. Chapman
 }
 
 \author{Zijun Ke <keziyun@mail.sysu.edu.cn> and Zhiyong Zhang <zhiyongzhang@nd.edu>}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-}
-\examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-}
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

@@ -34,19 +34,17 @@ In the presence of missing values, estimates of (partial) autocorrelations are c
 
 \value{
 
-A list of the following elements is returned invisibly: 
-\item{acf}{
-	\item{Asymptotic}{If method = 'asymptotic' or 'all', a matrix listing the estimated autocorrelations, standard error, z statistics and significance results is returned}
-	\item{Bartlett}{If method = 'barlett' or 'all', a matrix listing the estimated autocorrelations, confidence intervals and significance results is returned}
-	\item{Surrogate}{If method = 'surrogate' or 'all', a matrix listing the estimated autocorrelations, confidence intervals obtained using the percentile method and the BCa methods and significance results based on both types of intervals is returned}
-	\item{VMB}{If method = 'vmb' or 'all', a matrix listing the estimated autocorrelations, confidence intervals obtained using the percentile method and the BCa methods and significance results based on both types of intervals is returned}
+A list of the following elements is returned invisibly for acf and pacf: 
+
+Asymptotic: If method = 'asymptotic' or 'all', a matrix listing the estimated autocorrelations, standard error, z statistics and significance results is returned
+
+Bartlett: If method = 'barlett' or 'all', a matrix listing the estimated autocorrelations, confidence intervals and significance results is returned
+
+Surrogate: If method = 'surrogate' or 'all', a matrix listing the estimated autocorrelations, confidence intervals obtained using the percentile method and the BCa methods and significance results based on both types of intervals is returned
+
+VMB: If method = 'vmb' or 'all', a matrix listing the estimated autocorrelations, confidence intervals obtained using the percentile method and the BCa methods and significance results based on both types of intervals is returned
 }
-\item{pacf}{
-	\item{Asymptotic}{If method = 'asymptotic' or 'all', a matrix listing the estimated partial autocorrelations, standard error, z statistics and significance results is returned}
-	\item{Surrogate}{If method = 'surrogate' or 'all', a matrix listing the estimated partial autocorrelations, confidence intervals obtained using the percentile method and the BCa methods and significance results based on both types of intervals is returned}
-	\item{VMB}{If method = 'vmb' or 'all', a matrix listing the estimated partial autocorrelations, confidence intervals obtained using the percentile method and the BCa methods and significance results based on both types of intervals is returned}
-}
-}
+
 \references{
 
 Bartlett, M. S. (1955). An introduction to stochastic processes. Cambridge: Cambridge University Press.
@@ -59,28 +57,4 @@ K¨¹nsch, H. (1989). The jackknife and the bootstrap for general stationary obser
 \author{
 Zijun Ke <keziyun@mail.sysu.edu.cn> and Zhiyong Zhang <zhiyongzhang@nd.edu>
 }
-\note{
-%%  ~~further notes~~
-}
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-	\code{\link{http://127.0.0.1:31515/library/stats/html/acf.html }}
-	plot.pautocorr
-}
-\examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-da = data(daily.moral)[,'daily.moral']
-ts.data = ts(data = da,start = 1,end = 8,frequency = 7)
-d.adj = da - decompose(ts.data)$trend
-res = pautocorr.test(na.omit(d.adj),lagmax=15,print = TRUE)
-plot(res)
-}
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
