@@ -1,7 +1,7 @@
 Package: pautocorr
 Type: Package
 Title: Testing Autocorrelation and Partial Autocorrelation Through Bootstrap and Surrogate Methods
-Version: 0.21
+Version: 0.3
 Date: 2016-12-02
 Author: Zijun Ke & Zhiyong Zhang
 Maintainer: Zijun Ke <keziyun@mail.sysu.edu.cn>

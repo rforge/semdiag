@@ -9,15 +9,16 @@
 Function BartlettSE is a wrapper of Bartlett_Shumway. This function returns standard error estimates of autocorrelations up to lagmax.
 }
 \usage{
-BartlettSE(x, L, lagmax)
-Bartlett_Shumway(x, rho, L, T)
+BartlettSE(data, L, lagmax)
+Bartlett_Shumway(data, rho, L, T)
 }
 
 \arguments{
-  \item{x}{a numeric vector of time series data.}
+  \item{data}{a numeric vector of time series data.}
   \item{L}{an upper limit for the summed terms. Default is 30.}
   \item{lagmax}{maximum lag at which to calculate autocorrelations.}
   \item{T}{time series length or number of time points.}
+  \item{rho}{correlation.}
 }
 \details{
 Compute standard error estimates for autocorrelations using Bartlett's formula.
@@ -31,7 +32,6 @@ Bartlett, M. S. (1955). An introduction to stochastic processes. Cambridge: Camb
 Shumway, R. H., & Stoffer, D. S. (2006). Time series analysis and its applications with r examples (2nd ed.). New York: Springer.  (p.519)
 }
 \author{Zijun Ke <keziyun@mail.sysu.edu.cn> and Zhiyong Zhang <zhiyongzhang@nd.edu>}
-\note{
-}
+
 
 

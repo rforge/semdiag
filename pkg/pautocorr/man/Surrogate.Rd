@@ -9,14 +9,14 @@ Function Surrogate carries out the surrogate data method for testing (partial) a
 Function JN.NB computes the acceleration constant for the surrogate data method by sequentially deleting one observation from the sample data points.
 }
 \usage{
-Surrogate(acf.est, ahat, x, a1, a2, boot, lagmax)
-JN.NB(x, lagmax)
+Surrogate(ahat, data, a1, a2, boot, lagmax)
+JN.NB(data, lagmax)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{acf.est}{a vector of sample autocorrelation estimates up to lagmax.}
   \item{ahat}{a vector of estimated acceleration constants for autocorrelations up to lagmax. An object returned by JN.NB.}
-  \item{x}{a vector of time series data.}
+  \item{data}{a vector of time series data.}
   \item{a1,a2}{the percentages for the lower and upper limits of confidence intervals.}
   \item{boot}{number of surrogate data sets}
   \item{lagmax}{maximum lag at which to calculate (partial) autocorrelations}
