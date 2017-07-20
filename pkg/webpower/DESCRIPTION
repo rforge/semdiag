@@ -1,0 +1,16 @@
+Package: webpower
+Title: Statistical Power Analysis (One Line)
+Version: 0.0.0.9000
+Date: 2017-05-01
+Author: Zhiyong Zhang <zzhang4@nd.edu>, Yujiao Mai <ymai@nd.edu>
+Maintainer: Zhiyong Zhang <zzhang4@nd.edu>
+Depends: R (>= 3.2.5), MASS, stats, grDevices, graphics, lme4, lavaan,
+        parallel
+License: MIT + file LICENSE
+Description: This is a collection of tools for conducting statistical power analysis. WebPower can be used by anyone for free. To use the software, install the R package 'webpower' or visit webpower.psychstat.org. The development of WebPower is supported by a grant from the Department of Education (R305D140037). However, the contents of WebPower do not necessarily represent the policy of the Department of Education, and you should not assume endorsement by the Federal Government.
+URL: https://www.r-project.org , http://webpower.psychstat.org
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+NeedsCompilation: no
+Packaged: 2017-06-18 05:17:07 UTC; Vanda
